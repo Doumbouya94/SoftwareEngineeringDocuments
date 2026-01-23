@@ -13,7 +13,7 @@ Les informations sur les événements sont dispersées sur plusieurs plateformes
 
 ## Équipe
 - Pierre-Sylvestre Cypré - 2213358
-- Aboubacar Sidiki Doumbouya 
+- Aboubacar Sidiki Doumbouya - 2310243
 
 ---
 
