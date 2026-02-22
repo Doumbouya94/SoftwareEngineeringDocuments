@@ -62,7 +62,7 @@ Ce diagramme montre comment l'app est structurée. C'est l'architecture techniqu
 
 Ce diagramme montre les **entités de la base de données** et comment elles sont reliées entre elles.
 
-**Les 5 tables :**
+**Les tables :**
 
 - **`users`** — les utilisateurs de l'app. Chaque user a un rôle (`role`), ses coordonnées GPS (`latitude`, `longitude`), son thème préféré et son unité de distance. C'est la table centrale de tout.
 - **`events`** — les événements. Chaque event a un titre, une description, une catégorie, une date, un lieu (+ coords GPS), un prix, et un champ `source` pour distinguer les events internes vs externes. Le champ `organizerId` lie l'event à son créateur (un user).
