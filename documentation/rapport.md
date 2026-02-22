@@ -85,3 +85,8 @@ Trois patrons de conception sont présents dans l'implémentation. Le patron Ada
 
 ## Principes de développement
 L'architecture respecte la séparation des responsabilités : AuthController gère uniquement la couche HTTP, AuthService contient la logique métier, AppDbContext gère la persistance, et les DTOs (RegisterRequest, LoginRequest, AuthResponse) isolent le contrat de l'API du modèle de domaine. La structure en dossiers (Controllers/, Services/, Models/, DTOs/, Data/) renforce la clarté et la lisibilité du projet.
+
+## Commentaires importants
+On utilse Docker pour faire tourner la base de données MySQL. Donc il faut s'assurer que Docker est lancé et que le conteneur est actif avant de démarrer l'API. Pour tester les endpoints d'authentification (inscription, connexion, etc.), on lance (build/run) le projet ASP.NET Core, on ouvre Swagger avec le lien http ce qui nous permet d'appeler chaque endpoint directement depuis le navigateur. 
+
+- !! À Noter : la table users est amenée à évoluer : nous prévoyons d'y ajouter des propriétés supplémentaires selon nos besoins au fil du développement !!
