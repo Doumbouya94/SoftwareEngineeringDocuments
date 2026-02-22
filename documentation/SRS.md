@@ -1,8 +1,8 @@
-# Cahier des charges (SRS léger) — <Nom du projet>
-**Équipe :** <Pierre-Sylvestre Cypré, Aboubacar Doumbouya Sidiki>
+# Cahier des charges (SRS léger) — EventGo
+**Équipe :** Pierre-Sylvestre Cypré, Aboubacar Doumbouya Sidiki
 
-**Date :** <2026-01-23>  
-**Version :** <v0.1 / v1.0>
+**Date :** 2026-01-23  
+**Version :** Pre-Alpha
 
 ---
 
@@ -39,29 +39,27 @@
 ---
 
 ## 4. Exigences fonctionnelles (FR)
-> Forme recommandée : “Le système doit…”
-- **FR-1 :** Le système doit permettre aux utilisateurs de créer un compte et se connecter.
-- **FR-2 :** Le système doit permettre aux utilisateurs de lister, rechercher et filtrer des événements par localisation, rayon, prix, date et catégorie.
-- **FR-3 :** Le système doit utiliser la géolocalisation pour afficher les événements autour de l'utilisateur.
-- **FR-4 :** Le système doit permettre aux organisateurs d'ajouter, modifier et supprimer des événements.
-- **FR-5 :** Le système doit permettre aux utilisateurs d'ajouter des événements à leurs favoris.
-- **FR-6 :** Le système doit envoyer des notifications aux utilisateurs pour les événements pertinents.
-- **FR-7 :** Le système doit permettre aux administrateurs de modérer le contenu et consulter les statistiques.
+- **FR-1 :** Le système doit permettre aux utilisateurs de créer un compte (nom, courriel, mot de passe ≥ 8 caractères avec au moins 1 majuscule et 1 chiffre) et de se connecter via JWT. Un courriel unique est requis ; toute tentative de doublon retourne une erreur 409 Conflict.
+- **FR-2 :** Le système doit permettre de lister, rechercher et filtrer des événements selon au moins 5 critères combinables : localisation (ville ou coordonnées GPS), rayon (ex. 5, 10, 25 km), fourchette de prix, plage de dates (date début / date fin), et catégorie. Les résultats doivent être triables par pertinence, date ou distance.
+- **FR-3 :** Le système doit utiliser les coordonnées GPS de l'utilisateur (avec consentement explicite) pour afficher les événements dans un rayon configurable (défaut : 10 km). Si la permission est refusée, l'utilisateur doit pouvoir saisir manuellement une adresse.
+- **FR-4 :** Le système doit permettre aux utilisateurs avec le rôle Organisateur de créer un événement (titre, description, catégorie, date, lieu, prix), de le modifier, et de le supprimer (avec confirmation). Un événement ne peut être modifié que par son créateur ou un administrateur.
+- **FR-5 :** Le système doit permettre aux utilisateurs authentifiés d'ajouter ou retirer un événement de leurs favoris (toggle). La liste des favoris doit être persistante et accessible hors ligne (cache local).
+- **FR-6 :** Le système doit envoyer une notification push aux utilisateurs abonnés à une catégorie ou un rayon géographique lorsqu'un nouvel événement correspondant est publié, dans un délai maximum de 5 minutes après la publication.
+- **FR-7 :** Le système doit permettre aux utilisateurs avec le rôle Admin de signaler/masquer un événement, de bannir un compte, et de consulter un tableau de bord affichant au minimum : le nombre d'événements actifs, d'utilisateurs inscrits, et d'événements signalés.
 
 ---
 
 ## 5. Exigences non fonctionnelles (NFR)
-> Performance / sécurité / disponibilité / UX / maintenabilité…
-- **NFR-1 (Performance) :** L'authentification est requise pour accéder aux fonctionnalités de favoris et de gestion d'événements. Les mots de passe doivent être chiffrés.
-- **NFR-2 (Sécurité) :** L'authentification est requise pour accéder aux fonctionnalités de favoris et de gestion d'événements. Les mots de passe doivent être chiffrés.
-- **NFR-3 (UX) :** Le parcours pour trouver un événement doit nécessiter 3 clics ou moins.
-- **NFR-4 (Qualité) :** Couverture minimale de tests unitaires à définir selon les standards de l'équipe.
+- **NFR-1 (Performance) :** La liste des événements doit se charger en moins de 2 secondes pour une requête avec filtres sur un réseau 4G. Les appels API de recherche doivent retourner une réponse en moins de 500 ms.
+- **NFR-2 (Sécurité) :** L'accès aux endpoints de favoris et de gestion d'événements est restreint aux utilisateurs authentifiés (token JWT requis). Les mots de passe doivent être hachés avec bcrypt. Les tokens doivent expirer après 24h.
+- **NFR-3 (UX) :** L'utilisateur doit pouvoir trouver et consulter un événement en 3 interactions ou moins depuis l'écran d'accueil. Le temps de réponse perçu lors de la navigation doit être inférieur à 300 ms.
+- **NFR-4 (Qualité) :** La couverture minimale de tests unitaires est fixée à 80 % sur les services et contrôleurs critiques (Auth, Events, Favorites). Chaque endpoint exposé via Swagger doit avoir au moins un test d'intégration couvrant le cas nominal et un cas d'erreur.
 
 ---
 
 ## 6. Contraintes
-- **C-1 (Technologie) :** C# MAUI.NET + SQLite
-- **C-2 (Plateforme) :** Mobile
+- **C-1 (Technologies) :** ASP.NET Core + MAUI.NET + MySQL
+- **C-2 (Plateforme) :** Mobile/Web
 - **C-3 (Délai) :** 25 janvier 2026 (Phase 1), 22 fevrier 2026 (Phase 2), 22 mars 2026 (Phase 3), 23 au 19 avril (Phase 4)
 - **C-4 (Outils) :** Visual Studio, Git, Notion (Asana si nécessaire)
 
@@ -80,9 +78,9 @@
 - H-3 : Les utilisateurs acceptent de partager leur localisation pour utiliser les fonctionnalités de géolocalisation.
 
 ### 8.2 Dépendances
-- D-1 : API Ticketmaster, Eventbrite etc...
-- D-2 : Service de notifications push (locales et cloud) .NET
-- D-3 : API pour la localisation
+- D-1 : Service de géolocalisation (Comme Geolocation dans MAUI)
+- D-2 : Service de notifications push (Azure Notification Hubs)
+- D-3 : Service d'autentification (ASP.NET Core authentication)
 
 ---
 
