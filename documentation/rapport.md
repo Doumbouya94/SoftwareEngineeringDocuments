@@ -60,7 +60,7 @@ Ce diagramme montre comment l'app est structurée. C'est l'architecture techniqu
 ## Diagramme de classe (Class Diagram)
 [Lien vers diagramme de classe](https://github.com/Doumbouya94/SoftwareEngineeringDocuments/blob/main/documentation/diagrammes/png/class_diagram.png)  
 
-Ce diagramme montre les **entités de la base de données** et comment elles sont reliées entre elles. C'est basically le plan de ta BD.
+Ce diagramme montre les **entités de la base de données** et comment elles sont reliées entre elles.
 
 **Les 5 tables :**
 
