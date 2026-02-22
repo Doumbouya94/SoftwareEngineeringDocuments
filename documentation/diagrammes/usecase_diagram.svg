@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="920" height="700" xmlns="http://www.w3.org/2000/svg" font-family="Arial, sans-serif">
+
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#444"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="920" height="700" fill="white"/>
+
+  <!-- System Boundary Box -->
+  <rect x="165" y="45" width="562" height="630" rx="12" fill="#FFF5F5" stroke="#FF4444" stroke-width="2.5"/>
+
+  <!-- Title inside box -->
+  <text x="446" y="76" text-anchor="middle" font-size="16" font-weight="bold" fill="#333">Use Case Diagram – EventGo</text>
+
+  <!-- ===================== LEFT COLUMN: User Use Cases ===================== -->
+
+  <!-- Explore Events -->
+  <ellipse cx="355" cy="122" rx="92" ry="28" fill="#FF6B6B"/>
+  <text x="355" y="127" text-anchor="middle" font-size="13" fill="white" font-weight="bold">Explore Events</text>
+
+  <!-- Search &amp; Filter -->
+  <ellipse cx="355" cy="204" rx="92" ry="28" fill="#FF6B6B"/>
+  <text x="355" y="209" text-anchor="middle" font-size="13" fill="white" font-weight="bold">Search &amp; Filter</text>
+
+  <!-- View Event Details -->
+  <ellipse cx="355" cy="286" rx="92" ry="28" fill="#FF6B6B"/>
+  <text x="355" y="291" text-anchor="middle" font-size="12" fill="white" font-weight="bold">View Event Details</text>
+
+  <!-- Book Ticket -->
+  <ellipse cx="355" cy="368" rx="92" ry="28" fill="#FF6B6B"/>
+  <text x="355" y="373" text-anchor="middle" font-size="13" fill="white" font-weight="bold">Book Ticket</text>
+
+  <!-- View Tickets -->
+  <ellipse cx="355" cy="450" rx="92" ry="28" fill="#FF6B6B"/>
+  <text x="355" y="455" text-anchor="middle" font-size="13" fill="white" font-weight="bold">View Tickets</text>
+
+  <!-- Save to Favorites -->
+  <ellipse cx="355" cy="532" rx="92" ry="28" fill="#FF6B6B"/>
+  <text x="355" y="537" text-anchor="middle" font-size="12" fill="white" font-weight="bold">Save to Favorites</text>
+
+  <!-- Manage Profile -->
+  <ellipse cx="355" cy="614" rx="92" ry="28" fill="#FF6B6B"/>
+  <text x="355" y="619" text-anchor="middle" font-size="13" fill="white" font-weight="bold">Manage Profile</text>
+
+  <!-- ===================== RIGHT COLUMN: System / Admin Use Cases ===================== -->
+
+  <!-- Process Payment (included) -->
+  <ellipse cx="590" cy="368" rx="85" ry="28" fill="#FF6B6B"/>
+  <text x="590" y="362" text-anchor="middle" font-size="12" fill="white" font-weight="bold">Process</text>
+  <text x="590" y="378" text-anchor="middle" font-size="12" fill="white" font-weight="bold">Payment</text>
+
+  <!-- Manage Events (Admin) -->
+  <ellipse cx="590" cy="532" rx="85" ry="28" fill="#FF6B6B"/>
+  <text x="590" y="537" text-anchor="middle" font-size="12" fill="white" font-weight="bold">Manage Events</text>
+
+  <!-- View Analytics (Admin) -->
+  <ellipse cx="590" cy="614" rx="85" ry="28" fill="#FF6B6B"/>
+  <text x="590" y="619" text-anchor="middle" font-size="12" fill="white" font-weight="bold">View Analytics</text>
+
+  <!-- ===================== LINES FROM USER ACTOR ===================== -->
+  <!-- All fan out from approx (118, 328) on the right side of the User figure -->
+  <line x1="118" y1="308" x2="263" y2="128" stroke="#444" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="119" y1="316" x2="263" y2="203" stroke="#444" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="119" y1="324" x2="263" y2="282" stroke="#444" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="120" y1="332" x2="263" y2="366" stroke="#444" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="119" y1="340" x2="263" y2="448" stroke="#444" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="118" y1="348" x2="263" y2="530" stroke="#444" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="117" y1="356" x2="263" y2="612" stroke="#444" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- Book Ticket <<include>> Process Payment (dashed) -->
+  <line x1="447" y1="368" x2="505" y2="368" stroke="#444" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#arr)"/>
+  <text x="476" y="358" text-anchor="middle" font-size="11" fill="#884488" font-style="italic">«include»</text>
+
+  <!-- ===================== LINES FROM ADMIN ACTOR ===================== -->
+  <!-- Admin is to the right; lines go left into system box -->
+  <line x1="805" y1="480" x2="675" y2="527" stroke="#444" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="808" y1="492" x2="675" y2="608" stroke="#444" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- ===================== USER ACTOR (filled stick figure) ===================== -->
+  <circle cx="82" cy="280" r="19" fill="#FF6B6B"/>
+  <line x1="82" y1="299" x2="82" y2="348" stroke="#FF6B6B" stroke-width="3"/>
+  <line x1="55" y1="316" x2="109" y2="316" stroke="#FF6B6B" stroke-width="3"/>
+  <line x1="82" y1="348" x2="59" y2="382" stroke="#FF6B6B" stroke-width="3"/>
+  <line x1="82" y1="348" x2="105" y2="382" stroke="#FF6B6B" stroke-width="3"/>
+  <text x="82" y="403" text-anchor="middle" font-size="14" font-weight="bold" fill="#FF6B6B">User</text>
+
+  <!-- ===================== ADMIN ACTOR (open circle stick figure) ===================== -->
+  <circle cx="840" cy="462" r="19" fill="none" stroke="#FF4444" stroke-width="2.5"/>
+  <line x1="840" y1="481" x2="840" y2="528" stroke="#FF4444" stroke-width="2.5"/>
+  <line x1="813" y1="498" x2="867" y2="498" stroke="#FF4444" stroke-width="2.5"/>
+  <line x1="840" y1="528" x2="817" y2="562" stroke="#FF4444" stroke-width="2.5"/>
+  <line x1="840" y1="528" x2="863" y2="562" stroke="#FF4444" stroke-width="2.5"/>
+  <text x="840" y="582" text-anchor="middle" font-size="14" font-weight="bold" fill="#FF4444">Admin</text>
+
+</svg>
