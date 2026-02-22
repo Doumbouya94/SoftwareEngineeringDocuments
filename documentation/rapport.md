@@ -32,6 +32,8 @@ Passées de vagues à **précises et mesurables** :
 Voilà les explications rapides des trois diagrammes pour EventGo :
 
 ## Diagramme de cas d'utilisation (Use Case Diagram)
+[Lien vers diagramme use case](https://github.com/Doumbouya94/SoftwareEngineeringDocuments/blob/main/documentation/diagrammes/png/usecase_diagram.png)  
+
 Ce diagramme montre qui fait quoi dans l'app. On a deux acteurs : l'Utilisateur et l'Admin.  
 L'utilisateur peut :  
 - Explorer et rechercher des événements autour de lui (géoloc + filtres)  
@@ -43,6 +45,8 @@ L'utilisateur peut :
 - Voir les statistiques de la plateforme  
 
 ## Diagramme de composants (Component Diagram)
+[Lien vers diagramme de composants](https://github.com/Doumbouya94/SoftwareEngineeringDocuments/blob/main/documentation/diagrammes/png/component_diagram.drawio.png)  
+
 Ce diagramme montre comment l'app est structurée. C'est l'architecture technique complète :  
 - À gauche : le client (.NET MAUI mobile/web) qui envoie des requêtes HTTP/REST avec un token JWT
 - Il passe par un Load Balancer / API Gateway
@@ -53,7 +57,9 @@ Ce diagramme montre comment l'app est structurée. C'est l'architecture techniqu
 - Les APIs externes (Ticketmaster, Eventbrite) sont chargées en lazy loading seulement quand nécessaire
 - Pour les notifications, ça passe par Azure Notification Hubs  
 
-## Diagramme de séquence (Sequence Diagram)
+## [Diagramme de séquence]
+[Lien vers diagramme de séquence](https://github.com/Doumbouya94/SoftwareEngineeringDocuments/blob/main/documentation/diagrammes/png/sequence_diagram.png)  
+
 Ce diagramme montre les étapes dans le temps pour les principales actions d'un utilisateur. On voit l'interaction entre : l'utilisateur, l'app mobile, l'API backend, la base de données, le service de géolocalisation et les notifications.  
 Les grands scénarios couverts :  
 1. Inscription — l'utilisateur entre ses infos, le backend vérifie que le courriel est unique, crée le compte et retourne un token JWT. Si le courriel existe déjà → erreur affichée.  
