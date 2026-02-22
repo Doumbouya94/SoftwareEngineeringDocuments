@@ -62,4 +62,13 @@ Les grands scénarios couverts :
 4. Recherche — requête avec debounce de 300ms, recherche insensible à la casse, suggestions en temps réel.  
 5. Favoris — ajout d'un événement aux favoris, confirmation en base de données.  
 6. Obtenir un billet — création d'un billet avec numéro unique + QR code.  
-7. Notifications push — quand un nouvel événement est publié, Azure envoie une notif aux utilisateurs abonnés.  
+7. Notifications push — quand un nouvel événement est publié, Azure envoie une notif aux utilisateurs abonnés.
+
+## Composant implémenté
+Le module d'authentification (AuthService) est un composant fonctionnel complet, couvrant l'inscription (RegisterAsync), la connexion (LoginAsync) et la génération de tokens JWT (GenerateToken), exposés via des endpoints REST dans AuthController.
+
+## Patron de conception
+Trois patrons de conception sont présents dans l'implémentation. Le patron Adaptateur est le plus visible : la classe ApplicationUser, qui hérite de IdentityUser<Guid>, adapte le modèle d'Identity d'SASP.NET aux besoins spécifiques du schéma users de EventGo, en ajoutant des champs comme FullName, IsGuest et CreatedAt, et en remappant les colonnes dans OnModelCreating. Le patron Factory est illustré par la méthode GenerateToken, qui centralise la création d'un objet AuthResponse (incluant le token JWT) à partir d'un utilisateur. Enfin, le patron Singleton est présent de façon indirecte via IConfiguration, fourni par le framework comme instance unique partagée à travers l'application et injecté dans AuthService.
+
+## Principes de développement
+L'architecture respecte la séparation des responsabilités : AuthController gère uniquement la couche HTTP, AuthService contient la logique métier, AppDbContext gère la persistance, et les DTOs (RegisterRequest, LoginRequest, AuthResponse) isolent le contrat de l'API du modèle de domaine. La structure en dossiers (Controllers/, Services/, Models/, DTOs/, Data/) renforce la clarté et la lisibilité du projet.
