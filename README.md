@@ -1,56 +1,54 @@
-# Project Documentation Overview
+# Aperçu de la documentation du projet
 
-This repository contains the core documentation used to structure and guide the software project throughout its lifecycle.
+Ce dépôt contient la documentation principale utilisée pour structurer et guider le projet **EventGo**, une application mobile de découverte d'événements publics par géolocalisation tout au long de son cycle de développement.
 
+## Documents inclus
 
-## Documents Included
+### 1. `SRS.md` — Spécification des exigences logicielles
 
-### 1. `SRS.md` — Software Requirements Specification
-This document describes **what the system must do**.  
-It defines:
-- the project scope (included and excluded features),
-- functional requirements,
-- non-functional requirements (performance, security, usability, etc.),
-- constraints (platform, tools, deadlines),
-- assumptions and dependencies.
+Ce document décrit **ce que le système doit faire**.
 
-The SRS serves as the **reference for understanding the system requirements** and as the foundation for design and development decisions.
+Il définit :
 
----
+- la portée du projet (fonctionnalités incluses et exclues),
+- les exigences fonctionnelles,
+- les exigences non fonctionnelles (performance, sécurité, utilisabilité, etc.),
+- les contraintes (plateforme, outils, échéances),
+- les hypothèses et les dépendances.
 
-### 2. `ADR.md` — Architecture Decision Records
-This document records **why key architectural and technical decisions were made**.
-
-Each ADR captures:
-- the context of the decision,
-- the selected solution,
-- alternatives considered,
-- justifications,
-- consequences and trade-offs.
-
-ADR entries ensure **traceability, consistency, and clarity** throughout the evolution of the system architecture.
+Le SRS constitue la **référence pour comprendre les exigences du système** et sert de base aux décisions de conception et de développement d'EventGo.
 
 ---
 
-## How These Documents Are Used Together
+### 2. `ADR.md` — Registres de décisions architecturales
 
-- The **SRS** defines *what* the system should be.
-- The **ADR** explains *how and why* architectural decisions are taken to meet those requirements.
+Ce document consigne **pourquoi les décisions architecturales et techniques clés ont été prises**.
 
-Together, they provide a clear, professional, and maintainable documentation framework aligned with modern software engineering practices.
+Chaque ADR capture :
 
+- le contexte de la décision,
+- la solution retenue,
+- les alternatives envisagées,
+- les justifications,
+- les conséquences et les compromis.
 
-## Documentation Tree
-- [SRS.md](SRS.md)
-- [ADR.md](ADR.md)
+Les entrées ADR assurent la **traçabilité, la cohérence et la clarté** tout au long de l'évolution de l'architecture d'EventGo.
 
-## Students tasks
-- [ ] Complete the `student_readmefile.md` file.
-- [ ] Use the template file `SRS.md` to create your own SRS.
-- [ ] Use the template file `ADR.md` to create your own ADRs .
-- [ ] You will add your code in the `/code` folder.
-- [ ] You will add your documentation in the `/documentation` folder.
+---
 
-## Read more
-- [Architecture Decision Records (ADR) template by Joel Parker Henderson](https://github.com/joelparkerhenderson/architecture-decision-record?tab=readme-ov-file)
-- [ADR Website](https://adr.github.io/)
+## Utilisation conjointe de ces documents
+
+- Le **SRS** définit *ce que* le système EventGo doit être.
+- Les **ADR** expliquent *comment et pourquoi* les décisions architecturales sont prises pour répondre à ces exigences.
+
+Ensemble, ils forment un cadre de documentation clair, professionnel et maintenable, aligné avec les pratiques modernes du génie logiciel.
+
+## Arborescence de la documentation
+
+- [SRS.md](http://SRS.md)
+- [ADR.md](http://ADR.md)
+
+## En savoir plus
+
+- [Gabarit Architecture Decision Records (ADR) par Joel Parker Henderson](https://github.com/joelparkerhenderson/architecture-decision-record?tab=readme-ov-file)
+- [Site web ADR](https://adr.github.io/)
