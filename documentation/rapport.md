@@ -57,18 +57,25 @@ Ce diagramme montre comment l'app est structurée. C'est l'architecture techniqu
 - Les APIs externes (Ticketmaster, Eventbrite) sont chargées en lazy loading seulement quand nécessaire
 - Pour les notifications, ça passe par Azure Notification Hubs  
 
-## [Diagramme de séquence]
-[Lien vers diagramme de séquence](https://github.com/Doumbouya94/SoftwareEngineeringDocuments/blob/main/documentation/diagrammes/png/sequence_diagram.png)  
+## Diagramme de classe (Class Diagram)
+[Lien vers diagramme de classe](https://github.com/Doumbouya94/SoftwareEngineeringDocuments/blob/main/documentation/diagrammes/png/class_diagram.png)  
 
-Ce diagramme montre les étapes dans le temps pour les principales actions d'un utilisateur. On voit l'interaction entre : l'utilisateur, l'app mobile, l'API backend, la base de données, le service de géolocalisation et les notifications.  
-Les grands scénarios couverts :  
-1. Inscription — l'utilisateur entre ses infos, le backend vérifie que le courriel est unique, crée le compte et retourne un token JWT. Si le courriel existe déjà → erreur affichée.  
-2. Connexion — entrée courriel/mdp, vérification des identifiants, retour des tokens d'accès et de rafraîchissement.  
-3. Explorer des événements — l'app récupère les coordonnées GPS, le backend filtre les événements par coordonnées et retourne une liste paginée (20/page).  
-4. Recherche — requête avec debounce de 300ms, recherche insensible à la casse, suggestions en temps réel.  
-5. Favoris — ajout d'un événement aux favoris, confirmation en base de données.  
-6. Obtenir un billet — création d'un billet avec numéro unique + QR code.  
-7. Notifications push — quand un nouvel événement est publié, Azure envoie une notif aux utilisateurs abonnés.
+Ce diagramme montre les **entités de la base de données** et comment elles sont reliées entre elles.
+
+**Les tables :**
+
+- **`users`** — les utilisateurs de l'app. Chaque user a un rôle (`role`), ses coordonnées GPS (`latitude`, `longitude`), son thème préféré et son unité de distance. C'est la table centrale de tout.
+- **`events`** — les événements. Chaque event a un titre, une description, une catégorie, une date, un lieu (+ coords GPS), un prix, et un champ `source` pour distinguer les events internes vs externes. Le champ `organizerId` lie l'event à son créateur (un user).
+- **`categories`** — juste une table simple avec un `id` et un `name`. Elle est liée à `events` en relation **1 → plusieurs** (une catégorie peut avoir plein d'events).
+- **`tickets`** — les billets générés quand un user réserve un event interne. Chaque billet a un numéro unique, un QR code, le nom du détenteur, et le type de billet. Lié à `users` ET à `events`.
+- **`favorites`** — les events sauvegardés par un user. Juste trois colonnes : `userId`, `eventId`, et `savedAt`. Relation **plusieurs → plusieurs** entre users et events.
+- **`notifications`** — les notifs push envoyées aux users. Chaque notif est liée à un user, a un message, et un flag `isRead` pour savoir si elle a été lue.
+
+**Les relations clés :**
+
+- Un `user` peut avoir **plusieurs** `events` (comme organisateur), **plusieurs** `tickets`, **plusieurs** `favorites`, et **plusieurs** `notifications`
+- Un `event` peut avoir **plusieurs** `tickets` et **plusieurs** `favorites`
+- La relation entre `users` et `events` via `favorites` est une relation **many-to-many** (plusieurs users peuvent sauvegarder plusieurs events)
 
 ## Composant implémenté
 Le module d'authentification (AuthService) est un composant fonctionnel complet, couvrant l'inscription (RegisterAsync), la connexion (LoginAsync) et la génération de tokens JWT (GenerateToken), exposés via des endpoints REST dans AuthController.
@@ -78,3 +85,8 @@ Trois patrons de conception sont présents dans l'implémentation. Le patron Ada
 
 ## Principes de développement
 L'architecture respecte la séparation des responsabilités : AuthController gère uniquement la couche HTTP, AuthService contient la logique métier, AppDbContext gère la persistance, et les DTOs (RegisterRequest, LoginRequest, AuthResponse) isolent le contrat de l'API du modèle de domaine. La structure en dossiers (Controllers/, Services/, Models/, DTOs/, Data/) renforce la clarté et la lisibilité du projet.
+
+## Commentaires importants
+On utilse Docker pour faire tourner la base de données MySQL. Donc il faut s'assurer que Docker est lancé et que le conteneur est actif avant de démarrer l'API. Pour tester les endpoints d'authentification (inscription, connexion, etc.), on lance (build/run) le projet ASP.NET Core, on ouvre Swagger avec le lien http ce qui nous permet d'appeler chaque endpoint directement depuis le navigateur. 
+
+- !! À Noter : la table users est amenée à évoluer : nous prévoyons d'y ajouter des propriétés supplémentaires selon nos besoins au fil du développement !!
