@@ -54,6 +54,7 @@ builder.Services.AddScoped<AuthService>();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddScoped<UserService>();
 
 var app = builder.Build();
 

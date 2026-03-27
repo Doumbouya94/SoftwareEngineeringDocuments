@@ -1,41 +1,57 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\pscyp\\OneDrive\\Documents\\Bureau\\EventGo\\EventGoAPI\\",
+  "WorkspaceRootPath": "C:\\Users\\pscyp\\OneDrive\\Documents\\Bureau\\SoftwareEngineeringDocuments\\code\\EventGoAPI\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{E96EA5F5-C999-48C4-B1A1-CA6408875A7F}|EventGoAPI\\EventGoAPI.csproj|c:\\users\\pscyp\\onedrive\\documents\\bureau\\eventgo\\eventgoapi\\eventgoapi\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E96EA5F5-C999-48C4-B1A1-CA6408875A7F}|EventGoAPI\\EventGoAPI.csproj|solutionrelative:eventgoapi\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E96EA5F5-C999-48C4-B1A1-CA6408875A7F}|EventGoAPI\\EventGoAPI.csproj|c:\\users\\pscyp\\onedrive\\documents\\bureau\\softwareengineeringdocuments\\code\\eventgoapi\\eventgoapi\\models\\refreshtoken.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E96EA5F5-C999-48C4-B1A1-CA6408875A7F}|EventGoAPI\\EventGoAPI.csproj|solutionrelative:eventgoapi\\models\\refreshtoken.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E96EA5F5-C999-48C4-B1A1-CA6408875A7F}|EventGoAPI\\EventGoAPI.csproj|c:\\users\\pscyp\\onedrive\\documents\\bureau\\eventgo\\eventgoapi\\eventgoapi\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E96EA5F5-C999-48C4-B1A1-CA6408875A7F}|EventGoAPI\\EventGoAPI.csproj|solutionrelative:eventgoapi\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E96EA5F5-C999-48C4-B1A1-CA6408875A7F}|EventGoAPI\\EventGoAPI.csproj|c:\\users\\pscyp\\onedrive\\documents\\bureau\\eventgo\\eventgoapi\\eventgoapi\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{E96EA5F5-C999-48C4-B1A1-CA6408875A7F}|EventGoAPI\\EventGoAPI.csproj|c:\\users\\pscyp\\onedrive\\documents\\bureau\\softwareengineeringdocuments\\code\\eventgoapi\\eventgoapi\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E96EA5F5-C999-48C4-B1A1-CA6408875A7F}|EventGoAPI\\EventGoAPI.csproj|solutionrelative:eventgoapi\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E96EA5F5-C999-48C4-B1A1-CA6408875A7F}|EventGoAPI\\EventGoAPI.csproj|c:\\users\\pscyp\\onedrive\\documents\\bureau\\eventgo\\eventgoapi\\eventgoapi\\dtos\\authdtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E96EA5F5-C999-48C4-B1A1-CA6408875A7F}|EventGoAPI\\EventGoAPI.csproj|solutionrelative:eventgoapi\\dtos\\authdtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E96EA5F5-C999-48C4-B1A1-CA6408875A7F}|EventGoAPI\\EventGoAPI.csproj|c:\\users\\pscyp\\onedrive\\documents\\bureau\\softwareengineeringdocuments\\code\\eventgoapi\\eventgoapi\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E96EA5F5-C999-48C4-B1A1-CA6408875A7F}|EventGoAPI\\EventGoAPI.csproj|solutionrelative:eventgoapi\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E96EA5F5-C999-48C4-B1A1-CA6408875A7F}|EventGoAPI\\EventGoAPI.csproj|c:\\users\\pscyp\\onedrive\\documents\\bureau\\eventgo\\eventgoapi\\eventgoapi\\migrations\\20260222015924_initidentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E96EA5F5-C999-48C4-B1A1-CA6408875A7F}|EventGoAPI\\EventGoAPI.csproj|solutionrelative:eventgoapi\\migrations\\20260222015924_initidentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E96EA5F5-C999-48C4-B1A1-CA6408875A7F}|EventGoAPI\\EventGoAPI.csproj|c:\\users\\pscyp\\onedrive\\documents\\bureau\\eventgo\\eventgoapi\\eventgoapi\\migrations\\appdbcontextmodelsnapshot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E96EA5F5-C999-48C4-B1A1-CA6408875A7F}|EventGoAPI\\EventGoAPI.csproj|solutionrelative:eventgoapi\\migrations\\appdbcontextmodelsnapshot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E96EA5F5-C999-48C4-B1A1-CA6408875A7F}|EventGoAPI\\EventGoAPI.csproj|c:\\users\\pscyp\\onedrive\\documents\\bureau\\eventgo\\eventgoapi\\eventgoapi\\models\\applicationuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{E96EA5F5-C999-48C4-B1A1-CA6408875A7F}|EventGoAPI\\EventGoAPI.csproj|c:\\users\\pscyp\\onedrive\\documents\\bureau\\softwareengineeringdocuments\\code\\eventgoapi\\eventgoapi\\models\\applicationuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E96EA5F5-C999-48C4-B1A1-CA6408875A7F}|EventGoAPI\\EventGoAPI.csproj|solutionrelative:eventgoapi\\models\\applicationuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E96EA5F5-C999-48C4-B1A1-CA6408875A7F}|EventGoAPI\\EventGoAPI.csproj|c:\\users\\pscyp\\onedrive\\documents\\bureau\\eventgo\\eventgoapi\\eventgoapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{E96EA5F5-C999-48C4-B1A1-CA6408875A7F}|EventGoAPI\\EventGoAPI.csproj|c:\\users\\pscyp\\onedrive\\documents\\bureau\\softwareengineeringdocuments\\code\\eventgoapi\\eventgoapi\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E96EA5F5-C999-48C4-B1A1-CA6408875A7F}|EventGoAPI\\EventGoAPI.csproj|solutionrelative:eventgoapi\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E96EA5F5-C999-48C4-B1A1-CA6408875A7F}|EventGoAPI\\EventGoAPI.csproj|c:\\users\\pscyp\\onedrive\\documents\\bureau\\softwareengineeringdocuments\\code\\eventgoapi\\eventgoapi\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E96EA5F5-C999-48C4-B1A1-CA6408875A7F}|EventGoAPI\\EventGoAPI.csproj|solutionrelative:eventgoapi\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E96EA5F5-C999-48C4-B1A1-CA6408875A7F}|EventGoAPI\\EventGoAPI.csproj|c:\\users\\pscyp\\onedrive\\documents\\bureau\\softwareengineeringdocuments\\code\\eventgoapi\\eventgoapi\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E96EA5F5-C999-48C4-B1A1-CA6408875A7F}|EventGoAPI\\EventGoAPI.csproj|solutionrelative:eventgoapi\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E96EA5F5-C999-48C4-B1A1-CA6408875A7F}|EventGoAPI\\EventGoAPI.csproj|c:\\users\\pscyp\\onedrive\\documents\\bureau\\softwareengineeringdocuments\\code\\eventgoapi\\eventgoapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E96EA5F5-C999-48C4-B1A1-CA6408875A7F}|EventGoAPI\\EventGoAPI.csproj|solutionrelative:eventgoapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E96EA5F5-C999-48C4-B1A1-CA6408875A7F}|EventGoAPI\\EventGoAPI.csproj|c:\\users\\pscyp\\onedrive\\documents\\bureau\\eventgo\\eventgoapi\\eventgoapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "AbsoluteMoniker": "D:0:0:{E96EA5F5-C999-48C4-B1A1-CA6408875A7F}|EventGoAPI\\EventGoAPI.csproj|c:\\users\\pscyp\\onedrive\\documents\\bureau\\softwareengineeringdocuments\\code\\eventgoapi\\eventgoapi\\dtos\\authdtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E96EA5F5-C999-48C4-B1A1-CA6408875A7F}|EventGoAPI\\EventGoAPI.csproj|solutionrelative:eventgoapi\\dtos\\authdtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E96EA5F5-C999-48C4-B1A1-CA6408875A7F}|EventGoAPI\\EventGoAPI.csproj|c:\\users\\pscyp\\onedrive\\documents\\bureau\\softwareengineeringdocuments\\code\\eventgoapi\\eventgoapi\\dtos\\userdtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E96EA5F5-C999-48C4-B1A1-CA6408875A7F}|EventGoAPI\\EventGoAPI.csproj|solutionrelative:eventgoapi\\dtos\\userdtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E96EA5F5-C999-48C4-B1A1-CA6408875A7F}|EventGoAPI\\EventGoAPI.csproj|c:\\users\\pscyp\\onedrive\\documents\\bureau\\softwareengineeringdocuments\\code\\eventgoapi\\eventgoapi\\migrations\\20260222015924_initidentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E96EA5F5-C999-48C4-B1A1-CA6408875A7F}|EventGoAPI\\EventGoAPI.csproj|solutionrelative:eventgoapi\\migrations\\20260222015924_initidentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E96EA5F5-C999-48C4-B1A1-CA6408875A7F}|EventGoAPI\\EventGoAPI.csproj|c:\\users\\pscyp\\onedrive\\documents\\bureau\\softwareengineeringdocuments\\code\\eventgoapi\\eventgoapi\\migrations\\appdbcontextmodelsnapshot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E96EA5F5-C999-48C4-B1A1-CA6408875A7F}|EventGoAPI\\EventGoAPI.csproj|solutionrelative:eventgoapi\\migrations\\appdbcontextmodelsnapshot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E96EA5F5-C999-48C4-B1A1-CA6408875A7F}|EventGoAPI\\EventGoAPI.csproj|c:\\users\\pscyp\\onedrive\\documents\\bureau\\softwareengineeringdocuments\\code\\eventgoapi\\eventgoapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{E96EA5F5-C999-48C4-B1A1-CA6408875A7F}|EventGoAPI\\EventGoAPI.csproj|solutionrelative:eventgoapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     }
   ],
@@ -46,34 +62,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 9,
+          "SelectedChildIndex": 5,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "AppDbContextModelSnapshot.cs",
-              "DocumentMoniker": "C:\\Users\\pscyp\\OneDrive\\Documents\\Bureau\\EventGo\\EventGoAPI\\EventGoAPI\\Migrations\\AppDbContextModelSnapshot.cs",
-              "RelativeDocumentMoniker": "EventGoAPI\\Migrations\\AppDbContextModelSnapshot.cs",
-              "ToolTip": "C:\\Users\\pscyp\\OneDrive\\Documents\\Bureau\\EventGo\\EventGoAPI\\EventGoAPI\\Migrations\\AppDbContextModelSnapshot.cs",
-              "RelativeToolTip": "EventGoAPI\\Migrations\\AppDbContextModelSnapshot.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-23T00:02:54.215Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "20260222015924_InitIdentity.cs",
-              "DocumentMoniker": "C:\\Users\\pscyp\\OneDrive\\Documents\\Bureau\\EventGo\\EventGoAPI\\EventGoAPI\\Migrations\\20260222015924_InitIdentity.cs",
-              "RelativeDocumentMoniker": "EventGoAPI\\Migrations\\20260222015924_InitIdentity.cs",
-              "ToolTip": "C:\\Users\\pscyp\\OneDrive\\Documents\\Bureau\\EventGo\\EventGoAPI\\EventGoAPI\\Migrations\\20260222015924_InitIdentity.cs",
-              "RelativeToolTip": "EventGoAPI\\Migrations\\20260222015924_InitIdentity.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGUAAAA4AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-22T21:04:40.958Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
@@ -85,36 +75,114 @@
             {
               "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "UserController.cs",
+              "DocumentMoniker": "C:\\Users\\pscyp\\OneDrive\\Documents\\Bureau\\SoftwareEngineeringDocuments\\code\\EventGoAPI\\EventGoAPI\\Controllers\\UserController.cs",
+              "RelativeDocumentMoniker": "EventGoAPI\\Controllers\\UserController.cs",
+              "ToolTip": "C:\\Users\\pscyp\\OneDrive\\Documents\\Bureau\\SoftwareEngineeringDocuments\\code\\EventGoAPI\\EventGoAPI\\Controllers\\UserController.cs",
+              "RelativeToolTip": "EventGoAPI\\Controllers\\UserController.cs",
+              "ViewState": "AgIAADgAAAAAAAAAAAAwwAkAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-27T19:56:44.376Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\pscyp\\OneDrive\\Documents\\Bureau\\SoftwareEngineeringDocuments\\code\\EventGoAPI\\EventGoAPI\\Data\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "EventGoAPI\\Data\\AppDbContext.cs",
+              "ToolTip": "C:\\Users\\pscyp\\OneDrive\\Documents\\Bureau\\SoftwareEngineeringDocuments\\code\\EventGoAPI\\EventGoAPI\\Data\\AppDbContext.cs",
+              "RelativeToolTip": "EventGoAPI\\Data\\AppDbContext.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAgwB0AAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-22T00:20:59.709Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "UserService.cs",
+              "DocumentMoniker": "C:\\Users\\pscyp\\OneDrive\\Documents\\Bureau\\SoftwareEngineeringDocuments\\code\\EventGoAPI\\EventGoAPI\\Services\\UserService.cs",
+              "RelativeDocumentMoniker": "EventGoAPI\\Services\\UserService.cs",
+              "ToolTip": "C:\\Users\\pscyp\\OneDrive\\Documents\\Bureau\\SoftwareEngineeringDocuments\\code\\EventGoAPI\\EventGoAPI\\Services\\UserService.cs",
+              "RelativeToolTip": "EventGoAPI\\Services\\UserService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADQAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-27T18:56:07.21Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "RefreshToken.cs",
+              "DocumentMoniker": "C:\\Users\\pscyp\\OneDrive\\Documents\\Bureau\\SoftwareEngineeringDocuments\\code\\EventGoAPI\\EventGoAPI\\Models\\RefreshToken.cs",
+              "RelativeDocumentMoniker": "EventGoAPI\\Models\\RefreshToken.cs",
+              "ToolTip": "C:\\Users\\pscyp\\OneDrive\\Documents\\Bureau\\SoftwareEngineeringDocuments\\code\\EventGoAPI\\EventGoAPI\\Models\\RefreshToken.cs",
+              "RelativeToolTip": "EventGoAPI\\Models\\RefreshToken.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-27T16:06:36.054Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ApplicationUser.cs",
+              "DocumentMoniker": "C:\\Users\\pscyp\\OneDrive\\Documents\\Bureau\\SoftwareEngineeringDocuments\\code\\EventGoAPI\\EventGoAPI\\Models\\ApplicationUser.cs",
+              "RelativeDocumentMoniker": "EventGoAPI\\Models\\ApplicationUser.cs",
+              "ToolTip": "C:\\Users\\pscyp\\OneDrive\\Documents\\Bureau\\SoftwareEngineeringDocuments\\code\\EventGoAPI\\EventGoAPI\\Models\\ApplicationUser.cs",
+              "RelativeToolTip": "EventGoAPI\\Models\\ApplicationUser.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABoAAABHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-22T00:20:30.639Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "UserDtos.cs",
+              "DocumentMoniker": "C:\\Users\\pscyp\\OneDrive\\Documents\\Bureau\\SoftwareEngineeringDocuments\\code\\EventGoAPI\\EventGoAPI\\DTOs\\UserDtos.cs",
+              "RelativeDocumentMoniker": "EventGoAPI\\DTOs\\UserDtos.cs",
+              "ToolTip": "C:\\Users\\pscyp\\OneDrive\\Documents\\Bureau\\SoftwareEngineeringDocuments\\code\\EventGoAPI\\EventGoAPI\\DTOs\\UserDtos.cs",
+              "RelativeToolTip": "EventGoAPI\\DTOs\\UserDtos.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-27T17:43:28.786Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "AuthController.cs",
-              "DocumentMoniker": "C:\\Users\\pscyp\\OneDrive\\Documents\\Bureau\\EventGo\\EventGoAPI\\EventGoAPI\\Controllers\\AuthController.cs",
+              "DocumentMoniker": "C:\\Users\\pscyp\\OneDrive\\Documents\\Bureau\\SoftwareEngineeringDocuments\\code\\EventGoAPI\\EventGoAPI\\Controllers\\AuthController.cs",
               "RelativeDocumentMoniker": "EventGoAPI\\Controllers\\AuthController.cs",
-              "ToolTip": "C:\\Users\\pscyp\\OneDrive\\Documents\\Bureau\\EventGo\\EventGoAPI\\EventGoAPI\\Controllers\\AuthController.cs",
+              "ToolTip": "C:\\Users\\pscyp\\OneDrive\\Documents\\Bureau\\SoftwareEngineeringDocuments\\code\\EventGoAPI\\EventGoAPI\\Controllers\\AuthController.cs",
               "RelativeToolTip": "EventGoAPI\\Controllers\\AuthController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAaAAAAAAAAAA==",
+              "ViewState": "AgIAACkAAAAAAAAAAADwv3oAAABNAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-02-22T01:25:21.242Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "AuthService.cs",
-              "DocumentMoniker": "C:\\Users\\pscyp\\OneDrive\\Documents\\Bureau\\EventGo\\EventGoAPI\\EventGoAPI\\Services\\AuthService.cs",
+              "DocumentMoniker": "C:\\Users\\pscyp\\OneDrive\\Documents\\Bureau\\SoftwareEngineeringDocuments\\code\\EventGoAPI\\EventGoAPI\\Services\\AuthService.cs",
               "RelativeDocumentMoniker": "EventGoAPI\\Services\\AuthService.cs",
-              "ToolTip": "C:\\Users\\pscyp\\OneDrive\\Documents\\Bureau\\EventGo\\EventGoAPI\\EventGoAPI\\Services\\AuthService.cs",
+              "ToolTip": "C:\\Users\\pscyp\\OneDrive\\Documents\\Bureau\\SoftwareEngineeringDocuments\\code\\EventGoAPI\\EventGoAPI\\Services\\AuthService.cs",
               "RelativeToolTip": "EventGoAPI\\Services\\AuthService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACYAAAAjAAAAAAAAAA==",
+              "ViewState": "AgIAAKYAAAAAAAAAAAAvwLAAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-02-22T00:29:50.209Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 12,
               "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\pscyp\\OneDrive\\Documents\\Bureau\\EventGo\\EventGoAPI\\EventGoAPI\\appsettings.json",
+              "DocumentMoniker": "C:\\Users\\pscyp\\OneDrive\\Documents\\Bureau\\SoftwareEngineeringDocuments\\code\\EventGoAPI\\EventGoAPI\\appsettings.json",
               "RelativeDocumentMoniker": "EventGoAPI\\appsettings.json",
-              "ToolTip": "C:\\Users\\pscyp\\OneDrive\\Documents\\Bureau\\EventGo\\EventGoAPI\\EventGoAPI\\appsettings.json",
+              "ToolTip": "C:\\Users\\pscyp\\OneDrive\\Documents\\Bureau\\SoftwareEngineeringDocuments\\code\\EventGoAPI\\EventGoAPI\\appsettings.json",
               "RelativeToolTip": "EventGoAPI\\appsettings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAABlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
@@ -124,52 +192,50 @@
               "$type": "Document",
               "DocumentIndex": 7,
               "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\pscyp\\OneDrive\\Documents\\Bureau\\EventGo\\EventGoAPI\\EventGoAPI\\Program.cs",
+              "DocumentMoniker": "C:\\Users\\pscyp\\OneDrive\\Documents\\Bureau\\SoftwareEngineeringDocuments\\code\\EventGoAPI\\EventGoAPI\\Program.cs",
               "RelativeDocumentMoniker": "EventGoAPI\\Program.cs",
-              "ToolTip": "C:\\Users\\pscyp\\OneDrive\\Documents\\Bureau\\EventGo\\EventGoAPI\\EventGoAPI\\Program.cs",
+              "ToolTip": "C:\\Users\\pscyp\\OneDrive\\Documents\\Bureau\\SoftwareEngineeringDocuments\\code\\EventGoAPI\\EventGoAPI\\Program.cs",
               "RelativeToolTip": "EventGoAPI\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADgAAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-02-22T00:26:21.572Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 11,
+              "Title": "AppDbContextModelSnapshot.cs",
+              "DocumentMoniker": "C:\\Users\\pscyp\\OneDrive\\Documents\\Bureau\\SoftwareEngineeringDocuments\\code\\EventGoAPI\\EventGoAPI\\Migrations\\AppDbContextModelSnapshot.cs",
+              "RelativeDocumentMoniker": "EventGoAPI\\Migrations\\AppDbContextModelSnapshot.cs",
+              "ToolTip": "C:\\Users\\pscyp\\OneDrive\\Documents\\Bureau\\SoftwareEngineeringDocuments\\code\\EventGoAPI\\EventGoAPI\\Migrations\\AppDbContextModelSnapshot.cs",
+              "RelativeToolTip": "EventGoAPI\\Migrations\\AppDbContextModelSnapshot.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-23T00:02:54.215Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "20260222015924_InitIdentity.cs",
+              "DocumentMoniker": "C:\\Users\\pscyp\\OneDrive\\Documents\\Bureau\\SoftwareEngineeringDocuments\\code\\EventGoAPI\\EventGoAPI\\Migrations\\20260222015924_InitIdentity.cs",
+              "RelativeDocumentMoniker": "EventGoAPI\\Migrations\\20260222015924_InitIdentity.cs",
+              "ToolTip": "C:\\Users\\pscyp\\OneDrive\\Documents\\Bureau\\SoftwareEngineeringDocuments\\code\\EventGoAPI\\EventGoAPI\\Migrations\\20260222015924_InitIdentity.cs",
+              "RelativeToolTip": "EventGoAPI\\Migrations\\20260222015924_InitIdentity.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGUAAAA4AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-22T21:04:40.958Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
               "Title": "AuthDtos.cs",
-              "DocumentMoniker": "C:\\Users\\pscyp\\OneDrive\\Documents\\Bureau\\EventGo\\EventGoAPI\\EventGoAPI\\DTOs\\AuthDtos.cs",
+              "DocumentMoniker": "C:\\Users\\pscyp\\OneDrive\\Documents\\Bureau\\SoftwareEngineeringDocuments\\code\\EventGoAPI\\EventGoAPI\\DTOs\\AuthDtos.cs",
               "RelativeDocumentMoniker": "EventGoAPI\\DTOs\\AuthDtos.cs",
-              "ToolTip": "C:\\Users\\pscyp\\OneDrive\\Documents\\Bureau\\EventGo\\EventGoAPI\\EventGoAPI\\DTOs\\AuthDtos.cs",
+              "ToolTip": "C:\\Users\\pscyp\\OneDrive\\Documents\\Bureau\\SoftwareEngineeringDocuments\\code\\EventGoAPI\\EventGoAPI\\DTOs\\AuthDtos.cs",
               "RelativeToolTip": "EventGoAPI\\DTOs\\AuthDtos.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAACAAAAAAAAAA==",
+              "ViewState": "AgIAAEcAAAAAAAAAAAAIwFkAAAACAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-02-22T00:24:26.643Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "AppDbContext.cs",
-              "DocumentMoniker": "C:\\Users\\pscyp\\OneDrive\\Documents\\Bureau\\EventGo\\EventGoAPI\\EventGoAPI\\Data\\AppDbContext.cs",
-              "RelativeDocumentMoniker": "EventGoAPI\\Data\\AppDbContext.cs",
-              "ToolTip": "C:\\Users\\pscyp\\OneDrive\\Documents\\Bureau\\EventGo\\EventGoAPI\\EventGoAPI\\Data\\AppDbContext.cs",
-              "RelativeToolTip": "EventGoAPI\\Data\\AppDbContext.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAfAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-22T00:20:59.709Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "ApplicationUser.cs",
-              "DocumentMoniker": "C:\\Users\\pscyp\\OneDrive\\Documents\\Bureau\\EventGo\\EventGoAPI\\EventGoAPI\\Models\\ApplicationUser.cs",
-              "RelativeDocumentMoniker": "EventGoAPI\\Models\\ApplicationUser.cs",
-              "ToolTip": "C:\\Users\\pscyp\\OneDrive\\Documents\\Bureau\\EventGo\\EventGoAPI\\EventGoAPI\\Models\\ApplicationUser.cs",
-              "RelativeToolTip": "EventGoAPI\\Models\\ApplicationUser.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAA+AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-22T00:20:30.639Z",
               "EditorCaption": ""
             }
           ]
