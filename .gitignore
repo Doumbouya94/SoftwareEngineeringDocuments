@@ -87,9 +87,43 @@ docker-compose.override.yml
 *.temp
 Thumbs.db
 .DS_Store
-
-# ============================================================
-# Claude Code (local settings only)
-# ============================================================
-
 .claude/settings.local.json
+
+# ============================================================
+# .NET MAUI / Xamarin
+# ============================================================
+
+# Android
+*.apk
+*.aab
+*.ap_
+*.dex
+bin/
+obj/
+local.properties
+
+# iOS
+*.ipa
+*.dSYM.zip
+*.dSYM
+xcuserdata/
+*.xcworkspace/xcuserdata/
+*.xccheckout
+*.moved-to-trash/
+DerivedData/
+*.hmap
+
+# Windows (WinUI / MSIX)
+*.msix
+*.msixbundle
+*.appx
+*.appxbundle
+AppPackages/
+BundleArtifacts/
+
+# Mac Catalyst
+*.app/
+
+# MAUI Hot Reload / Resources
+**/.hotreload
+**/GeneratedCode/
