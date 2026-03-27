@@ -1,0 +1,95 @@
+# ============================================================
+# .NET / ASP.NET Core
+# ============================================================
+
+# Build outputs
+bin/
+obj/
+
+# NuGet
+project.assets.json
+project.nuget.cache
+*.nuget.dgspec.json
+*.nuget.g.props
+*.nuget.g.targets
+packages/
+
+# ============================================================
+# Visual Studio 2022
+# ============================================================
+
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.wsuo
+
+# VS semantic search / Copilot code index
+*.vsidx
+*.db
+*.db-shm
+*.db-wal
+
+# ============================================================
+# Build Artifacts
+# ============================================================
+
+*.AssemblyInfo.cs
+*.AssemblyInfoInputs.cache
+*.GeneratedMSBuildEditorConfig.editorconfig
+*.assets.cache
+*.GlobalUsings.g.cs
+*.AssemblyReference.cache
+*.csproj.AssemblyReference.cache
+
+# ============================================================
+# Compiled binaries
+# ============================================================
+
+*.dll
+*.exe
+*.pdb
+*.mdb
+
+# ============================================================
+# Entity Framework Core
+# ============================================================
+
+# Do NOT ignore Migrations — they should be committed
+# Migrations/
+
+# ============================================================
+# Docker
+# ============================================================
+
+# Keep docker-compose.yml — it is part of the project setup
+# docker-compose.override.yml can be local
+docker-compose.override.yml
+
+# ============================================================
+# Environment & Secrets
+# ============================================================
+
+.env
+.env.*
+!.env.example
+
+# Careful: only ignore if it contains secrets/connection strings
+# appsettings.Development.json
+
+# ============================================================
+# Logs & Temp
+# ============================================================
+
+*.log
+*.tmp
+*.temp
+Thumbs.db
+.DS_Store
+
+# ============================================================
+# Claude Code (local settings only)
+# ============================================================
+
+.claude/settings.local.json
