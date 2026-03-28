@@ -1,4 +1,4 @@
-# Guide de démarrage — EventGo
+# Guide de démarrage - EventGo
 
 ## Prérequis
 
