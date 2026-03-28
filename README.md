@@ -49,6 +49,7 @@ Ensemble, ils forment un cadre de documentation clair, professionnel et maintena
 - [ADR.md](https://github.com/Doumbouya94/SoftwareEngineeringDocuments/blob/main/documentation/ADR-001.md)
 - [ADR02.md](https://github.com/Doumbouya94/SoftwareEngineeringDocuments/blob/main/documentation/ADR-002.md)
 - [Rapport.md](https://github.com/Doumbouya94/SoftwareEngineeringDocuments/blob/main/documentation/rapport.md)
+- [Guide de demarrage](https://github.com/Doumbouya94/SoftwareEngineeringDocuments/blob/main/documentation/guide-demarrage.md)
 
 ## En savoir plus
 
