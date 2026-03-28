@@ -75,8 +75,8 @@ Ou ouvrir `EventGo.sln` dans Visual Studio et lancer le projet `EventGoApp`.
 
 ## 6. Tester
 
-1. Ouvrir l'app MAUI — la page de bienvenue s'affiche
-2. Cliquer sur **Créer un compte** — remplir le formulaire
+1. Ouvrir l'app MAUI - la page de bienvenue s'affiche
+2. Cliquer sur **Créer un compte** - remplir le formulaire
 3. Vérifier dans la base de données :
    ```bash
    docker exec -it eventgo-mysql mysql -u root -p eventgo
@@ -84,7 +84,7 @@ Ou ouvrir `EventGo.sln` dans Visual Studio et lancer le projet `EventGoApp`.
    ```sql
    SELECT * FROM users;
    ```  
-4. Se déconnecter — se reconnecter avec le compte créé
+4. Se déconnecter - se reconnecter avec le compte créé
 
 ---
 
