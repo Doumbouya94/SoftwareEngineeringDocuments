@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EventGoApp.Views.WelcomePage"
+             BackgroundColor="#121212"
+             Shell.NavBarIsVisible="False">
+
+    <VerticalStackLayout Padding="32" Spacing="24" VerticalOptions="Center">
+
+        <Label Text="🎉"
+               FontSize="72"
+               HorizontalOptions="Center"/>
+
+        <Label Text="EventGo"
+               FontSize="40"
+               FontAttributes="Bold"
+               TextColor="White"
+               HorizontalOptions="Center"/>
+
+        <Label Text="Découvrez des événements autour de vous."
+               FontSize="15"
+               TextColor="#AAAAAA"
+               HorizontalOptions="Center"
+               HorizontalTextAlignment="Center"
+               Margin="0,0,0,24"/>
+
+        <Button Text="Se connecter"
+                Clicked="OnLoginClicked"
+                BackgroundColor="#6200EE"
+                TextColor="White"
+                CornerRadius="8"/>
+
+        <Button Text="Créer un compte"
+                Clicked="OnRegisterClicked"
+                BackgroundColor="Transparent"
+                TextColor="#6200EE"
+                BorderColor="#6200EE"
+                BorderWidth="1.5"
+                CornerRadius="8"/>
+
+    </VerticalStackLayout>
+
+</ContentPage>

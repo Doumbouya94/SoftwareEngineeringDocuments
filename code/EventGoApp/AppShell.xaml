@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<Shell
-    x:Class="EventGoApp.AppShell"
-    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:EventGoApp"
-    Title="EventGoApp">
+<Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:views="clr-namespace:EventGoApp.Views"
+       x:Class="EventGoApp.AppShell"
+       FlyoutBehavior="Disabled"
+       ForegroundColor="White"
+       TitleColor="White">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    <ShellContent Route="welcome"
+                  ContentTemplate="{DataTemplate views:WelcomePage}"
+                  Shell.NavBarIsVisible="False"/>
+
+    <ShellContent Route="home"
+                  ContentTemplate="{DataTemplate views:HomePage}"
+                  Shell.NavBarIsVisible="False"/>
 
 </Shell>

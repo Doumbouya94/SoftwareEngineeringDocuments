@@ -61,6 +61,9 @@ public class AuthService
     /// Méthode de connexion d'un utilisateur existant. 
     /// Vérifie les informations d'identification et génère un token JWT si elles sont valides.
     /// </summary>
+    /// <remarks> Utilise le design pattern Facade pour simplifier l'interaction avec les services 
+    /// d'authentification et de gestion des utilisateurs.
+    /// </remarks>
     /// <param name="request">Les informations de connexion de l'utilisateur</param>
     /// <returns>Une réponse d'authentification contenant le token JWT</returns>
     /// <exception cref="UnauthorizedAccessException">Lance une exception si les informations d'identification sont invalides</exception>

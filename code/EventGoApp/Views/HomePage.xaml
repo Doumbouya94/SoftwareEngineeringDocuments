@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EventGoApp.Views.HomePage"
+             Title="Accueil"
+             BackgroundColor="#121212">
+
+    <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="16">
+        <Label Text="Bienvenue sur EventGo!"
+               FontSize="24"
+               FontAttributes="Bold"
+               TextColor="White"
+               HorizontalOptions="Center"/>
+        <Label Text="Vous etes connecte."
+               TextColor="#AAAAAA"
+               HorizontalOptions="Center"/>
+
+        <Button Text="Se deconnecter"
+                Clicked="OnLogoutClicked"
+                BackgroundColor="Transparent"
+                TextColor="#FF5252"
+                BorderColor="#FF5252"
+                BorderWidth="1.5"
+                CornerRadius="8"
+                Margin="0,24,0,0"/>
+    </VerticalStackLayout>
+
+</ContentPage>

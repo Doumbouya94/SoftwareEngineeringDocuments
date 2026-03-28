@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EventGoApp.Views.RegisterPage"
+             Title="Inscription"
+             BackgroundColor="#121212"
+             Shell.BackgroundColor="#1E1E1E">
+
+    <VerticalStackLayout Padding="32" Spacing="16" VerticalOptions="Center">
+
+        <Label Text="Créer un compte"
+               FontSize="28"
+               FontAttributes="Bold"
+               TextColor="White"
+               HorizontalOptions="Center"/>
+
+        <Label Text="Rejoignez EventGo dès aujourd'hui"
+               FontSize="14"
+               TextColor="#AAAAAA"
+               HorizontalOptions="Center"
+               Margin="0,0,0,16"/>
+
+        <Entry x:Name="FullNameEntry"
+               Placeholder="Nom complet (optionnel)"
+               PlaceholderColor="#888"
+               TextColor="White"
+               BackgroundColor="#1E1E1E"/>
+
+        <Entry x:Name="UsernameEntry"
+               Placeholder="Nom d'utilisateur"
+               PlaceholderColor="#888"
+               TextColor="White"
+               BackgroundColor="#1E1E1E"/>
+
+        <Entry x:Name="EmailEntry"
+               Placeholder="Courriel"
+               Keyboard="Email"
+               PlaceholderColor="#888"
+               TextColor="White"
+               BackgroundColor="#1E1E1E"/>
+
+        <Entry x:Name="PasswordEntry"
+               Placeholder="Mot de passe"
+               IsPassword="True"
+               PlaceholderColor="#888"
+               TextColor="White"
+               BackgroundColor="#1E1E1E"/>
+
+        <Label x:Name="ErrorLabel"
+               TextColor="#FF5252"
+               FontSize="13"
+               IsVisible="False"
+               HorizontalOptions="Center"/>
+
+        <Button Text="S'inscrire"
+                Clicked="OnRegisterClicked"
+                BackgroundColor="#6200EE"
+                TextColor="White"
+                CornerRadius="8"
+                Margin="0,8,0,0"/>
+
+        <HorizontalStackLayout HorizontalOptions="Center" Spacing="4">
+            <Label Text="Déjà un compte ?" TextColor="#AAAAAA" VerticalOptions="Center"/>
+            <Label Text="Se connecter"
+                   TextColor="#6200EE"
+                   VerticalOptions="Center">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnLoginTapped"/>
+                </Label.GestureRecognizers>
+            </Label>
+        </HorizontalStackLayout>
+
+    </VerticalStackLayout>
+</ContentPage>
