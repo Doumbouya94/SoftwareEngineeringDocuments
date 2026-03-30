@@ -76,7 +76,7 @@ public class SqliteEventAdapter : IEventAdapter
 
         IEnumerable<Event> result = events;
 
-        // Filtre par ville appliqué en mémoire (insensible à la casse)
+        // Filtre par ville appliqué en mémoire
         if (!string.IsNullOrEmpty(city))
         {
             result = result.Where(e =>
@@ -96,7 +96,6 @@ public class SqliteEventAdapter : IEventAdapter
     /// Insère les données de test dans la base de données si elle est vide.
     /// Contient 20 événements répartis dans plusieurs villes québécoises
     /// (Montréal, Québec, Laval, Gatineau, Sherbrooke, Trois-Rivières).
-    /// Cette méthode est idempotente : elle ne fait rien si des événements existent déjà.
     /// </summary>
     public async Task SeedEventsAsync()
     {

@@ -1,46 +1,41 @@
 namespace EventGoApp.Services;
 
 /// <summary>
-/// Classe AuthStateService gère l'état d'authentification de l'utilisateur dans l'application.
+/// ImplÃ©mentation singleton de IAuthState. GÃ¨re l'Ã©tat d'authentification en mÃ©moire.
 /// </summary>
 /// <remarks>
 /// Auteur : Pierre
-/// Patron de conception : State Pattern — centralise la logique de gestion de l'état d'authentification et permet 
-/// de basculer facilement entre les différents états (connecté, invité, déconnecté).
-/// Hérite de : IAuthState — implémente l'interface pour garantir que toutes les méthodes nécessaires sont définies et utilisées de manière cohérente à travers l'application.
-/// UserStories : US1.2 (connexion), US1.4 (déconnexion), US1.6 (persistance session) — gère l'état connecté / invité / déconnecté
-/// Épic : "Gestion de l'authentification et de l'état utilisateur"
+/// Patron de conception : State â€” gÃ¨re les transitions entre LoggedOut, Guest et LoggedIn.
+/// UserStories : US1.2 (connexion), US1.4 (dÃ©connexion), US1.6 (persistance de session).
+/// Ã‰pic : Authentification et gestion des utilisateurs.
 /// </remarks>
 public class AuthStateService : IAuthState
 {
+    /// <summary>Mode d'authentification actuel.</summary>
     public AuthMode CurrentMode { get; private set; } = AuthMode.LoggedOut;
+
+    /// <summary>Utilisateur connectÃ©. Null si invitÃ© ou dÃ©connectÃ©.</summary>
     public Models.User? CurrentUser { get; private set; }
+
+    /// <summary>Vrai si l'utilisateur est connectÃ© ou invitÃ©.</summary>
     public bool IsAuthenticated => CurrentMode != AuthMode.LoggedOut;
 
-    /// <summary>
-    /// Méthode pour définir l'état de l'utilisateur en tant qu'invité. 
-    /// Cela signifie que l'utilisateur n'est pas connecté, mais peut accéder à certaines 
-    /// fonctionnalités limitées de l'application.
-    /// </summary>
+    /// <summary>Passe l'Ã©tat Ã  InvitÃ© et efface l'utilisateur courant.</summary>
     public void SetGuest()
     {
         CurrentMode = AuthMode.Guest;
         CurrentUser = null;
     }
 
-    /// <summary>
-    /// Méthode pour définir l'état de l'utilisateur en tant que connecté.
-    /// </summary>
-    /// <param name="user"></param>
+    /// <summary>Passe l'Ã©tat Ã  ConnectÃ© et enregistre l'utilisateur.</summary>
+    /// <param name="user">Utilisateur authentifiÃ©.</param>
     public void SetLoggedIn(Models.User user)
     {
         CurrentMode = AuthMode.LoggedIn;
         CurrentUser = user;
     }
 
-    /// <summary>
-    /// Méthode pour définir l'état de l'utilisateur en tant que déconnecté.
-    /// </summary>
+    /// <summary>Passe l'Ã©tat Ã  DÃ©connectÃ© et efface l'utilisateur courant.</summary>
     public void SetLoggedOut()
     {
         CurrentMode = AuthMode.LoggedOut;

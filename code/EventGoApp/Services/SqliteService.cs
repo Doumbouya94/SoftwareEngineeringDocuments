@@ -1,13 +1,16 @@
-﻿using SQLite;
+using SQLite;
 using EventGoApp.Models;
 
 namespace EventGoApp.Services;
 
 /// <summary>
-/// Gère la connexion SQLite asynchrone et l'initialisation de la base de données.
+/// Façade pour la gestion de la connexion SQLite et la création du schéma.
 /// </summary>
 /// <remarks>
 /// Auteur : Aboubacar Sidiki Doumbouya
+/// Patron de conception : Façade — cache la complexité de l'initialisation SQLite derrière deux méthodes simples.
+/// UserStories : US1.1 (inscription), US1.2 (connexion), US2.1 (affichage des événements).
+/// Épic : Authentification et gestion des utilisateurs / Découverte et recherche d'événements.
 /// </remarks>
 public class SqliteService
 {
@@ -15,53 +18,41 @@ public class SqliteService
 
     /// <summary>
     /// Initialise la connexion SQLite et crée les tables si elles n'existent pas.
+    /// Méthode idempotente : sans effet si déjà appelée.
     /// </summary>
     public async Task InitializeAsync()
     {
-        // Si déjà initialisé, on ne fait rien
-        if (_db is not null)
-        {
-            return;
-        }
+        if (_db is not null) return;
 
-        // Construire le chemin vers le fichier de BD
         string dbPath = Path.Combine(FileSystem.AppDataDirectory, "eventgo.db");
-
-        // Créer la connexion
         _db = new SQLiteAsyncConnection(dbPath);
 
-        // Créer les tables si elles n'existent pas
         await _db.CreateTableAsync<User>();
         await _db.CreateTableAsync<Event>();
     }
 
     /// <summary>
-    /// Retourne la connexion active. Lance une exception si non initialisée.
+    /// Retourne la connexion SQLite active.
     /// </summary>
+    /// <exception cref="InvalidOperationException">Lancée si InitializeAsync() n'a pas encore été appelée.</exception>
     public SQLiteAsyncConnection GetConnection()
     {
         if (_db is null)
-        {
             throw new InvalidOperationException(
-                "Database not initialized. Call InitializeAsync() before using services.");
-        }
+                "Base de données non initialisée. Appelez InitializeAsync() avant d'utiliser les services.");
 
         return _db;
     }
 
     /// <summary>
-    /// Supprime et recrée les tables.
+    /// Supprime et recrée toutes les tables. À utiliser en développement uniquement.
     /// </summary>
     public async Task DropAndRecreateAsync()
     {
-        if (_db is null)
-            return;
+        if (_db is null) return;
 
-        // Supprimer les tables
         await _db.DropTableAsync<User>();
         await _db.DropTableAsync<Event>();
-
-        // Recréer les tables
         await _db.CreateTableAsync<User>();
         await _db.CreateTableAsync<Event>();
     }

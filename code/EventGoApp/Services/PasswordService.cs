@@ -1,32 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
 namespace EventGoApp.Services;
 
 /// <summary>
-/// Service pour le hachage et la vérification des mots de passe.
+/// Service de hachage et vérification des mots de passe avec BCrypt.
 /// </summary>
+/// <remarks>
+/// Auteur : Aboubacar Sidiki Doumbouya
+/// Patron de conception : aucun — service utilitaire.
+/// UserStories : US1.1 (inscription), US1.2 (connexion).
+/// Épic : Authentification et gestion des utilisateurs.
+/// </remarks>
 public class PasswordService
 {
     /// <summary>
-    /// Hache un mot de passe en clair.
+    /// Hache un mot de passe en clair avec BCrypt (10 rounds par défaut).
     /// </summary>
-    /// <param name="plaintext">Le mot de passe en clair.</param>
-    /// <returns>Le mot de passe haché.</returns>
-    public string HashPassword(string plaintext)
-    {
-        return BCrypt.Net.BCrypt.HashPassword(plaintext);
-    }
+    /// <param name="plaintext">Mot de passe en clair.</param>
+    /// <returns>Hash BCrypt du mot de passe.</returns>
+    public string HashPassword(string plaintext) =>
+        BCrypt.Net.BCrypt.HashPassword(plaintext);
 
     /// <summary>
-    /// Vérifie si un mot de passe en clair correspond à un mot de passe haché.
+    /// Vérifie si un mot de passe en clair correspond à un hash BCrypt.
     /// </summary>
-    /// <param name="plaintext">Le mot de passe en clair.</param>
-    /// <param name="hashed">Le mot de passe haché.</param>
-    /// <returns>True si le mot de passe correspond, sinon false.</returns>
-    public bool VerifyPassword(string plaintext, string hashed)
-    {
-        return BCrypt.Net.BCrypt.Verify(plaintext, hashed);
-    }
+    /// <param name="plaintext">Mot de passe en clair saisi par l'utilisateur.</param>
+    /// <param name="hashed">Hash BCrypt stocké en base de données.</param>
+    /// <returns>Vrai si le mot de passe correspond au hash.</returns>
+    public bool VerifyPassword(string plaintext, string hashed) =>
+        BCrypt.Net.BCrypt.Verify(plaintext, hashed);
 }

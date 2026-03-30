@@ -3,13 +3,8 @@ using EventGoApp.Models;
 namespace EventGoApp.Services;
 
 /// <summary>
-/// Énumération représentant les différents modes sociaux que l'utilisateur peut sélectionner lors de l'onboarding.
+/// Mode social sélectionné par l'utilisateur lors de l'onboarding.
 /// </summary>
-/// <remarks>
-/// Auteur : Pierre
-/// Patron de conception : State Pattern — permet de gérer l'état du mode social sélectionné par l'utilisateur lors de l'onboarding.
-/// Epic : "Personnalisation de l'expérience utilisateur lors de l'onboarding" — le mode social sélectionné par l'utilisateur peut influencer les recommandations d'événements et les fonctionnalités de l'application, en adaptant l'expérience en fonction des préférences sociales de l'utilisateur.
-/// </remarks>
 public enum SocialMode
 {
     Solo,
@@ -19,7 +14,7 @@ public enum SocialMode
 }
 
 /// <summary>
-/// Énumération représentant les différentes tranches de budget que l'utilisateur peut sélectionner lors de l'onboarding.
+/// Tranche de budget sélectionnée par l'utilisateur lors de l'onboarding.
 /// </summary>
 public enum BudgetTier
 {
@@ -30,42 +25,50 @@ public enum BudgetTier
 }
 
 /// <summary>
-/// Service pour gérer l'état de l'onboarding, y compris les étapes, la ville sélectionnée,
-/// les catégories d'événements, le mode social et le budget.
+/// Service de gestion de l'état des 4 étapes d'onboarding.
 /// </summary>
+/// <remarks>
+/// Auteur : Pierre
+/// Patron de conception : State — suit la progression et les sélections de l'utilisateur à travers les étapes.
+/// UserStories : US1.1 (inscription avec préférences).
+/// Épic : Authentification et gestion des utilisateurs.
+/// </remarks>
 public class OnboardingStateService
 {
+    /// <summary>Étape courante (0 à 3).</summary>
     public int CurrentStep { get; private set; } = 0;
-    public const int TotalSteps = 4; // 0: Ville, 1: Catégories, 2: Mode social, 3: Budget
 
+    /// <summary>Nombre total d'étapes : 0=Ville, 1=Catégories, 2=Mode social, 3=Budget.</summary>
+    public const int TotalSteps = 4;
+
+    /// <summary>Ville sélectionnée par l'utilisateur.</summary>
     public string SelectedCity { get; set; } = "Montréal";
+
+    /// <summary>Catégories d'événements sélectionnées par l'utilisateur.</summary>
     public HashSet<EventCategory> SelectedCategories { get; } = new();
+
+    /// <summary>Mode social sélectionné par l'utilisateur.</summary>
     public SocialMode? SelectedSocialMode { get; set; }
+
+    /// <summary>Tranche de budget sélectionnée par l'utilisateur.</summary>
     public BudgetTier? SelectedBudget { get; set; }
 
+    /// <summary>Vrai si toutes les étapes ont été complétées.</summary>
     public bool IsComplete => CurrentStep >= TotalSteps;
 
-
-    // Permet de passer à l'étape suivante de l'onboarding
+    /// <summary>Avance à l'étape suivante si possible.</summary>
     public void NextStep()
     {
-        if (CurrentStep < TotalSteps)
-        {
-            CurrentStep++;
-        }
+        if (CurrentStep < TotalSteps) CurrentStep++;
     }
 
-    // Permet de revenir à l'étape précédente de l'onboarding
+    /// <summary>Revient à l'étape précédente si possible.</summary>
     public void PreviousStep()
     {
-        if (CurrentStep > 0)
-        {
-            CurrentStep--;
-        }
+        if (CurrentStep > 0) CurrentStep--;
     }
 
-    // Réinitialise l'état de l'onboarding à ses valeurs par défaut,
-    // permettant à l'utilisateur de recommencer le processus d'onboarding depuis le début.
+    /// <summary>Réinitialise toutes les sélections et revient à l'étape 0.</summary>
     public void Reset()
     {
         CurrentStep = 0;

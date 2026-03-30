@@ -5,56 +5,74 @@ using EventGoApp.Models;
 namespace EventGoApp.ViewModels;
 
 /// <summary>
-/// Classe de vue-modèle pour représenter un événement dans l'interface utilisateur, avec des propriétés 
-/// formatées pour l'affichage et une logique de sélection.
+/// Vue-modèle observable pour un événement. Expose les propriétés formatées pour l'affichage.
 /// </summary>
 /// <remarks>
-/// Patron de conception : Observer Pattern — permet à l'interface utilisateur de réagir aux changements
-/// de propriétés, notamment pour la sélection de l'événement.
-/// UserStory : US2.1 (affichage liste événements), US2.3 (sélection événement) => fournit les données formatées pour l'affichage et gère la sélection de l'événement.
-/// Elle hérite de INotifyPropertyChanged pour permettre à l'interface utilisateur de se mettre à jour 
-/// automatiquement lorsque les propriétés changent, notamment pour la sélection de l'événement.
 /// Auteur : Pierre
+/// Patron de conception : Observateur — implémente INotifyPropertyChanged pour notifier l'interface des changements.
+/// UserStories : US2.1 (affichage de la liste), US2.4 (page de détails).
+/// Épic : Découverte et recherche d'événements.
 /// </remarks>
 public class EventViewModel : INotifyPropertyChanged
 {
-    private readonly Event _event; // variable privée pour stocker l'événement d'origine
-    private bool _isSelected; // variable privée pour suivre l'état de sélection de l'événement
+    private readonly Event _event;
+    private bool _isSelected;
 
+    /// <summary>Initialise le vue-modèle avec l'événement source.</summary>
     public EventViewModel(Event @event)
     {
         _event = @event;
     }
 
-    // Propriétés publiques pour exposer les données de l'événement formatées pour l'affichage
+    /// <summary>Identifiant unique de l'événement.</summary>
     public Guid Id => _event.Id;
+
+    /// <summary>Titre de l'événement.</summary>
     public string Title => _event.Title;
+
+    /// <summary>Description de l'événement.</summary>
     public string Description => _event.Description;
+
+    /// <summary>Ville de l'événement.</summary>
     public string City => _event.City;
+
+    /// <summary>Lieu de l'événement.</summary>
     public string Venue => _event.Venue;
+
+    /// <summary>Chemin vers l'image de l'événement.</summary>
     public string ImageSource => _event.ImageSource;
+
+    /// <summary>Vrai si une image est disponible pour l'événement.</summary>
     public bool HasImage => !string.IsNullOrWhiteSpace(_event.ImageSource);
+
+    /// <summary>Couleur de fond affichée si aucune image n'est disponible.</summary>
     public string ImagePlaceholderColor => _event.ImagePlaceholderColor;
+
+    /// <summary>Indique si l'événement est mis en vedette.</summary>
     public bool IsFeatured => _event.IsFeatured;
 
+    /// <summary>Date formatée en français</summary>
     public string FormattedDate => _event.Date.ToString("ddd d MMM yyyy · HH:mm",
         new System.Globalization.CultureInfo("fr-CA"));
 
+    /// <summary>Prix formaté. Retourne « Gratuit » si le prix est 0.</summary>
     public string FormattedPrice => _event.Price == 0.0 ? "Gratuit" : $"{_event.Price:0.##} $";
 
+    /// <summary>Nom de la catégorie en français.</summary>
     public string CategoryLabel => _event.Category switch
     {
-        EventCategory.Concerts  => "Concerts",
-        EventCategory.Festivals => "Festivals",
-        EventCategory.Sports    => "Sports",
-        EventCategory.Parties   => "Soirées",
-        EventCategory.Food      => "Gastronomie",
-        EventCategory.Arts      => "Arts & Culture",
-        EventCategory.Outdoor   => "Plein air",
+        EventCategory.Concerts   => "Concerts",
+        EventCategory.Festivals  => "Festivals",
+        EventCategory.Sports     => "Sports",
+        EventCategory.Parties    => "Soirées",
+        EventCategory.Food       => "Gastronomie",
+        EventCategory.Arts       => "Arts & Culture",
+        EventCategory.Outdoor    => "Plein air",
         EventCategory.Networking => "Réseautage",
         _ => _event.Category.ToString()
     };
 
+    /// <summary>Couleur associée à la catégorie de l'événement.</summary>
     public Color CategoryColor => _event.Category switch
     {
         EventCategory.Concerts   => Color.FromArgb("#1A237E"),
@@ -68,7 +86,10 @@ public class EventViewModel : INotifyPropertyChanged
         _ => Color.FromArgb("#444444")
     };
 
-    // Propriété pour suivre si l'événement est sélectionné dans l'interface utilisateur
+    /// <summary>
+    /// Indique si l'événement est sélectionné dans l'interface.
+    /// Déclenche PropertyChanged pour mettre à jour l'affichage.
+    /// </summary>
     public bool IsSelected
     {
         get => _isSelected;
@@ -84,9 +105,10 @@ public class EventViewModel : INotifyPropertyChanged
         }
     }
 
-    // Implémentation de INotifyPropertyChanged pour notifier l'interface utilisateur des changements de propriétés
+    /// <inheritdoc/>
     public event PropertyChangedEventHandler? PropertyChanged;
 
+    /// <summary>Notifie l'interface qu'une propriété a changé.</summary>
     protected void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 }

@@ -1,29 +1,40 @@
-﻿using SQLite;
+using SQLite;
 
 namespace EventGoApp.Models;
+
 /// <summary>
-/// Represente un utilisateur de l'application EventGo, avec des propriétés pour l'identification, 
-/// les informations de connexion et les métadonnées de création et de mise à jour.
+/// Représente un utilisateur de l'application EventGo.
 /// </summary>
-/// /// <remarks>
+/// <remarks>
 /// Auteur : Aboubacar Sidiki Doumbouya
+/// Patron de conception : aucun — modèle de données ORM.
+/// UserStories : US1.1 (inscription), US1.2 (connexion), US1.5 (modification du profil).
+/// Épic : Authentification et gestion des utilisateurs.
 /// </remarks>
 [Table("Users")]
 public class User
 {
+    /// <summary>Identifiant unique de l'utilisateur.</summary>
     [PrimaryKey]
     public Guid Id { get; set; } = Guid.NewGuid();
 
+    /// <summary>Adresse courriel unique de l'utilisateur.</summary>
     [Indexed, MaxLength(255)]
     public string Email { get; set; } = string.Empty;
 
+    /// <summary>Nom d'utilisateur unique.</summary>
     [Indexed, MaxLength(100)]
     public string Username { get; set; } = string.Empty;
 
+    /// <summary>Nom complet affiché dans l'application.</summary>
     public string FullName { get; set; } = string.Empty;
 
+    /// <summary>Mot de passe haché avec BCrypt.</summary>
     public string PasswordHash { get; set; } = string.Empty;
 
+    /// <summary>Date de création du compte.</summary>
     public DateTime CreatedAt { get; set; }
+
+    /// <summary>Date de la dernière modification du compte.</summary>
     public DateTime UpdatedAt { get; set; }
 }
