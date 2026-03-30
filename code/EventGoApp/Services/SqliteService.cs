@@ -20,7 +20,9 @@ public class SqliteService
     {
         // Si déjà initialisé, on ne fait rien
         if (_db is not null)
+        {
             return;
+        }
 
         // Construire le chemin vers le fichier de BD
         string dbPath = Path.Combine(FileSystem.AppDataDirectory, "eventgo.db");
@@ -28,7 +30,7 @@ public class SqliteService
         // Créer la connexion
         _db = new SQLiteAsyncConnection(dbPath);
 
-        // Créer les tables si elles n'existent pas (idempotent)
+        // Créer les tables si elles n'existent pas
         await _db.CreateTableAsync<User>();
         await _db.CreateTableAsync<Event>();
     }
@@ -39,14 +41,16 @@ public class SqliteService
     public SQLiteAsyncConnection GetConnection()
     {
         if (_db is null)
+        {
             throw new InvalidOperationException(
                 "Database not initialized. Call InitializeAsync() before using services.");
+        }
 
         return _db;
     }
 
     /// <summary>
-    /// Supprime et recrée les tables. À utiliser en dev/test seulement.
+    /// Supprime et recrée les tables.
     /// </summary>
     public async Task DropAndRecreateAsync()
     {

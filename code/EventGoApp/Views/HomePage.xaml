@@ -1,28 +1,148 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:EventGoApp.ViewModels"
              x:Class="EventGoApp.Views.HomePage"
-             Title="Accueil"
-             BackgroundColor="#121212">
+             BackgroundColor="#F0E6FF"
+             Shell.NavBarIsVisible="False">
 
-    <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="16">
-        <Label Text="Bienvenue sur EventGo!"
-               FontSize="24"
-               FontAttributes="Bold"
-               TextColor="White"
-               HorizontalOptions="Center"/>
-        <Label Text="Vous etes connecte."
-               TextColor="#AAAAAA"
-               HorizontalOptions="Center"/>
+    <Grid RowDefinitions="Auto,Auto,*">
 
-        <Button Text="Se deconnecter"
-                Clicked="OnLogoutClicked"
-                BackgroundColor="Transparent"
-                TextColor="#FF5252"
-                BorderColor="#FF5252"
-                BorderWidth="1.5"
-                CornerRadius="8"
-                Margin="0,24,0,0"/>
-    </VerticalStackLayout>
+        <!-- Top bar -->
+        <Grid Grid.Row="0" Padding="20,20,20,12" ColumnDefinitions="*,Auto" BackgroundColor="#F0E6FF">
+            <HorizontalStackLayout Grid.Column="0" Spacing="10" VerticalOptions="Center">
+                <Path Data="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M11,19.93C7.05,19.44 4,16.08 4,12C4,11.38 4.08,10.78 4.21,10.21L9,15V16A2,2 0 0,0 11,18M17.9,17.39C17.64,16.58 16.9,16 16,16H15V13A1,1 0 0,0 14,12H8V10H10A1,1 0 0,0 11,9V7H13A2,2 0 0,0 15,5V4.59C17.93,5.77 20,8.64 20,12C20,14.08 19.2,15.97 17.9,17.39Z" 
+                      Fill="#6200EE" 
+                      WidthRequest="22" 
+                      HeightRequest="22" 
+                      VerticalOptions="Center" 
+                      Aspect="Uniform"/>
+                <VerticalStackLayout Spacing="0" VerticalOptions="Center">
+                    <Label Text="EventGo"
+                           FontSize="24"
+                           FontAttributes="Bold"
+                           TextColor="#4A148C"/>
+                    <Label x:Name="SubtitleLabel"
+                           Text="Découvrez ce qui se passe"
+                           FontSize="13"
+                           TextColor="#5D4E7E"/>
+                </VerticalStackLayout>
+            </HorizontalStackLayout>
+            <Button Grid.Column="1"
+                    Text="Déconnexion"
+                    Clicked="OnLogoutClicked"
+                    BackgroundColor="Transparent"
+                    TextColor="#6200EE"
+                    FontAttributes="Bold"
+                    FontSize="12"
+                    Padding="12,6"
+                    BorderColor="#6200EE"
+                    BorderWidth="1"
+                    CornerRadius="15"/>
+        </Grid>
+
+        <!-- Filter pills -->
+        <ScrollView Grid.Row="1"
+                    Orientation="Horizontal"
+                    HorizontalScrollBarVisibility="Never"
+                    Padding="12,0,12,12"
+                    BackgroundColor="#F0E6FF">
+            <HorizontalStackLayout x:Name="FilterPillsLayout" Spacing="8"/>
+        </ScrollView>
+
+        <!-- Event list -->
+        <CollectionView Grid.Row="2"
+                        x:Name="EventsCollection"
+                        Margin="0,0,0,0">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="16"/>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="vm:EventViewModel">
+                    <Grid Padding="16,0">
+                        <Border BackgroundColor="White"
+                                StrokeShape="RoundRectangle 12"
+                                Stroke="#D1C4E9"
+                                StrokeThickness="1"
+                                HeightRequest="280">
+                            <!-- Content -->
+                            <Grid RowDefinitions="180,*">
+                                <!-- Image or placeholder -->
+                                <BoxView Grid.Row="0" 
+                                         Color="{Binding ImagePlaceholderColor}" 
+                                         CornerRadius="12,12,0,0"
+                                         IsVisible="{Binding HasImage, Converter={StaticResource InverseBoolConverter}}"/>
+
+                                <Image Grid.Row="0"
+                                       Source="{Binding ImageSource}"
+                                       Aspect="AspectFill"
+                                       IsVisible="{Binding HasImage}"/>
+                                
+                                <!-- Featured badge -->
+                                <Border Grid.Row="0"
+                                        BackgroundColor="#CC000000"
+                                        StrokeThickness="0"
+                                        StrokeShape="RoundRectangle 6"
+                                        HorizontalOptions="Start"
+                                        VerticalOptions="Start"
+                                        Margin="12,12,0,0"
+                                        Padding="8,4"
+                                        IsVisible="{Binding IsFeatured}">
+                                    <Label Text="⭐ À la une"
+                                           TextColor="White"
+                                           FontSize="11"
+                                           FontAttributes="Bold"/>
+                                </Border>
+
+                                <!-- Category badge -->
+                                <Border Grid.Row="0"
+                                        BackgroundColor="#CC000000"
+                                        StrokeThickness="0"
+                                        StrokeShape="RoundRectangle 6"
+                                        HorizontalOptions="End"
+                                        VerticalOptions="Start"
+                                        Margin="0,12,12,0"
+                                        Padding="8,4">
+                                    <Label Text="{Binding CategoryLabel}"
+                                           TextColor="White"
+                                           FontSize="11"/>
+                                </Border>
+
+                                <!-- Info panel -->
+                                <Grid Grid.Row="1" 
+                                      RowDefinitions="Auto,Auto,Auto" 
+                                      RowSpacing="4" 
+                                      Padding="12,10">
+                                    <Label Grid.Row="0"
+                                           Text="{Binding Title}"
+                                           FontSize="17"
+                                           FontAttributes="Bold"
+                                           TextColor="#2D1B4E"
+                                           LineBreakMode="TailTruncation"/>
+                                    <Label Grid.Row="1"
+                                           Text="{Binding FormattedDate}"
+                                           FontSize="13"
+                                           TextColor="#6200EE"
+                                           FontAttributes="Bold"/>
+                                    <Grid Grid.Row="2" ColumnDefinitions="*,Auto">
+                                        <Label Grid.Column="0"
+                                               Text="{Binding City}"
+                                               FontSize="13"
+                                               TextColor="#5D4E7E"/>
+                                        <Label Grid.Column="1"
+                                               Text="{Binding FormattedPrice}"
+                                               FontSize="15"
+                                               FontAttributes="Bold"
+                                               TextColor="#4A148C"/>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </Grid>
 
 </ContentPage>

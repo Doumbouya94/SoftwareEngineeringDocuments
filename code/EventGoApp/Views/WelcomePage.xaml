@@ -2,42 +2,76 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="EventGoApp.Views.WelcomePage"
-             BackgroundColor="#121212"
+             BackgroundColor="#F0E6FF"
              Shell.NavBarIsVisible="False">
 
-    <VerticalStackLayout Padding="32" Spacing="24" VerticalOptions="Center">
+    <Grid RowDefinitions="Auto,*" RowSpacing="0">
 
-        <Label Text="🎉"
-               FontSize="72"
-               HorizontalOptions="Center"/>
+        <!-- Top bar with logo -->
+        <Grid Grid.Row="0" Padding="24,16,24,0" ColumnDefinitions="Auto,*">
+            <HorizontalStackLayout Grid.Column="0" Spacing="10" VerticalOptions="Center">
+                <Path Data="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M11,19.93C7.05,19.44 4,16.08 4,12C4,11.38 4.08,10.78 4.21,10.21L9,15V16A2,2 0 0,0 11,18M17.9,17.39C17.64,16.58 16.9,16 16,16H15V13A1,1 0 0,0 14,12H8V10H10A1,1 0 0,0 11,9V7H13A2,2 0 0,0 15,5V4.59C17.93,5.77 20,8.64 20,12C20,14.08 19.2,15.97 17.9,17.39Z" 
+                      Fill="#6200EE" 
+                      WidthRequest="24" 
+                      HeightRequest="24" 
+                      VerticalOptions="Center" 
+                      Aspect="Uniform"/>
+                <Label Text="EventGo"
+                       FontSize="22"
+                       FontAttributes="Bold"
+                       TextColor="#4A148C"
+                       VerticalOptions="Center"/>
+            </HorizontalStackLayout>
+        </Grid>
 
-        <Label Text="EventGo"
-               FontSize="40"
-               FontAttributes="Bold"
-               TextColor="White"
-               HorizontalOptions="Center"/>
+        <!-- Main content -->
+        <VerticalStackLayout Grid.Row="1" Padding="32" Spacing="48" VerticalOptions="Center">
 
-        <Label Text="Découvrez des événements autour de vous."
-               FontSize="15"
-               TextColor="#AAAAAA"
-               HorizontalOptions="Center"
-               HorizontalTextAlignment="Center"
-               Margin="0,0,0,24"/>
+            <VerticalStackLayout Spacing="12" HorizontalOptions="Center">
+                <Label Text="Découvrez vos prochains événements"
+                       FontSize="28"
+                       FontAttributes="Bold"
+                       TextColor="#2D1B4E"
+                       HorizontalTextAlignment="Center"
+                       LineBreakMode="WordWrap"/>
 
-        <Button Text="Se connecter"
-                Clicked="OnLoginClicked"
-                BackgroundColor="#6200EE"
-                TextColor="White"
-                CornerRadius="8"/>
+                <Label Text="Explorez une sélection personnalisée d'événements autour de vous. Concerts, festivals, sports, et bien plus encore."
+                       FontSize="15"
+                       TextColor="#5D4E7E"
+                       HorizontalTextAlignment="Center"
+                       LineBreakMode="WordWrap"
+                       Margin="0,0,0,8"/>
+            </VerticalStackLayout>
 
-        <Button Text="Créer un compte"
-                Clicked="OnRegisterClicked"
-                BackgroundColor="Transparent"
-                TextColor="#6200EE"
-                BorderColor="#6200EE"
-                BorderWidth="1.5"
-                CornerRadius="8"/>
+            <VerticalStackLayout Spacing="12">
+                <Button Text="Se connecter"
+                        Clicked="OnLoginClicked"
+                        BackgroundColor="#6200EE"
+                        TextColor="White"
+                        CornerRadius="20"
+                        FontAttributes="Bold"
+                        Padding="0,16"/>
 
-    </VerticalStackLayout>
+                <Button Text="Créer un compte"
+                        Clicked="OnRegisterClicked"
+                        BackgroundColor="Transparent"
+                        TextColor="#6200EE"
+                        BorderColor="#6200EE"
+                        BorderWidth="2"
+                        CornerRadius="20"
+                        FontAttributes="Bold"
+                        Padding="0,16"/>
+
+                <Button Text="Continuer en tant qu'invité"
+                        Clicked="OnGuestClicked"
+                        BackgroundColor="Transparent"
+                        TextColor="#8B7BA8"
+                        CornerRadius="20"
+                        Padding="0,16"/>
+            </VerticalStackLayout>
+
+        </VerticalStackLayout>
+
+    </Grid>
 
 </ContentPage>

@@ -6,12 +6,12 @@ namespace EventGoApp.Models
 {
     public enum EventCategory
     {
-        Concert,
-        Festival,
+        Concerts,
+        Festivals,
         Sports,
         Parties,
         Food,
-        Art,
+        Arts,
         Outdoor,
         Networking
     }
