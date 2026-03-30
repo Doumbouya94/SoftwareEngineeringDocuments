@@ -1,10 +1,11 @@
+
 # Guide de démarrage - EventGo
 
 ## Prérequis
 
-- [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
-- [Docker Desktop](https://www.docker.com/products/docker-desktop)
-- Un IDE (Visual Studio 2022+ recommande)
+- [.NET 9 SDK](https://dotnet.microsoft.com/download/dotnet/9.0)
+- Visual Studio 2022 ou Visual Studio Code avec l'extension MAUI
+- Windows 10 version 19041 ou supérieure (pour le déploiement Windows)
 
 ---
 
@@ -17,74 +18,74 @@ cd SoftwareEngineeringDocuments/code
 
 ---
 
-## 2. Démarrer la base de données (MySQL via Docker)
-
-```bash
-cd EventGoAPI
-docker-compose up -d
-```
-
-Vérifier que le conteneur est actif :
-
-```bash
-docker ps
-```
-
----
-
-## 3. Appliquer les migrations
-
-```bash
-cd EventGoAPI
-dotnet ef database update
-```
-
-> Si `dotnet ef` n'est pas installe :
-> ```bash
-> dotnet tool install --global dotnet-ef
-> ```
-
----
-
-## 4. Lancer le backend (API)
-
-```bash
-cd EventGoAPI
-dotnet run
-```
-
-L'API sera disponible sur `http://localhost:5121`. Swagger est accessible à `http://localhost:5121/swagger` en mode développement.
-
----
-
-## 5. Lancer le frontend (MAUI)
-
-Dans un **nouveau terminal** :
+## 2. Restaurer les dépendances
 
 ```bash
 cd EventGoApp
-dotnet build
-dotnet run
+dotnet restore
 ```
 
-Ou ouvrir `EventGo.sln` dans Visual Studio et lancer le projet `EventGoApp`.
+Les paquets NuGet suivants seront téléchargés automatiquement :
 
-> **Note Android** : L'émulateur Android utilise `10.0.2.2` au lieu de `localhost` pour accéder à la machine hôte. Ce changement est déjà géré automatiquement dans le code.
+| Paquet | Version | Utilisation |
+|--------|---------|-------------|
+| Microsoft.Maui.Controls | 9.0.51 | Interface MAUI |
+| sqlite-net-pcl | 1.9.172 | Base de données locale |
+| BCrypt.Net-Next | 4.0.3 | Hachage des mots de passe |
+
+> Aucune installation de Docker ou de base de données externe n'est requise.
+> L'application utilise SQLite, une base de données locale créée automatiquement au premier lancement.
 
 ---
 
-## 6. Tester
+## 3. Compiler et lancer l'application
 
-1. Ouvrir l'app MAUI - la page de bienvenue s'affiche
-2. Cliquer sur **Créer un compte** - remplir le formulaire
-3. Vérifier dans la base de données :
-   ```bash
-   docker exec -it eventgo-mysql mysql -u root -p eventgo
-   ```
-   ```sql
-   SELECT * FROM users;
-   ```  
-4. Se déconnecter - se reconnecter avec le compte créé
+### Via Visual Studio
+
+Ouvrir `EventGo.sln`, sélectionner le projet `EventGoApp`, choisir la cible **Windows Machine** et appuyer sur **F5**.
+
+### Via terminal
+
+```bash
+cd EventGoApp
+dotnet build -f net9.0-windows10.0.19041.0
+dotnet run -f net9.0-windows10.0.19041.0
+```
+
+---
+
+## 4. Premier lancement
+
+Au premier lancement, l'application effectue automatiquement les opérations suivantes :
+
+1. Création du fichier de base de données `eventgo.db` dans le répertoire de données de l'application
+2. Création des tables `Users` et `Events`
+3. Insertion d'un utilisateur de démonstration
+4. Insertion de 20 événements de démonstration
+
+L'emplacement du fichier de base de données sur Windows :
+```
+%LOCALAPPDATA%\EventGoApp\eventgo.db
+```
+
+---
+
+## 5. Tester l'application
+
+### Parcours utilisateur complet
+
+1. La page de bienvenue s'affiche au lancement
+2. Cliquer sur **Se connecter** et utiliser les identifiants de démonstration :
+   - Courriel : `demo@eventgo.ca`
+   - Mot de passe : `Demo1234`
+3. Cliquer sur **Créer un compte** pour tester l'inscription avec un nouveau courriel
+4. Cliquer sur **Continuer en tant qu'invité** pour accéder sans compte
+5. Compléter les 4 étapes d'onboarding (ville, catégories, mode social, budget)
+6. Naviguer sur la page d'accueil et utiliser les filtres par catégorie
+
+### Vérification de la base de données
+
+Ouvrir le fichier `eventgo.db` avec [DB Browser for SQLite](https://sqlitebrowser.org/) pour inspecter les tables et vérifier que les mots de passe sont bien hachés avec BCrypt.
 
 ---
 
@@ -92,19 +93,41 @@ Ou ouvrir `EventGo.sln` dans Visual Studio et lancer le projet `EventGoApp`.
 
 ```
 code/
-├── EventGo.sln              <- solution unique pour les deux projets
-├── EventGoAPI/
-│   ├── docker-compose.yml   <- configuration MySQL
-│   └── EventGoAPI/          <- projet ASP.NET Core (backend)
-│       ├── Controllers/
-│       ├── Services/
-│       ├── Models/
-│       ├── DTOs/
-│       ├── Data/
-│       └── Program.cs
-└── EventGoApp/              <- projet .NET MAUI (frontend)
-    ├── Views/
-    ├── Services/
+├── EventGo.sln
+├── EventGoAPI/                       <- backend ASP.NET Core (non requis pour MAUI)
+└── EventGoApp/                       <- application MAUI autonome
     ├── Models/
-    └── MauiProgram.cs
+    │   ├── Event.cs                  <- modèle événement (table SQLite)
+    │   ├── EventCategory.cs          <- énumération des catégories
+    │   └── User.cs                   <- modèle utilisateur (table SQLite)
+    ├── Services/
+    │   ├── SqliteService.cs          <- façade SQLite (connexion + schéma)
+    │   ├── PasswordService.cs        <- hachage BCrypt
+    │   ├── LocalAuthService.cs       <- authentification via SQLite
+    │   ├── IEventAdapter.cs          <- interface adaptateur événements
+    │   ├── SqliteEventAdapter.cs     <- adaptateur SQLite pour les événements
+    │   ├── IAuthState.cs             <- interface état d'authentification
+    │   ├── AuthStateService.cs       <- gestion de l'état d'authentification
+    │   └── OnboardingStateService.cs <- gestion de l'onboarding
+    ├── ViewModels/
+    │   ├── EventViewModel.cs         <- patron Observateur (INotifyPropertyChanged)
+    │   └── HomeViewModel.cs          <- logique de la page d'accueil
+    ├── Views/
+    │   ├── WelcomePage.xaml
+    │   ├── LoginPage.xaml
+    │   ├── RegisterPage.xaml
+    │   ├── OnboardingPage.xaml
+    │   └── HomePage.xaml
+    └── MauiProgram.cs                <- configuration de l'injection de dépendances
 ```
+
+---
+
+## Patrons de conception implémentés
+
+| Patron | Classe | Rôle |
+|--------|--------|------|
+| Observateur | `EventViewModel` | Notification automatique de l'interface |
+| État | `AuthStateService`, `OnboardingStateService` | Gestion des transitions d'état |
+| Adaptateur | `SqliteEventAdapter` | Abstraction de la source de données |
+| Façade | `SqliteService` | Simplification de l'accès SQLite |
