@@ -59,13 +59,19 @@ public class OnboardingStateService
     /// <summary>Avance à l'étape suivante si possible.</summary>
     public void NextStep()
     {
-        if (CurrentStep < TotalSteps) CurrentStep++;
+        if (CurrentStep < TotalSteps)
+        {
+            CurrentStep++;
+        }
     }
 
     /// <summary>Revient à l'étape précédente si possible.</summary>
     public void PreviousStep()
     {
-        if (CurrentStep > 0) CurrentStep--;
+        if (CurrentStep > 0)
+        {
+            CurrentStep--;
+        }
     }
 
     /// <summary>Réinitialise toutes les sélections et revient à l'étape 0.</summary>

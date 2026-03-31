@@ -44,7 +44,11 @@ public class HomeViewModel : INotifyPropertyChanged
         get => _activeFilter;
         set
         {
-            if (_activeFilter == value) return;
+            if (_activeFilter == value)
+            {
+                return;
+            }
+
             _activeFilter = value;
             OnPropertyChanged();
         }
@@ -72,7 +76,9 @@ public class HomeViewModel : INotifyPropertyChanged
 
         Events.Clear();
         foreach (var e in events)
+        {
             Events.Add(new EventViewModel(e));
+        }
     }
 
     /// <summary>

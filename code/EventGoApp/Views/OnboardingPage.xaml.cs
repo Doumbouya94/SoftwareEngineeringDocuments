@@ -99,29 +99,47 @@ public partial class OnboardingPage : ContentPage
 
     private void OnCategoryTapped(object sender, TappedEventArgs e)
     {
-        if (sender is not Element el) return;
-        var param = e.Parameter?.ToString();
-        if (param == null) return;
+        if (sender is not Element el)
+        {
+            return;
+        }
 
-        if (!Enum.TryParse<EventCategory>(param, out var cat)) return;
+        var param = e.Parameter?.ToString();
+        if (param == null)
+        {
+            return;
+        }
+
+        if (!Enum.TryParse<EventCategory>(param, out var cat))
+        {
+            return;
+        }
 
         if (_onboarding.SelectedCategories.Contains(cat))
+        {
             _onboarding.SelectedCategories.Remove(cat);
+        }
         else
+        {
             _onboarding.SelectedCategories.Add(cat);
+        }
 
-        // Update visual state for all category borders
         foreach (var kv in _categoryBorders)
         {
             var border = (Border)FindByName(kv.Key);
-            if (border == null) continue;
+            if (border == null)
+            {
+                continue;
+            }
+
             bool selected = _onboarding.SelectedCategories.Contains(kv.Value);
             border.BackgroundColor = selected ? Color.FromArgb("#2C0070") : Colors.White;
             border.Stroke = selected ? Color.FromArgb("#6200EE") : Color.FromArgb("#D1C4E9");
             
-            // Also update label color for better contrast when selected
             if (border.Content is Label label)
+            {
                 label.TextColor = selected ? Colors.White : Color.FromArgb("#2D1B4E");
+            }
         }
     }
 
@@ -130,7 +148,10 @@ public partial class OnboardingPage : ContentPage
     private void OnSocialTapped(object sender, TappedEventArgs e)
     {
         var param = e.Parameter?.ToString();
-        if (param == null) return;
+        if (param == null)
+        {
+            return;
+        }
 
         if (!Enum.TryParse<SocialMode>(param, out var mode))
         {
@@ -142,13 +163,19 @@ public partial class OnboardingPage : ContentPage
         foreach (var kv in _socialBorders)
         {
             var border = (Border)FindByName(kv.Key);
-            if (border == null) continue;
+            if (border == null)
+            {
+                continue;
+            }
+
             bool selected = _onboarding.SelectedSocialMode == kv.Value;
             border.BackgroundColor = selected ? Color.FromArgb("#2C0070") : Colors.White;
             border.Stroke = selected ? Color.FromArgb("#6200EE") : Color.FromArgb("#D1C4E9");
 
             if (border.Content is Label label)
+            {
                 label.TextColor = selected ? Colors.White : Color.FromArgb("#2D1B4E");
+            }
         }
     }
 
@@ -157,9 +184,16 @@ public partial class OnboardingPage : ContentPage
     private void OnBudgetTapped(object sender, TappedEventArgs e)
     {
         var param = e.Parameter?.ToString();
-        if (param == null) return;
+        if (param == null)
+        {
+            return;
+        }
 
-        if (!Enum.TryParse<BudgetTier>(param, out var tier)) return;
+        if (!Enum.TryParse<BudgetTier>(param, out var tier))
+        {
+            return;
+        }
+
         _onboarding.SelectedBudget = tier;
 
         foreach (var kv in _budgetBorders)
@@ -171,7 +205,9 @@ public partial class OnboardingPage : ContentPage
             border.Stroke = selected ? Color.FromArgb("#6200EE") : Color.FromArgb("#D1C4E9");
 
             if (border.Content is Label label)
+            {
                 label.TextColor = selected ? Colors.White : Color.FromArgb("#2D1B4E");
+            }
         }
     }
 

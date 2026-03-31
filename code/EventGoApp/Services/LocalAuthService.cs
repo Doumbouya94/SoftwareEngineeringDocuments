@@ -36,7 +36,10 @@ public class LocalAuthService
         var user = await _db.Table<User>()
             .FirstOrDefaultAsync(u => u.Email == normalized);
 
-        if (user is null) return null;
+        if (user is null)
+        {
+            return null;
+        }
 
         return _passwordService.VerifyPassword(password, user.PasswordHash) ? user : null;
     }
@@ -92,7 +95,10 @@ public class LocalAuthService
     public async Task SeedDemoUserAsync()
     {
         var count = await _db.Table<User>().CountAsync();
-        if (count > 0) return;
+        if (count > 0)
+        {
+            return;
+        }
 
         await RegisterAsync("demo@eventgo.ca", "demo", "Demo1234", "Utilisateur Démo");
     }

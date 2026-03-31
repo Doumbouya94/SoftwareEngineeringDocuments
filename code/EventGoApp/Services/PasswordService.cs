@@ -16,8 +16,11 @@ public class PasswordService
     /// </summary>
     /// <param name="plaintext">Mot de passe en clair.</param>
     /// <returns>Hash BCrypt du mot de passe.</returns>
-    public string HashPassword(string plaintext) =>
-        BCrypt.Net.BCrypt.HashPassword(plaintext);
+    public string HashPassword(string plaintext)
+    {
+        return BCrypt.Net.BCrypt.HashPassword(plaintext);
+    }
+        
 
     /// <summary>
     /// Vérifie si un mot de passe en clair correspond à un hash BCrypt.
@@ -25,6 +28,9 @@ public class PasswordService
     /// <param name="plaintext">Mot de passe en clair saisi par l'utilisateur.</param>
     /// <param name="hashed">Hash BCrypt stocké en base de données.</param>
     /// <returns>Vrai si le mot de passe correspond au hash.</returns>
-    public bool VerifyPassword(string plaintext, string hashed) =>
-        BCrypt.Net.BCrypt.Verify(plaintext, hashed);
+    public bool VerifyPassword(string plaintext, string hashed)
+    {
+        return BCrypt.Net.BCrypt.Verify(plaintext, hashed);
+    }
+        
 }

@@ -22,7 +22,10 @@ public class SqliteService
     /// </summary>
     public async Task InitializeAsync()
     {
-        if (_db is not null) return;
+        if (_db is not null)
+        {
+            return;
+        }
 
         string dbPath = Path.Combine(FileSystem.AppDataDirectory, "eventgo.db");
         _db = new SQLiteAsyncConnection(dbPath);
@@ -38,8 +41,10 @@ public class SqliteService
     public SQLiteAsyncConnection GetConnection()
     {
         if (_db is null)
+        {
             throw new InvalidOperationException(
                 "Base de données non initialisée. Appelez InitializeAsync() avant d'utiliser les services.");
+        }
 
         return _db;
     }
@@ -49,7 +54,10 @@ public class SqliteService
     /// </summary>
     public async Task DropAndRecreateAsync()
     {
-        if (_db is null) return;
+        if (_db is null)
+        {
+            return;
+        }
 
         await _db.DropTableAsync<User>();
         await _db.DropTableAsync<Event>();
