@@ -84,5 +84,5 @@ Les services (`LocalAuthService`, `SqliteEventAdapter`) ont juste besoin d'appel
 | # | Patron | Classe |
 |---|--------|--------|
 | 1 | Observer | `EventViewModel`, `AuthStateService` | 
-| 3 | Adapter | `SqliteEventAdapter` / `IEventAdapter` |
-| 4 | Facade | `SqliteService` | Aboubacar |
+| 2 | Adapter | `SqliteEventAdapter` / `IEventAdapter` |
+| 3 | Facade | `SqliteService` | Aboubacar |
