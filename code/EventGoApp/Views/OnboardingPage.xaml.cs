@@ -16,8 +16,8 @@ public partial class OnboardingPage : ContentPage
     private static readonly string[] StepTitles = new[]
     {
         "Où êtes-vous situé?",
-        "Quels types d'événements vous intéressent?",
-        "Vous sortez habituellement...",
+        "Vos intérêts?",
+        "Taille groupe",
         "Quel est votre budget?"
     };
 

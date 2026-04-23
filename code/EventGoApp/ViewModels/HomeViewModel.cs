@@ -15,7 +15,7 @@ namespace EventGoApp.ViewModels;
 /// UserStories : US2.1 (affichage de la liste), US2.2 (filtrage par catégorie), US2.3 (filtrage par date et prix).
 /// Épic : Découverte et recherche d'événements.
 /// </remarks>
-public class HomeViewModel : INotifyPropertyChanged
+public partial class HomeViewModel : INotifyPropertyChanged
 {
     private readonly IEventAdapter _adapter;
     private string _activeFilter = "Tous";

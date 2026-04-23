@@ -13,7 +13,7 @@ namespace EventGoApp.ViewModels;
 /// UserStories : US2.1 (affichage de la liste), US2.4 (page de détails).
 /// Épic : Découverte et recherche d'événements.
 /// </remarks>
-public class EventViewModel : INotifyPropertyChanged
+public partial class EventViewModel : INotifyPropertyChanged
 {
     private readonly Event _event;
     private bool _isSelected;
@@ -35,6 +35,9 @@ public class EventViewModel : INotifyPropertyChanged
 
     /// <summary>Ville de l'événement.</summary>
     public string City => _event.City;
+
+    /// <summary>Adresse de l'événement.</summary>
+    public string Address => _event.Address;
 
     /// <summary>Lieu de l'événement.</summary>
     public string Venue => _event.Venue;

@@ -22,8 +22,8 @@ public partial class HomePage : ContentPage
         base.OnAppearing();
 
         SubtitleLabel.Text = _authState.CurrentMode == AuthMode.Guest
-            ? "Mode invité — bienvenue!"
-            : $"Bonjour, {_authState.CurrentUser?.Username ?? "vous"}!";
+            ? "Bienvenue, explorateur 👋 !"
+            : $"Bonjour, {_authState.CurrentUser?.Username ?? "vous"} 👋 !";
 
         await _viewModel.LoadEventsAsync();
     }
@@ -41,8 +41,8 @@ public partial class HomePage : ContentPage
                 Padding = new Thickness(14, 6),
                 CornerRadius = 20,
                 BackgroundColor = active ? Color.FromArgb("#6200EE") : Colors.White,
-                TextColor = active ? Colors.White : Color.FromArgb("#6200EE"),
-                BorderColor = Color.FromArgb("#6200EE"),
+                TextColor = active ? Colors.White : Colors.Black,
+                BorderColor = active ? Color.FromArgb("#6200EE") : Colors.Black,
                 BorderWidth = active ? 0 : 1,
                 FontAttributes = FontAttributes.Bold
             };
@@ -63,7 +63,8 @@ public partial class HomePage : ContentPage
             {
                 bool active = btn.Text == _viewModel.ActiveFilter;
                 btn.BackgroundColor = active ? Color.FromArgb("#6200EE") : Colors.White;
-                btn.TextColor = active ? Colors.White : Color.FromArgb("#6200EE");
+                btn.TextColor = active ? Colors.White : Colors.Black;
+                btn.BorderColor = active ? Color.FromArgb("#6200EE") : Colors.Black;
                 btn.BorderWidth = active ? 0 : 1;
             }
         }
@@ -73,5 +74,22 @@ public partial class HomePage : ContentPage
     {
         _authState.SetLoggedOut();
         await Shell.Current.GoToAsync("//welcome");
+    }
+
+    private async void OnFilterClicked(object sender, TappedEventArgs e)
+    {
+        await Shell.Current.GoToAsync("filter");
+    }
+
+    private async void OnEventSelected(object sender, SelectionChangedEventArgs e)
+    {
+        if (e.CurrentSelection.FirstOrDefault() is EventViewModel selectedEvent)
+        {
+            // Désélectionner l'item pour permettre de cliquer à nouveau
+            ((CollectionView)sender).SelectedItem = null;
+
+            // Naviguer vers la page de détails avec l'Id
+            await Shell.Current.GoToAsync($"eventdetails?id={selectedEvent.Id}");
+        }
     }
 }

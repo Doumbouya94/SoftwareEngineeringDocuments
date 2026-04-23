@@ -2,13 +2,13 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="EventGoApp.Views.OnboardingPage"
-             BackgroundColor="#F0E6FF"
+             BackgroundColor="White"
              Shell.NavBarIsVisible="False">
 
-    <Grid RowDefinitions="Auto,*,Auto" Padding="0">
+    <Grid RowDefinitions="Auto,Auto,*,Auto" Padding="0">
 
-        <!-- Header -->
-        <Grid Grid.Row="0" Padding="24,20,24,0" ColumnDefinitions="*,Auto">
+        <!-- Header (Row 0) -->
+        <Grid Grid.Row="0" Padding="24,20,24,12" ColumnDefinitions="*,Auto" BackgroundColor="White">
             <VerticalStackLayout Grid.Column="0" Spacing="4">
                 <Label x:Name="StepLabel"
                        Text="Étape 1 sur 4"
@@ -18,6 +18,7 @@
                        Text="Où êtes-vous situé?"
                        FontSize="22"
                        FontAttributes="Bold"
+                       FontFamily="OswaldBold"
                        TextColor="#2D1B4E"/>
             </VerticalStackLayout>
             <Label Grid.Column="1"
@@ -32,16 +33,26 @@
             </Label>
         </Grid>
 
-        <!-- Progress bar -->
-        <ProgressBar x:Name="StepProgress"
-                     Grid.Row="0"
-                     Margin="24,60,24,0"
-                     Progress="0.25"
-                     ProgressColor="#6200EE"
-                     BackgroundColor="#D1C4E9"/>
+        <!-- Progress bar (Row 1) -->
+        <Frame Grid.Row="1"
+               Margin="24,0,24,16"
+               HeightRequest="8"
+               Padding="0"
+               CornerRadius="4"
+               HasShadow="False"
+               IsClippedToBounds="True"
+               BorderColor="Transparent"
+               BackgroundColor="#D1C4E9">
+            <ProgressBar x:Name="StepProgress"
+                         Progress="0.25"
+                         ProgressColor="#6200EE"
+                         BackgroundColor="Transparent"
+                         ScaleY="4"
+                         VerticalOptions="Center"/>
+        </Frame>
 
-        <!-- Step content -->
-        <ScrollView Grid.Row="1" Margin="0,80,0,0">
+        <!-- Step content (Row 2) -->
+        <ScrollView Grid.Row="2">
             <VerticalStackLayout Padding="24,8" Spacing="16">
 
                 <!-- Step 0: City -->
@@ -67,7 +78,6 @@
                     <Label Text="Sélectionnez un ou plusieurs types"
                            TextColor="#5D4E7E"
                            FontSize="14"/>
-
                     <Border x:Name="Cat_Concerts" BackgroundColor="White" Stroke="#D1C4E9" StrokeThickness="1" StrokeShape="RoundRectangle 8">
                         <Border.GestureRecognizers><TapGestureRecognizer Tapped="OnCategoryTapped" CommandParameter="Concerts"/></Border.GestureRecognizers>
                         <Label Text="🎵  Concerts / Musique" TextColor="#2D1B4E" Padding="16,12" FontSize="15"/>
@@ -80,34 +90,11 @@
                         <Border.GestureRecognizers><TapGestureRecognizer Tapped="OnCategoryTapped" CommandParameter="Sports"/></Border.GestureRecognizers>
                         <Label Text="⚽  Sports" TextColor="#2D1B4E" Padding="16,12" FontSize="15"/>
                     </Border>
-                    <Border x:Name="Cat_Parties" BackgroundColor="White" Stroke="#D1C4E9" StrokeThickness="1" StrokeShape="RoundRectangle 8">
-                        <Border.GestureRecognizers><TapGestureRecognizer Tapped="OnCategoryTapped" CommandParameter="Parties"/></Border.GestureRecognizers>
-                        <Label Text="🎉  Soirées / Vie nocturne" TextColor="#2D1B4E" Padding="16,12" FontSize="15"/>
-                    </Border>
-                    <Border x:Name="Cat_Food" BackgroundColor="White" Stroke="#D1C4E9" StrokeThickness="1" StrokeShape="RoundRectangle 8">
-                        <Border.GestureRecognizers><TapGestureRecognizer Tapped="OnCategoryTapped" CommandParameter="Food"/></Border.GestureRecognizers>
-                        <Label Text="🍽️  Gastronomie / Restaurants" TextColor="#2D1B4E" Padding="16,12" FontSize="15"/>
-                    </Border>
-                    <Border x:Name="Cat_Arts" BackgroundColor="White" Stroke="#D1C4E9" StrokeThickness="1" StrokeShape="RoundRectangle 8">
-                        <Border.GestureRecognizers><TapGestureRecognizer Tapped="OnCategoryTapped" CommandParameter="Arts"/></Border.GestureRecognizers>
-                        <Label Text="🎨  Arts &amp; Culture" TextColor="#2D1B4E" Padding="16,12" FontSize="15"/>
-                    </Border>
-                    <Border x:Name="Cat_Outdoor" BackgroundColor="White" Stroke="#D1C4E9" StrokeThickness="1" StrokeShape="RoundRectangle 8">
-                        <Border.GestureRecognizers><TapGestureRecognizer Tapped="OnCategoryTapped" CommandParameter="Outdoor"/></Border.GestureRecognizers>
-                        <Label Text="🌲  Activités en plein air" TextColor="#2D1B4E" Padding="16,12" FontSize="15"/>
-                    </Border>
-                    <Border x:Name="Cat_Networking" BackgroundColor="White" Stroke="#D1C4E9" StrokeThickness="1" StrokeShape="RoundRectangle 8">
-                        <Border.GestureRecognizers><TapGestureRecognizer Tapped="OnCategoryTapped" CommandParameter="Networking"/></Border.GestureRecognizers>
-                        <Label Text="💼  Réseautage / Professionnel" TextColor="#2D1B4E" Padding="16,12" FontSize="15"/>
-                    </Border>
                 </VerticalStackLayout>
 
                 <!-- Step 2: Social mode -->
                 <VerticalStackLayout x:Name="Step2Content" IsVisible="False" Spacing="10">
-                    <Label Text="Vous cherchez habituellement des événements pour..."
-                           TextColor="#5D4E7E"
-                           FontSize="14"/>
-
+                    <Label Text="Vous cherchez habituellement des événements pour..." TextColor="#5D4E7E" FontSize="14"/>
                     <Border x:Name="Social_Solo" BackgroundColor="White" Stroke="#D1C4E9" StrokeThickness="1" StrokeShape="RoundRectangle 8">
                         <Border.GestureRecognizers><TapGestureRecognizer Tapped="OnSocialTapped" CommandParameter="Solo"/></Border.GestureRecognizers>
                         <Label Text="🧍  Seul(e)" TextColor="#2D1B4E" Padding="16,14" FontSize="15"/>
@@ -116,22 +103,11 @@
                         <Border.GestureRecognizers><TapGestureRecognizer Tapped="OnSocialTapped" CommandParameter="WithFriends"/></Border.GestureRecognizers>
                         <Label Text="👫  Entre amis" TextColor="#2D1B4E" Padding="16,14" FontSize="15"/>
                     </Border>
-                    <Border x:Name="Social_Partner" BackgroundColor="White" Stroke="#D1C4E9" StrokeThickness="1" StrokeShape="RoundRectangle 8">
-                        <Border.GestureRecognizers><TapGestureRecognizer Tapped="OnSocialTapped" CommandParameter="WithPartner"/></Border.GestureRecognizers>
-                        <Label Text="❤️  En couple" TextColor="#2D1B4E" Padding="16,14" FontSize="15"/>
-                    </Border>
-                    <Border x:Name="Social_Family" BackgroundColor="White" Stroke="#D1C4E9" StrokeThickness="1" StrokeShape="RoundRectangle 8">
-                        <Border.GestureRecognizers><TapGestureRecognizer Tapped="OnSocialTapped" CommandParameter="WithFamily"/></Border.GestureRecognizers>
-                        <Label Text="👨‍👩‍👧  En famille / avec des enfants" TextColor="#2D1B4E" Padding="16,14" FontSize="15"/>
-                    </Border>
                 </VerticalStackLayout>
 
                 <!-- Step 3: Budget -->
                 <VerticalStackLayout x:Name="Step3Content" IsVisible="False" Spacing="10">
-                    <Label Text="Quel est votre budget habituel pour un événement?"
-                           TextColor="#5D4E7E"
-                           FontSize="14"/>
-
+                    <Label Text="Quel est votre budget habituel?" TextColor="#5D4E7E" FontSize="14"/>
                     <Border x:Name="Budget_Free" BackgroundColor="White" Stroke="#D1C4E9" StrokeThickness="1" StrokeShape="RoundRectangle 8">
                         <Border.GestureRecognizers><TapGestureRecognizer Tapped="OnBudgetTapped" CommandParameter="FreeOnly"/></Border.GestureRecognizers>
                         <Label Text="🆓  Gratuit seulement" TextColor="#2D1B4E" Padding="16,14" FontSize="15"/>
@@ -140,21 +116,13 @@
                         <Border.GestureRecognizers><TapGestureRecognizer Tapped="OnBudgetTapped" CommandParameter="Under20"/></Border.GestureRecognizers>
                         <Label Text="💵  Moins de 20 $" TextColor="#2D1B4E" Padding="16,14" FontSize="15"/>
                     </Border>
-                    <Border x:Name="Budget_20to50" BackgroundColor="White" Stroke="#D1C4E9" StrokeThickness="1" StrokeShape="RoundRectangle 8">
-                        <Border.GestureRecognizers><TapGestureRecognizer Tapped="OnBudgetTapped" CommandParameter="Between20And50"/></Border.GestureRecognizers>
-                        <Label Text="💳  20 $ – 50 $" TextColor="#2D1B4E" Padding="16,14" FontSize="15"/>
-                    </Border>
-                    <Border x:Name="Budget_Above50" BackgroundColor="White" Stroke="#D1C4E9" StrokeThickness="1" StrokeShape="RoundRectangle 8">
-                        <Border.GestureRecognizers><TapGestureRecognizer Tapped="OnBudgetTapped" CommandParameter="Above50"/></Border.GestureRecognizers>
-                        <Label Text="💎  50 $ et plus" TextColor="#2D1B4E" Padding="16,14" FontSize="15"/>
-                    </Border>
                 </VerticalStackLayout>
 
             </VerticalStackLayout>
         </ScrollView>
 
-        <!-- Bottom navigation bar -->
-        <Grid Grid.Row="2" ColumnDefinitions="*,*" Padding="24,16" ColumnSpacing="12" BackgroundColor="#F0E6FF">
+        <!-- Bottom navigation bar (Row 3) -->
+        <Grid Grid.Row="3" ColumnDefinitions="*,*" Padding="24,16" ColumnSpacing="12" BackgroundColor="White">
             <Button x:Name="PrevButton"
                     Grid.Column="0"
                     Text="Précédent"

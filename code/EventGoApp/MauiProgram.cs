@@ -13,7 +13,13 @@ public static class MauiProgram
             .UseMauiApp<App>()
             .ConfigureFonts(fonts =>
             {
-                
+                fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
+                fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+                fonts.AddFont("Oswald-Regular.ttf", "OswaldRegular");
+                fonts.AddFont("Oswald-Bold.ttf", "OswaldBold");
+                fonts.AddFont("Inter_18pt-Regular.ttf", "InterRegular");
+                fonts.AddFont("Inter_18pt-Medium.ttf", "InterMedium");
+                fonts.AddFont("Inter_18pt-SemiBold.ttf", "InterSemiBold");
             });
         builder.Services.AddSingleton<App>();
 
@@ -29,6 +35,8 @@ public static class MauiProgram
 
         // ViewModels
         builder.Services.AddTransient<HomeViewModel>();
+        builder.Services.AddTransient<EventDetailViewModel>();
+        builder.Services.AddTransient<FilterViewModel>();
 
         // Pages
         builder.Services.AddTransient<Views.WelcomePage>();
@@ -36,6 +44,8 @@ public static class MauiProgram
         builder.Services.AddTransient<Views.RegisterPage>();
         builder.Services.AddTransient<Views.OnboardingPage>();
         builder.Services.AddTransient<Views.HomePage>();
+        builder.Services.AddTransient<Views.EventDetailPage>();
+        builder.Services.AddTransient<Views.FilterPage>();
 
 #if DEBUG
         builder.Logging.AddDebug();

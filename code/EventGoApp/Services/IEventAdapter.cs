@@ -21,4 +21,10 @@ public interface IEventAdapter
 
     /// <summary>Retourne les événements filtrés par catégorie, ville et prix maximum.</summary>
     Task<IReadOnlyList<Event>> GetFilteredAsync(EventCategory? category, string? city, decimal? maxPrice);
+
+    /// <summary>Récupère un événement spécifique par son Id.</summary>
+    Task<Event?> GetByIdAsync(Guid id);
+
+    /// <summary>Insère les données de test.</summary>
+    Task SeedEventsAsync();
 }

@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:EventGoApp.ViewModels"
+             x:Class="EventGoApp.Views.EventDetailPage"
+             x:DataType="vm:EventDetailViewModel"
+             BackgroundColor="White"
+             Shell.NavBarIsVisible="True"
+             Title="{Binding Title}">
+
+    <Grid RowDefinitions="*,Auto">
+        
+        <!-- Scrollable Content -->
+        <ScrollView Grid.Row="0">
+            <VerticalStackLayout Spacing="0">
+                
+                <!-- Header with Image -->
+                <Grid HeightRequest="300">
+                    <Image Source="{Binding ImageSource}" 
+                           Aspect="AspectFill"
+                           BackgroundColor="#F0E6FF"/>
+                </Grid>
+
+                <!-- Title Section -->
+                <VerticalStackLayout Padding="20,24,20,12" Spacing="8">
+                    <Label Text="{Binding Title}"
+                           FontSize="28"
+                           FontAttributes="Bold"
+                           FontFamily="OswaldBold"
+                           TextColor="Black"
+                           LineBreakMode="WordWrap"/>
+                </VerticalStackLayout>
+
+                <!-- Info Cards Section -->
+                <VerticalStackLayout Padding="20,0" Spacing="24">
+                    
+                    <!-- Date & Time Row -->
+                    <Grid ColumnDefinitions="Auto, *" ColumnSpacing="16">
+                        <Border Grid.Column="0" 
+                                BackgroundColor="#FFF0F0" 
+                                WidthRequest="48" 
+                                HeightRequest="48" 
+                                StrokeShape="RoundRectangle 12"
+                                StrokeThickness="0">
+                            <Grid>
+                                <Path Data="M19,19H5V8H19M16,1V3H8V1H6V3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3H17V1M11,14H7V10H11M11,18H7V15H11M15,14H12V10H15M15,18H12V15H15" 
+                                      Fill="#E91E63" 
+                                      WidthRequest="24"
+                                      HeightRequest="24"
+                                      Aspect="Uniform"
+                                      HorizontalOptions="Center" 
+                                      VerticalOptions="Center"/>
+                            </Grid>
+                        </Border>
+                        <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
+                            <Label Text="{Binding FormattedDate}" 
+                                   FontSize="16" 
+                                   FontAttributes="Bold" 
+                                   TextColor="Black"/>
+                            <Label Text="{Binding FormattedTime}" 
+                                   FontSize="14" 
+                                   TextColor="#666666"/>
+                        </VerticalStackLayout>
+                    </Grid>
+
+                    <!-- Separator -->
+                    <BoxView HeightRequest="1" BackgroundColor="#EEEEEE" Margin="0,-4"/>
+
+                    <!-- Location Row -->
+                    <Grid ColumnDefinitions="Auto, *" ColumnSpacing="16">
+                        <Border Grid.Column="0" 
+                                BackgroundColor="#FFF5E6" 
+                                WidthRequest="48" 
+                                HeightRequest="48" 
+                                StrokeShape="RoundRectangle 12"
+                                StrokeThickness="0">
+                            <Grid>
+                                <Path Data="M12,2C8.13,2 5,5.13 5,9C5,14.25 12,22 12,22C12,22 19,14.25 19,9C19,5.13 15.87,2 12,2M12,11.5A2.5,2.5 0 0,1 9.5,9A2.5,2.5 0 0,1 12,6.5A2.5,2.5 0 0,1 14.5,9A2.5,2.5 0 0,1 12,11.5Z" 
+                                      Fill="#F57C00" 
+                                      WidthRequest="24"
+                                      HeightRequest="24"
+                                      Aspect="Uniform"
+                                      HorizontalOptions="Center" 
+                                      VerticalOptions="Center"/>
+                            </Grid>
+                        </Border>
+                        <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
+                            <Label Text="{Binding Venue}" 
+                                   FontSize="16" 
+                                   FontAttributes="Bold" 
+                                   TextColor="Black"/>
+                            <Label Text="{Binding Address}" 
+                                   FontSize="14" 
+                                   TextColor="#666666"/>
+                        </VerticalStackLayout>
+                    </Grid>
+
+                    <!-- Action Buttons -->
+                    <HorizontalStackLayout Spacing="12" Margin="0,8,0,0">
+                        <Border Stroke="Black" 
+                                StrokeThickness="1" 
+                                BackgroundColor="White" 
+                                Padding="16,8" 
+                                StrokeShape="RoundRectangle 20"
+                                HeightRequest="40">
+                            <HorizontalStackLayout Spacing="8">
+                                <Path Data="M12.1,18.55L12,18.65L11.89,18.55C7.14,14.24 4,11.39 4,8.5C4,6.5 5.5,5 7.5,5C8.63,5 9.73,5.73 10.11,6.72H13.88C14.27,5.73 15.37,5 16.5,5C18.5,5 20,6.5 20,8.5C20,11.39 16.86,14.24 12.1,18.55M16.5,3C14.76,3 13.09,3.81 12,5.08C10.91,3.81 9.24,3 7.5,3C4.42,3 2,5.41 2,8.5C2,12.27 5.4,15.36 10.55,20.03L12,21.35L13.45,20.03C18.6,15.36 22,12.27 22,8.5C22,5.41 19.58,3 16.5,3Z" 
+                                      Fill="Black" 
+                                      WidthRequest="16"
+                                      HeightRequest="16"
+                                      Aspect="Uniform"
+                                      VerticalOptions="Center"/>
+                                <Label Text="Ajouter aux favoris" 
+                                       TextColor="Black" 
+                                       FontAttributes="Bold" 
+                                       VerticalOptions="Center"
+                                       FontSize="14"/>
+                            </HorizontalStackLayout>
+                        </Border>
+
+                        <Border Stroke="Black" 
+                                StrokeThickness="1" 
+                                BackgroundColor="White" 
+                                Padding="16,8" 
+                                StrokeShape="RoundRectangle 20"
+                                HeightRequest="40">
+                            <HorizontalStackLayout Spacing="8">
+                                <Path Data="M18,16.08C17.24,16.08 16.56,16.38 16.04,16.85L8.91,12.7C8.96,12.47 9,12.24 9,12C9,11.76 8.96,11.53 8.91,11.3L15.96,7.19C16.5,7.69 17.21,8 18,8A3,3 0 0,0 21,5A3,3 0 0,0 18,2A3,3 0 0,0 15,5C15,5.24 15.04,5.47 15.09,5.7L8.04,9.81C7.5,9.31 6.79,9 6,9A3,3 0 0,0 3,12A3,3 0 0,0 6,15C6.79,15 7.5,14.69 8.04,14.19L15.14,18.3C15.09,18.53 15.06,18.76 15.06,19C15.06,20.66 16.4,22 18,22A3,3 0 0,0 21,19C21,17.34 19.66,16.08 18,16.08Z" 
+                                      Fill="Black" 
+                                      WidthRequest="16"
+                                      HeightRequest="16"
+                                      Aspect="Uniform"
+                                      VerticalOptions="Center"/>
+                                <Label Text="Partager" 
+                                       TextColor="Black" 
+                                       FontAttributes="Bold" 
+                                       VerticalOptions="Center"
+                                       FontSize="14"/>
+                            </HorizontalStackLayout>
+                        </Border>
+                    </HorizontalStackLayout>
+
+                    <!-- Description Section -->
+                    <VerticalStackLayout Spacing="8" Padding="0,12,0,24">
+                        <Label Text="À propos de l'événement" 
+                               FontSize="18" 
+                               FontAttributes="Bold" 
+                               FontFamily="OswaldBold"
+                               TextColor="Black"/>
+                        <Label Text="{Binding Description}" 
+                               FontSize="15" 
+                               LineHeight="1.4"
+                               TextColor="#333333"/>
+                    </VerticalStackLayout>
+
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Sticky Footer -->
+        <Border Grid.Row="1" 
+                BackgroundColor="White" 
+                StrokeThickness="1" 
+                Stroke="#EEEEEE"
+                Padding="20,12"
+                VerticalOptions="End">
+            <Grid ColumnDefinitions="*, Auto">
+                <VerticalStackLayout Grid.Column="0" VerticalOptions="Center">
+                    <Label Text="{Binding FormattedPrice}" 
+                           FontSize="20" 
+                           FontAttributes="Bold" 
+                           TextColor="Black"/>
+                    <Label Text="Places limitées" 
+                           FontSize="12" 
+                           TextColor="#666666"/>
+                </VerticalStackLayout>
+                
+                <Button Grid.Column="1"
+                        Text="Participer"
+                        BackgroundColor="Black"
+                        TextColor="White"
+                        FontAttributes="Bold"
+                        CornerRadius="25"
+                        Padding="40,0"
+                        HeightRequest="50"/>
+            </Grid>
+        </Border>
+
+    </Grid>
+
+</ContentPage>

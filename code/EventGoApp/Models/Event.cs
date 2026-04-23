@@ -30,6 +30,9 @@ public class Event
     /// <summary>Ville où se déroule l'événement.</summary>
     public string City { get; set; } = string.Empty;
 
+    /// <summary>Adresse civique complète de l'événement.</summary>
+    public string Address { get; set; } = string.Empty;
+
     /// <summary>Nom du lieu de l'événement.</summary>
     public string Venue { get; set; } = string.Empty;
 

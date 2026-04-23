@@ -3,11 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="EventGoApp.Views.RegisterPage"
              Title="Inscription"
-             BackgroundColor="#F0E6FF"
+             BackgroundColor="White"
              Shell.NavBarIsVisible="True">
 
     <Grid RowDefinitions="Auto,*">
-        
+
         <!-- Top Left Logo -->
         <HorizontalStackLayout Grid.Row="0" Spacing="8" Padding="24,16" HorizontalOptions="Start">
             <Path Data="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M11,19.93C7.05,19.44 4,16.08 4,12C4,11.38 4.08,10.78 4.21,10.21L9,15V16A2,2 0 0,0 11,18M17.9,17.39C17.64,16.58 16.9,16 16,16H15V13A1,1 0 0,0 14,12H8V10H10A1,1 0 0,0 11,9V7H13A2,2 0 0,0 15,5V4.59C17.93,5.77 20,8.64 20,12C20,14.08 19.2,15.97 17.9,17.39Z" 
@@ -23,73 +23,76 @@
                    VerticalOptions="Center"/>
         </HorizontalStackLayout>
 
-        <VerticalStackLayout Grid.Row="1" Padding="32" Spacing="16" VerticalOptions="Center">
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="32" Spacing="16" VerticalOptions="Center">
 
-            <Label Text="Inscription"
-                   FontSize="32"
-                   FontAttributes="Bold"
-                   TextColor="#2D1B4E"
-                   HorizontalOptions="Center"/>
-
-            <Label Text="Rejoignez EventGo dès aujourd'hui"
-                   FontSize="14"
-                   TextColor="#5D4E7E"
-                   HorizontalOptions="Center"
-                   Margin="0,0,0,16"/>
-
-            <Entry x:Name="FullNameEntry"
-                   Placeholder="Nom complet (optionnel)"
-                   PlaceholderColor="#8B7BA8"
-                   TextColor="#2D1B4E"
-                   BackgroundColor="White"/>
-
-            <Entry x:Name="UsernameEntry"
-                   Placeholder="Nom d'utilisateur"
-                   PlaceholderColor="#8B7BA8"
-                   TextColor="#2D1B4E"
-                   BackgroundColor="White"/>
-
-            <Entry x:Name="EmailEntry"
-                   Placeholder="Courriel"
-                   Keyboard="Email"
-                   PlaceholderColor="#8B7BA8"
-                   TextColor="#2D1B4E"
-                   BackgroundColor="White"/>
-
-            <Entry x:Name="PasswordEntry"
-                   Placeholder="Mot de passe"
-                   IsPassword="True"
-                   PlaceholderColor="#8B7BA8"
-                   TextColor="#2D1B4E"
-                   BackgroundColor="White"/>
-
-            <Label x:Name="ErrorLabel"
-                   TextColor="#D32F2F"
-                   FontSize="13"
-                   IsVisible="False"
-                   HorizontalOptions="Center"/>
-
-            <Button Text="S'inscrire"
-                    Clicked="OnRegisterClicked"
-                    BackgroundColor="#6200EE"
-                    TextColor="White"
-                    CornerRadius="20"
-                    Padding="0,12"
-                    FontAttributes="Bold"
-                    Margin="0,8,0,0"/>
-
-            <HorizontalStackLayout HorizontalOptions="Center" Spacing="4">
-                <Label Text="Déjà un compte ?" TextColor="#5D4E7E" VerticalOptions="Center"/>
-                <Label Text="Se connecter"
-                       TextColor="#6200EE"
+                <Label Text="Créer un compte"
+                       FontSize="32"
                        FontAttributes="Bold"
-                       VerticalOptions="Center">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="OnLoginTapped"/>
-                    </Label.GestureRecognizers>
-                </Label>
-            </HorizontalStackLayout>
+                       FontFamily="OswaldBold"
+                       TextColor="#2D1B4E"
+                       HorizontalOptions="Center"/>
+                
+                <Label Text="Rejoignez EventGo dès aujourd'hui"
+                       FontSize="14"
+                       TextColor="#5D4E7E"
+                       HorizontalOptions="Center"
+                       Margin="0,0,0,16"/>
 
-        </VerticalStackLayout>
+                <Entry x:Name="FullNameEntry"
+                       Placeholder="Nom complet (optionnel)"
+                       PlaceholderColor="#8B7BA8"
+                       TextColor="#2D1B4E"
+                       BackgroundColor="White"/>
+
+                <Entry x:Name="UsernameEntry"
+                       Placeholder="Nom d'utilisateur"
+                       PlaceholderColor="#8B7BA8"
+                       TextColor="#2D1B4E"
+                       BackgroundColor="White"/>
+
+                <Entry x:Name="EmailEntry"
+                       Placeholder="Courriel"
+                       Keyboard="Email"
+                       PlaceholderColor="#8B7BA8"
+                       TextColor="#2D1B4E"
+                       BackgroundColor="White"/>
+
+                <Entry x:Name="PasswordEntry"
+                       Placeholder="Mot de passe"
+                       IsPassword="True"
+                       PlaceholderColor="#8B7BA8"
+                       TextColor="#2D1B4E"
+                       BackgroundColor="White"/>
+
+                <Label x:Name="ErrorLabel"
+                       TextColor="#D32F2F"
+                       FontSize="13"
+                       IsVisible="False"
+                       HorizontalOptions="Center"/>
+
+                <Button Text="S'inscrire"
+                        Clicked="OnRegisterClicked"
+                        BackgroundColor="#6200EE"
+                        TextColor="White"
+                        CornerRadius="20"
+                        Padding="0,12"
+                        FontAttributes="Bold"
+                        Margin="0,8,0,0"/>
+
+                <HorizontalStackLayout HorizontalOptions="Center" Spacing="4">
+                    <Label Text="Déjà un compte ?" TextColor="#5D4E7E" VerticalOptions="Center"/>
+                    <Label Text="Se connecter"
+                           TextColor="#6200EE"
+                           FontAttributes="Bold"
+                           VerticalOptions="Center">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnLoginTapped"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </HorizontalStackLayout>
+
+            </VerticalStackLayout>
+        </ScrollView>
     </Grid>
 </ContentPage>
