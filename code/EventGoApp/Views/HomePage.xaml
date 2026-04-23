@@ -16,7 +16,7 @@
                        FontSize="22"
                        FontAttributes="Bold"
                        FontFamily="OswaldBold"
-                       TextColor="#Black"/>
+                       TextColor="Black"/>
                 <HorizontalStackLayout Spacing="4" Margin="0,-2,0,0">
                     <Path Data="M12,2C8.13,2 5,5.13 5,9C5,14.25 12,22 12,22C12,22 19,14.25 19,9C19,5.13 15.87,2 12,2M12,11.5A2.5,2.5 0 0,1 9.5,9A2.5,2.5 0 0,1 12,6.5A2.5,2.5 0 0,1 14.5,9A2.5,2.5 0 0,1 12,11.5Z" 
                           Fill="Black" 
@@ -175,7 +175,7 @@
                                            Text="{Binding Title}"
                                            FontSize="17"
                                            FontAttributes="Bold"
-                                           TextColor="#black"
+                                           TextColor="Black"
                                            LineBreakMode="TailTruncation"/>
                                     <Label Grid.Row="1"
                                            Text="{Binding FormattedDate}"
@@ -200,6 +200,9 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+
+        <!-- TabBar Separator -->
+        <BoxView Grid.Row="3" HeightRequest="1" BackgroundColor="Black" VerticalOptions="End"/>
 
     </Grid>
 

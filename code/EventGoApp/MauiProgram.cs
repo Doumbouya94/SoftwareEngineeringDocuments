@@ -46,6 +46,9 @@ public static class MauiProgram
         builder.Services.AddTransient<Views.HomePage>();
         builder.Services.AddTransient<Views.EventDetailPage>();
         builder.Services.AddTransient<Views.FilterPage>();
+        builder.Services.AddTransient<Views.FavoritesPage>();
+        builder.Services.AddTransient<Views.TicketsPage>();
+        builder.Services.AddTransient<Views.ProfilePage>();
 
 #if DEBUG
         builder.Logging.AddDebug();

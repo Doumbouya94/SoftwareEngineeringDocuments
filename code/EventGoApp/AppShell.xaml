@@ -9,10 +9,37 @@
 
     <ShellContent Route="welcome"
                   ContentTemplate="{DataTemplate views:WelcomePage}"
-                  Shell.NavBarIsVisible="False"/>
+                  Shell.NavBarIsVisible="False"
+                  Shell.FlyoutItemIsVisible="False"/>
 
-    <ShellContent Route="home"
-                  ContentTemplate="{DataTemplate views:HomePage}"
-                  Shell.NavBarIsVisible="False"/>
+    <TabBar>
+        <Tab Title="Explorer" Route="home">
+            <Tab.Icon>
+                <FontImageSource FontFamily="OpenSansRegular" Glyph="&#x1F50D;"/>
+            </Tab.Icon>
+            <ShellContent ContentTemplate="{DataTemplate views:HomePage}" Shell.NavBarIsVisible="False"/>
+        </Tab>
+
+        <Tab Title="Favoris" Route="favorites">
+            <Tab.Icon>
+                <FontImageSource FontFamily="OpenSansRegular" Glyph="&#x2764;"/>
+            </Tab.Icon>
+            <ShellContent ContentTemplate="{DataTemplate views:FavoritesPage}" Shell.NavBarIsVisible="True"/>
+        </Tab>
+
+        <Tab Title="Tickets" Route="tickets">
+            <Tab.Icon>
+                <FontImageSource FontFamily="OpenSansRegular" Glyph="&#x1F3AB;"/>
+            </Tab.Icon>
+            <ShellContent ContentTemplate="{DataTemplate views:TicketsPage}" Shell.NavBarIsVisible="True"/>
+        </Tab>
+
+        <Tab Title="Compte" Route="profile">
+            <Tab.Icon>
+                <FontImageSource FontFamily="OpenSansRegular" Glyph="&#x1F464;"/>
+            </Tab.Icon>
+            <ShellContent ContentTemplate="{DataTemplate views:ProfilePage}" Shell.NavBarIsVisible="True"/>
+        </Tab>
+    </TabBar>
 
 </Shell>

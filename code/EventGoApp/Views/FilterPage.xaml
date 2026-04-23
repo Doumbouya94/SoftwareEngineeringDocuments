@@ -6,19 +6,41 @@
              x:DataType="vm:FilterViewModel"
              BackgroundColor="White"
              Title="Filtres"
-             Shell.NavBarIsVisible="True"
+             Shell.NavBarIsVisible="False"
              Shell.PresentationMode="ModalAnimated">
 
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Réinitialiser" 
-                     Command="{Binding ResetCommand}"
-                     Priority="0"/>
-    </ContentPage.ToolbarItems>
-
-    <Grid RowDefinitions="*, Auto" Padding="20">
+    <Grid RowDefinitions="Auto, *, Auto" Padding="20">
+        
+        <!-- Header -->
+        <Grid Grid.Row="0" ColumnDefinitions="Auto, *, Auto" Margin="0,0,0,20" ColumnSpacing="12">
+            <Border Grid.Column="0" 
+                    BackgroundColor="White" 
+                    Stroke="#D1C4E9" 
+                    StrokeThickness="1" 
+                    StrokeShape="RoundRectangle 20" 
+                    WidthRequest="40" 
+                    HeightRequest="40">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding BackCommand}"/>
+                </Border.GestureRecognizers>
+                <Path Data="M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z" 
+                      Fill="Black" 
+                      HorizontalOptions="Center" 
+                      VerticalOptions="Center" 
+                      WidthRequest="24" 
+                      HeightRequest="24" 
+                      Aspect="Uniform"/>
+            </Border>
+            <Label Grid.Column="1" Text="Filtres" FontSize="24" FontAttributes="Bold" FontFamily="OswaldBold" TextColor="Black" VerticalOptions="Center"/>
+            <Label Grid.Column="2" Text="Réinitialiser" TextColor="#6200EE" VerticalOptions="Center">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ResetCommand}"/>
+                </Label.GestureRecognizers>
+            </Label>
+        </Grid>
 
         <!-- Content -->
-        <ScrollView Grid.Row="0">
+        <ScrollView Grid.Row="1">
             <VerticalStackLayout Spacing="24">
                 
                 <!-- City Filter -->
@@ -48,7 +70,7 @@
         </ScrollView>
 
         <!-- Bottom Button -->
-        <Button Grid.Row="1" 
+        <Button Grid.Row="2" 
                 Text="Appliquer les filtres" 
                 Command="{Binding ApplyCommand}"
                 BackgroundColor="Black" 
