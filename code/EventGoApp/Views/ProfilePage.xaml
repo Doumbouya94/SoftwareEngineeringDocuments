@@ -1,15 +1,112 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:EventGoApp.ViewModels"
              x:Class="EventGoApp.Views.ProfilePage"
+             x:DataType="vm:ProfileViewModel"
              Title="Compte"
              BackgroundColor="White">
-    <Grid>
-        <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="20">
-            <Label Text="👤" FontSize="60" HorizontalOptions="Center"/>
-            <Label Text="Votre Compte" FontSize="24" FontAttributes="Bold" HorizontalOptions="Center" TextColor="Black"/>
-            <Label Text="La page de profil est en préparation." HorizontalOptions="Center" TextColor="Gray"/>
+
+    <ContentPage.Resources>
+        <vm:SelectedToColorConverter x:Key="SelectedToColorConverter"/>
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="*, Auto" Padding="20">
+        
+        <ScrollView Grid.Row="0">
+            <VerticalStackLayout Spacing="30">
+                
+                <!-- User Info Card -->
+                <Border Stroke="#E0E0E0"
+                        StrokeThickness="1"
+                        StrokeShape="RoundRectangle 12"
+                        BackgroundColor="White"
+                        Padding="20">
+                    <HorizontalStackLayout Spacing="16" VerticalOptions="Center">
+                        <!-- Avatar -->
+                        <Border WidthRequest="60"
+                                HeightRequest="60"
+                                StrokeThickness="0"
+                                StrokeShape="RoundRectangle 30"
+                                BackgroundColor="Black">
+                            <Label Text="{Binding Initials}"
+                                   TextColor="White"
+                                   FontSize="24"
+                                   FontAttributes="Bold"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center"/>
+                        </Border>
+
+                        <!-- Name and City -->
+                        <VerticalStackLayout VerticalOptions="Center">
+                            <Label Text="{Binding FullName}"
+                                   FontSize="20"
+                                   FontAttributes="Bold"
+                                   TextColor="Black"/>
+                            <Label Text="{Binding City}"
+                                   FontSize="14"
+                                   TextColor="#666666"/>
+                        </VerticalStackLayout>
+                    </HorizontalStackLayout>
+                </Border>
+
+                <!-- Preferences Section -->
+                <VerticalStackLayout Spacing="16">
+                    <Label Text="Mes Intérêts"
+                           FontSize="18"
+                           FontAttributes="Bold"
+                           TextColor="Black"/>
+                    
+                    <FlexLayout BindableLayout.ItemsSource="{Binding Categories}"
+                                Direction="Row"
+                                Wrap="Wrap"
+                                JustifyContent="Start"
+                                AlignContent="Start"
+                                AlignItems="Start">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate x:DataType="vm:CategoryOption">
+                                <Border Margin="0,0,8,12"
+                                        Padding="16,8"
+                                        StrokeThickness="1"
+                                        StrokeShape="RoundRectangle 20"
+                                        BackgroundColor="{Binding IsSelected, Converter={StaticResource SelectedToColorConverter}, ConverterParameter='Background'}"
+                                        Stroke="{Binding IsSelected, Converter={StaticResource SelectedToColorConverter}, ConverterParameter='Stroke'}">
+                                    <Border.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:ProfileViewModel}}, Path=ToggleCategoryCommand}"
+                                                              CommandParameter="{Binding .}"/>
+                                    </Border.GestureRecognizers>
+                                    <Label Text="{Binding Name}"
+                                           TextColor="{Binding IsSelected, Converter={StaticResource SelectedToColorConverter}, ConverterParameter='Text'}"
+                                           FontSize="14"
+                                           FontAttributes="Bold"/>
+                                </Border>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </FlexLayout>
+                </VerticalStackLayout>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Bottom Buttons -->
+        <VerticalStackLayout Grid.Row="1" Spacing="12" Margin="0,20,0,0">
+            <Button Text="Sauvegarder les préférences"
+                    Command="{Binding SaveCommand}"
+                    BackgroundColor="Black"
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    CornerRadius="25"
+                    HeightRequest="50"/>
+            
+            <Button Text="Déconnexion"
+                    Command="{Binding LogoutCommand}"
+                    BackgroundColor="White"
+                    TextColor="#E91E63"
+                    BorderColor="#E91E63"
+                    BorderWidth="1"
+                    CornerRadius="25"
+                    HeightRequest="50"/>
         </VerticalStackLayout>
-        <BoxView HeightRequest="1" BackgroundColor="Black" VerticalOptions="End"/>
+
     </Grid>
 </ContentPage>

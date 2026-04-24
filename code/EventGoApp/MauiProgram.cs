@@ -28,7 +28,8 @@ public static class MauiProgram
         builder.Services.AddSingleton<PasswordService>();
 
         // Singletons
-        builder.Services.AddSingleton<IAuthState, AuthStateService>();
+        builder.Services.AddSingleton<AuthStateService>();
+        builder.Services.AddSingleton<IAuthState>(sp => sp.GetRequiredService<AuthStateService>());
         builder.Services.AddSingleton<LocalAuthService>();
         builder.Services.AddSingleton<OnboardingStateService>();
         builder.Services.AddSingleton<IEventAdapter, SqliteEventAdapter>();
@@ -37,6 +38,7 @@ public static class MauiProgram
         builder.Services.AddTransient<HomeViewModel>();
         builder.Services.AddTransient<EventDetailViewModel>();
         builder.Services.AddTransient<FilterViewModel>();
+        builder.Services.AddTransient<ProfileViewModel>();
 
         // Pages
         builder.Services.AddTransient<Views.WelcomePage>();

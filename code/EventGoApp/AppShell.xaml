@@ -24,21 +24,21 @@
             <Tab.Icon>
                 <FontImageSource FontFamily="OpenSansRegular" Glyph="&#x2764;"/>
             </Tab.Icon>
-            <ShellContent ContentTemplate="{DataTemplate views:FavoritesPage}" Shell.NavBarIsVisible="True"/>
+            <ShellContent ContentTemplate="{DataTemplate views:FavoritesPage}" Shell.NavBarIsVisible="False"/>
         </Tab>
 
         <Tab Title="Tickets" Route="tickets">
             <Tab.Icon>
                 <FontImageSource FontFamily="OpenSansRegular" Glyph="&#x1F3AB;"/>
             </Tab.Icon>
-            <ShellContent ContentTemplate="{DataTemplate views:TicketsPage}" Shell.NavBarIsVisible="True"/>
+            <ShellContent ContentTemplate="{DataTemplate views:TicketsPage}" Shell.NavBarIsVisible="False"/>
         </Tab>
 
         <Tab Title="Compte" Route="profile">
             <Tab.Icon>
                 <FontImageSource FontFamily="OpenSansRegular" Glyph="&#x1F464;"/>
             </Tab.Icon>
-            <ShellContent ContentTemplate="{DataTemplate views:ProfilePage}" Shell.NavBarIsVisible="True"/>
+            <ShellContent ContentTemplate="{DataTemplate views:ProfilePage}" Shell.NavBarIsVisible="False"/>
         </Tab>
     </TabBar>
 

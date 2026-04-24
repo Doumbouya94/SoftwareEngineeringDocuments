@@ -100,6 +100,16 @@ public class LocalAuthService
             return;
         }
 
-        await RegisterAsync("demo@eventgo.ca", "demo", "Demo1234", "Utilisateur Démo");
+        var user = await RegisterAsync("demo@eventgo.ca", "demo", "Demo1234", "Utilisateur Démo");
+        if (user != null)
+        {
+            user.PreferredCategories = new List<EventCategory> 
+            { 
+                EventCategory.Concerts, 
+                EventCategory.Festivals,
+                EventCategory.Arts 
+            };
+            await _db.UpdateAsync(user);
+        }
     }
 }

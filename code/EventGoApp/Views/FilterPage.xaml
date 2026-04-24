@@ -11,28 +11,10 @@
 
     <Grid RowDefinitions="Auto, *, Auto" Padding="20">
         
-        <!-- Header -->
-        <Grid Grid.Row="0" ColumnDefinitions="Auto, *, Auto" Margin="0,0,0,20" ColumnSpacing="12">
-            <Border Grid.Column="0" 
-                    BackgroundColor="White" 
-                    Stroke="#D1C4E9" 
-                    StrokeThickness="1" 
-                    StrokeShape="RoundRectangle 20" 
-                    WidthRequest="40" 
-                    HeightRequest="40">
-                <Border.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding BackCommand}"/>
-                </Border.GestureRecognizers>
-                <Path Data="M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z" 
-                      Fill="Black" 
-                      HorizontalOptions="Center" 
-                      VerticalOptions="Center" 
-                      WidthRequest="24" 
-                      HeightRequest="24" 
-                      Aspect="Uniform"/>
-            </Border>
-            <Label Grid.Column="1" Text="Filtres" FontSize="24" FontAttributes="Bold" FontFamily="OswaldBold" TextColor="Black" VerticalOptions="Center"/>
-            <Label Grid.Column="2" Text="Réinitialiser" TextColor="#6200EE" VerticalOptions="Center">
+        <!-- Simple Header for Title and Reset -->
+        <Grid Grid.Row="0" ColumnDefinitions="*, Auto" Margin="0,0,0,20">
+            <Label Grid.Column="0" Text="Filtres" FontSize="24" FontAttributes="Bold" FontFamily="OswaldBold" TextColor="Black" VerticalOptions="Center"/>
+            <Label Grid.Column="1" Text="Réinitialiser" TextColor="#6200EE" VerticalOptions="Center">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding ResetCommand}"/>
                 </Label.GestureRecognizers>
@@ -69,16 +51,28 @@
             </VerticalStackLayout>
         </ScrollView>
 
-        <!-- Bottom Button -->
-        <Button Grid.Row="2" 
-                Text="Appliquer les filtres" 
-                Command="{Binding ApplyCommand}"
-                BackgroundColor="Black" 
-                TextColor="White" 
-                FontAttributes="Bold" 
-                CornerRadius="25" 
-                HeightRequest="50"
-                Margin="0,20,0,0"/>
+        <!-- Bottom Buttons -->
+        <Grid Grid.Row="2" ColumnDefinitions="*, *" ColumnSpacing="12" Margin="0,20,0,0">
+            <Button Grid.Column="0" 
+                    Text="Fermer" 
+                    Command="{Binding BackCommand}"
+                    BackgroundColor="Transparent" 
+                    TextColor="Black" 
+                    BorderColor="Black"
+                    BorderWidth="1"
+                    FontAttributes="Bold" 
+                    CornerRadius="25" 
+                    HeightRequest="50"/>
+
+            <Button Grid.Column="1" 
+                    Text="Appliquer" 
+                    Command="{Binding ApplyCommand}"
+                    BackgroundColor="Black" 
+                    TextColor="White" 
+                    FontAttributes="Bold" 
+                    CornerRadius="25" 
+                    HeightRequest="50"/>
+        </Grid>
 
     </Grid>
 </ContentPage>

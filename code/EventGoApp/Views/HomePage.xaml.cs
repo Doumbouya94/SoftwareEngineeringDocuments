@@ -26,6 +26,7 @@ public partial class HomePage : ContentPage
             : $"Bonjour, {_authState.CurrentUser?.Username ?? "vous"} 👋 !";
 
         await _viewModel.LoadEventsAsync();
+        BuildFilterPills(); // Rebuild the manual UI pills
     }
 
     private void BuildFilterPills()
@@ -72,8 +73,12 @@ public partial class HomePage : ContentPage
 
     private async void OnLogoutClicked(object sender, EventArgs e)
     {
-        _authState.SetLoggedOut();
-        await Shell.Current.GoToAsync("//welcome");
+        bool answer = await DisplayAlert("Déconnexion", "Êtes-vous sûr de vouloir vous déconnecter ?", "Oui", "Non");
+        if (answer)
+        {
+            _authState.SetLoggedOut();
+            await Shell.Current.GoToAsync("//welcome");
+        }
     }
 
     private async void OnFilterClicked(object sender, TappedEventArgs e)

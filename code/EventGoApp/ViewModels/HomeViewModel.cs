@@ -18,22 +18,57 @@ namespace EventGoApp.ViewModels;
 public partial class HomeViewModel : INotifyPropertyChanged
 {
     private readonly IEventAdapter _adapter;
+    private readonly AuthStateService _authState;
     private string _activeFilter = "Tous";
 
     /// <summary>Initialise le vue-modèle avec l'adaptateur d'événements.</summary>
-    public HomeViewModel(IEventAdapter adapter)
+    public HomeViewModel(IEventAdapter adapter, AuthStateService authState)
     {
         _adapter = adapter;
+        _authState = authState;
+        LoadFilterPills();
     }
 
     /// <summary>Collection observable d'événements affichés dans le CollectionView.</summary>
     public ObservableCollection<EventViewModel> Events { get; } = new();
 
     /// <summary>Liste des étiquettes de filtre affichées dans la barre de filtres.</summary>
-    public List<string> FilterPills { get; } = new()
+    public ObservableCollection<string> FilterPills { get; } = new();
+
+    private void LoadFilterPills()
     {
-        "Tous", "Concerts", "Festivals", "Sports", "Soirées",
-        "Gastronomie", "Arts & Culture", "Plein air", "Réseautage"
+        FilterPills.Clear();
+        FilterPills.Add("Tous");
+
+        var user = _authState.CurrentUser;
+        if (user != null && user.PreferredCategories.Any())
+        {
+            foreach (var cat in user.PreferredCategories)
+            {
+                FilterPills.Add(CategoryToFilterLabel(cat));
+            }
+        }
+        else
+        {
+            // Fallback to all if no preferences
+            foreach (EventCategory cat in Enum.GetValues(typeof(EventCategory)))
+            {
+                FilterPills.Add(CategoryToFilterLabel(cat));
+            }
+        }
+    }
+
+    private static string CategoryToFilterLabel(EventCategory cat) => cat switch
+    {
+        EventCategory.Concerts => "Concerts",
+        EventCategory.Festivals => "Festivals",
+        EventCategory.Sports => "Sports",
+        EventCategory.Parties => "Soirées",
+        EventCategory.Food => "Gastronomie",
+        EventCategory.Arts => "Arts & Culture",
+        EventCategory.Outdoor => "Plein air",
+        EventCategory.Networking => "Réseautage",
+        _ => cat.ToString()
     };
 
     /// <summary>
@@ -60,6 +95,16 @@ public partial class HomeViewModel : INotifyPropertyChanged
     /// </summary>
     public async Task LoadEventsAsync()
     {
+        // Refresh pills in case preferences changed
+        LoadFilterPills();
+        
+        // Reset active filter if it's no longer in pills
+        if (!FilterPills.Contains(_activeFilter))
+        {
+            _activeFilter = "Tous";
+            OnPropertyChanged(nameof(ActiveFilter));
+        }
+
         IReadOnlyList<Event> events;
 
         if (_activeFilter == "Tous")

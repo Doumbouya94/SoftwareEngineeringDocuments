@@ -32,6 +32,32 @@ public class User
     /// <summary>Mot de passe haché avec BCrypt.</summary>
     public string PasswordHash { get; set; } = string.Empty;
 
+    /// <summary>Ville de l'utilisateur.</summary>
+    public string City { get; set; } = "Montréal";
+
+    /// <summary>Catégories préférées (stockées sous forme de chaîne séparée par des points-virgules pour SQLite).</summary>
+    public string PreferredCategoriesRaw { get; set; } = string.Empty;
+
+    [Ignore]
+    public List<EventCategory> PreferredCategories
+    {
+        get
+        {
+            if (string.IsNullOrWhiteSpace(PreferredCategoriesRaw))
+                return new List<EventCategory>();
+
+            return PreferredCategoriesRaw.Split(';')
+                .Select(s => Enum.TryParse<EventCategory>(s, out var cat) ? cat : (EventCategory?)null)
+                .Where(c => c.HasValue)
+                .Select(c => c!.Value)
+                .ToList();
+        }
+        set
+        {
+            PreferredCategoriesRaw = string.Join(";", value);
+        }
+    }
+
     /// <summary>Date de création du compte.</summary>
     public DateTime CreatedAt { get; set; }
 
