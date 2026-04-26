@@ -33,6 +33,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<LocalAuthService>();
         builder.Services.AddSingleton<OnboardingStateService>();
         builder.Services.AddSingleton<IEventAdapter, SqliteEventAdapter>();
+        builder.Services.AddSingleton<IEventSeeder, EventSeeder>();
 
         // ViewModels
         builder.Services.AddTransient<HomeViewModel>();

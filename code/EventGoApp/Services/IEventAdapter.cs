@@ -29,5 +29,7 @@ public interface IEventAdapter
     Task AddAsync(Event newEvent);
 
     /// <summary>Insère les données de test.</summary>
-    Task SeedEventsAsync();
+    /// ancienne méthode
+    // Task SeedEventsAsync();
+
 }

@@ -35,20 +35,24 @@ public partial class App : Application
 
         try
         {
-            // 1. Initialize DB tables
+            // 1. Initialiser la base de données SQLite
             var sqlite = _services.GetRequiredService<SqliteService>();
             await sqlite.InitializeAsync();
 
             // COMMENTER : Drop et recreate db
             await sqlite.DropAndRecreateAsync();
 
-            // 2. Seed data
+            // 2. Injecter les données de démonstration (seed)
             var auth = _services.GetRequiredService<LocalAuthService>();
             await auth.SeedDemoUserAsync();
 
-            // 3. Créer événements sample
-            var eventAdapter = (SqliteEventAdapter)_services.GetRequiredService<IEventAdapter>();
-            await eventAdapter.SeedEventsAsync();
+            // 3. Injecter les événements de démonstration (Factory + Adaptateur)
+            var eventSeeder = _services.GetRequiredService<IEventSeeder>();
+            await eventSeeder.SeedAsync();
+
+            // ancienne méthode de seed, remplacée par EventSeeder qui utilise les factories
+            // var eventAdapter = (SqliteEventAdapter)_services.GetRequiredService<IEventAdapter>();
+            // await eventAdapter.SeedEventsAsync();
         }
         catch (Exception ex)
         {
