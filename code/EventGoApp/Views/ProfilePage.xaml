@@ -50,6 +50,17 @@
                     </HorizontalStackLayout>
                 </Border>
 
+                <!-- Mes événements -->
+                <Border Stroke="#F0E6FF" StrokeThickness="1" StrokeShape="RoundRectangle 12" Padding="16,14">
+                    <Grid ColumnDefinitions="*, Auto">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding GoToMyEventsCommand}"/>
+                        </Grid.GestureRecognizers>
+                        <Label Grid.Column="0" Text="Mes événements" FontAttributes="Bold" TextColor="Black" VerticalOptions="Center"/>
+                        <Label Grid.Column="1" Text="›" FontSize="20" TextColor="#6200EE" VerticalOptions="Center"/>
+                    </Grid>
+                </Border>
+
                 <!-- Preferences Section -->
                 <VerticalStackLayout Spacing="16">
                     <Label Text="Mes Intérêts"

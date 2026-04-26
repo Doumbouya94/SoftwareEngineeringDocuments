@@ -28,8 +28,12 @@ public interface IEventAdapter
     /// <summary>Ajoute un nouvel événement à la source de données.</summary>
     Task AddAsync(Event newEvent);
 
-    /// <summary>Insère les données de test.</summary>
-    /// ancienne méthode
-    // Task SeedEventsAsync();
+    /// <summary>Retourne les événements créés par un organisateur donné.</summary>
+    Task<List<Event>> GetByOrganizerAsync(Guid organizerId);
 
+    /// <summary>Met à jour un événement existant.</summary>
+    Task UpdateAsync(Event ev);
+
+    /// <summary>Supprime un événement par son identifiant.</summary>
+    Task DeleteAsync(Guid id);
 }

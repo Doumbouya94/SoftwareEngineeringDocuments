@@ -78,6 +78,7 @@ public class ProfileViewModel : INotifyPropertyChanged
         LogoutCommand = new Command(OnLogout);
         SaveCommand = new Command(OnSave);
         ToggleCategoryCommand = new Command<CategoryOption>(OnToggleCategory);
+        GoToMyEventsCommand = new Command(async () => await Shell.Current.GoToAsync("myevents"));
 
         LoadUserData();
     }
@@ -105,6 +106,7 @@ public class ProfileViewModel : INotifyPropertyChanged
     public ICommand LogoutCommand { get; }
     public ICommand SaveCommand { get; }
     public ICommand ToggleCategoryCommand { get; }
+    public ICommand GoToMyEventsCommand { get; }
 
     public void LoadUserData()
     {

@@ -11,6 +11,7 @@ namespace EventGoApp.Services;
 /// </remarks>
 public class AuthStateService : IAuthState
 {
+    public static readonly Guid GuestId = new Guid("00000000-0000-0000-0000-000000000001");
     /// <summary>Mode d'authentification actuel.</summary>
     public AuthMode CurrentMode { get; private set; } = AuthMode.LoggedOut;
 

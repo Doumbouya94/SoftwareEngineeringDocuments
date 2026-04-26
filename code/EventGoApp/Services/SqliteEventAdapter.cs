@@ -101,4 +101,19 @@ public class SqliteEventAdapter : IEventAdapter
     {
         await _db.InsertAsync(newEvent);
     }
+
+    public async Task<List<Event>> GetByOrganizerAsync(Guid organizerId)
+        => await _db.Table<Event>()
+            .Where(e => e.OrganizerId == organizerId)
+            .OrderByDescending(e => e.Date)
+            .ToListAsync();
+
+    public async Task UpdateAsync(Event ev)
+    {
+        ev.UpdatedAt = DateTime.UtcNow;
+        await _db.UpdateAsync(ev);
+    }
+
+    public async Task DeleteAsync(Guid id)
+        => await _db.DeleteAsync<Event>(id);
 }

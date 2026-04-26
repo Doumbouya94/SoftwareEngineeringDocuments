@@ -95,6 +95,36 @@
                         </VerticalStackLayout>
                     </Grid>
 
+                    <!-- Separator -->
+                    <BoxView HeightRequest="1" BackgroundColor="#EEEEEE" Margin="0,-4"/>
+
+                    <!-- Organizer Row -->
+                    <Grid ColumnDefinitions="Auto, *" ColumnSpacing="16">
+                        <Border Grid.Column="0"
+                                BackgroundColor="#F5F5F5"
+                                WidthRequest="48"
+                                HeightRequest="48"
+                                StrokeShape="RoundRectangle 12"
+                                StrokeThickness="0">
+                            <Path Data="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z"
+                                  Fill="Black"
+                                  WidthRequest="24"
+                                  HeightRequest="24"
+                                  Aspect="Uniform"
+                                  HorizontalOptions="Center"
+                                  VerticalOptions="Center"/>
+                        </Border>
+                        <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
+                            <Label Text="Organisateur"
+                                   FontSize="12"
+                                   TextColor="#666666"/>
+                            <Label Text="{Binding OrganizerName}"
+                                   FontSize="16"
+                                   FontAttributes="Bold"
+                                   TextColor="Black"/>
+                        </VerticalStackLayout>
+                    </Grid>
+
                     <!-- Action Buttons -->
                     <HorizontalStackLayout Spacing="12" Margin="0,8,0,0">
                         <Border Stroke="Black" 

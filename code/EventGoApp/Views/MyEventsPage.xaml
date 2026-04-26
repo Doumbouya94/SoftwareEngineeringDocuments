@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:EventGoApp.ViewModels"
+             xmlns:models="clr-namespace:EventGoApp.Models"
+             x:Class="EventGoApp.Views.MyEventsPage"
+             x:DataType="vm:MyEventsViewModel"
+             BackgroundColor="White"
+             Title="Mes événements">
+
+    <Grid RowDefinitions="*, Auto" Padding="20">
+
+        <!-- Event List -->
+        <CollectionView Grid.Row="0"
+                        ItemsSource="{Binding Events}"
+                        SelectionMode="None">
+            <CollectionView.EmptyView>
+                <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="12">
+                    <Label Text="Aucun événement créé"
+                           FontSize="18"
+                           FontAttributes="Bold"
+                           TextColor="#666666"
+                           HorizontalOptions="Center"/>
+                    <Label Text="Les événements que vous créez apparaîtront ici."
+                           FontSize="14"
+                           TextColor="#999999"
+                           HorizontalOptions="Center"
+                           HorizontalTextAlignment="Center"/>
+                </VerticalStackLayout>
+            </CollectionView.EmptyView>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Event">
+                    <Border Stroke="#F0E6FF"
+                            StrokeThickness="1"
+                            StrokeShape="RoundRectangle 12"
+                            Padding="16"
+                            Margin="0,0,0,12">
+                        <Grid ColumnDefinitions="*, Auto">
+
+                            <VerticalStackLayout Grid.Column="0" Spacing="4">
+                                <Label Text="{Binding Title}"
+                                       FontSize="16"
+                                       FontAttributes="Bold"
+                                       TextColor="Black"
+                                       LineBreakMode="TailTruncation"/>
+                                <Label Text="{Binding Date, StringFormat='{0:ddd d MMM yyyy — HH:mm}'}"
+                                       FontSize="13"
+                                       TextColor="#666666"/>
+                                <Label Text="{Binding Venue}"
+                                       FontSize="13"
+                                       TextColor="#999999"
+                                       LineBreakMode="TailTruncation"/>
+                            </VerticalStackLayout>
+
+                            <!-- Edit / Delete buttons -->
+                            <HorizontalStackLayout Grid.Column="1" Spacing="8" VerticalOptions="Center" Margin="12,0,0,0">
+                                <Label Text="✎"
+                                       FontSize="20"
+                                       TextColor="#6200EE"
+                                       VerticalOptions="Center">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type vm:MyEventsViewModel}}, Path=EditEventCommand}"
+                                            CommandParameter="{Binding .}"/>
+                                    </Label.GestureRecognizers>
+                                </Label>
+                                <Label Text="🗑"
+                                       FontSize="20"
+                                       VerticalOptions="Center">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type vm:MyEventsViewModel}}, Path=DeleteEventCommand}"
+                                            CommandParameter="{Binding .}"/>
+                                    </Label.GestureRecognizers>
+                                </Label>
+                            </HorizontalStackLayout>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <!-- FAB Button -->
+        <Border Grid.Row="0"
+                HorizontalOptions="End"
+                VerticalOptions="End"
+                Margin="0,0,0,20"
+                BackgroundColor="Black"
+                WidthRequest="60"
+                HeightRequest="60"
+                StrokeShape="RoundRectangle 30"
+                StrokeThickness="0"
+                ZIndex="10">
+            <Border.Shadow>
+                <Shadow Brush="Black" Offset="0,4" Radius="10" Opacity="0.3"/>
+            </Border.Shadow>
+            <Border.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding GoToCreateEventCommand}"/>
+            </Border.GestureRecognizers>
+            <Path Data="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
+                  Fill="White"
+                  WidthRequest="30"
+                  HeightRequest="30"
+                  HorizontalOptions="Center"
+                  VerticalOptions="Center"
+                  Aspect="Uniform"/>
+        </Border>
+
+    </Grid>
+</ContentPage>

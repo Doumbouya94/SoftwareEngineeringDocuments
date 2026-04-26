@@ -61,4 +61,7 @@ public class Event
     /// <summary>Identifiant de l'utilisateur qui a créé (organise) l'événement.</summary>
     [Indexed]
     public Guid OrganizerId { get; set; }
+
+    /// <summary>Nom affiché de l'organisateur. "Invité" si créé sans compte.</summary>
+    public string OrganizerName { get; set; } = string.Empty;
 }
