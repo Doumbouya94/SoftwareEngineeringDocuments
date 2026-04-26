@@ -86,6 +86,11 @@ public partial class HomePage : ContentPage
         await Shell.Current.GoToAsync("filter");
     }
 
+    private async void OnCreateEventClicked(object sender, TappedEventArgs e)
+    {
+        await Shell.Current.GoToAsync("createevent");
+    }
+
     private async void OnEventSelected(object sender, SelectionChangedEventArgs e)
     {
         if (e.CurrentSelection.FirstOrDefault() is EventViewModel selectedEvent)

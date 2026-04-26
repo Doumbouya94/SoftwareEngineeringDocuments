@@ -39,6 +39,7 @@ public static class MauiProgram
         builder.Services.AddTransient<EventDetailViewModel>();
         builder.Services.AddTransient<FilterViewModel>();
         builder.Services.AddTransient<ProfileViewModel>();
+        builder.Services.AddTransient<CreateEventViewModel>();
 
         // Pages
         builder.Services.AddTransient<Views.WelcomePage>();
@@ -51,6 +52,7 @@ public static class MauiProgram
         builder.Services.AddTransient<Views.FavoritesPage>();
         builder.Services.AddTransient<Views.TicketsPage>();
         builder.Services.AddTransient<Views.ProfilePage>();
+        builder.Services.AddTransient<Views.CreateEventPage>();
 
 #if DEBUG
         builder.Logging.AddDebug();

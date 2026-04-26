@@ -25,6 +25,9 @@ public interface IEventAdapter
     /// <summary>Récupère un événement spécifique par son Id.</summary>
     Task<Event?> GetByIdAsync(Guid id);
 
+    /// <summary>Ajoute un nouvel événement à la source de données.</summary>
+    Task AddAsync(Event newEvent);
+
     /// <summary>Insère les données de test.</summary>
     Task SeedEventsAsync();
 }

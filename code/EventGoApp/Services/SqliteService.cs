@@ -8,7 +8,7 @@ namespace EventGoApp.Services;
 /// </summary>
 /// <remarks>
 /// Auteur : Aboubacar Sidiki Doumbouya
-/// Patron de conception : Façade — cache la complexité de l'initialisation SQLite derrière deux méthodes simples.
+/// Patron de conception : Façade —­ cache la complexité de l'initialisation SQLite derrière deux méthodes simples.
 /// UserStories : US1.1 (inscription), US1.2 (connexion), US2.1 (affichage des événements).
 /// Épic : Authentification et gestion des utilisateurs / Découverte et recherche d'événements.
 /// </remarks>

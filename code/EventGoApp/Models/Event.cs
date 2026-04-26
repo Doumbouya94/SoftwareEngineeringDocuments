@@ -57,4 +57,8 @@ public class Event
 
     /// <summary>Date de la dernière modification de l'enregistrement.</summary>
     public DateTime UpdatedAt { get; set; }
+
+    /// <summary>Identifiant de l'utilisateur qui a créé (organise) l'événement.</summary>
+    [Indexed]
+    public Guid OrganizerId { get; set; }
 }

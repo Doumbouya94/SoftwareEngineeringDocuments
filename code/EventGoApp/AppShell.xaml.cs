@@ -11,5 +11,6 @@ public partial class AppShell : Shell
 		Routing.RegisterRoute("onboarding", typeof(Views.OnboardingPage));
 		Routing.RegisterRoute("eventdetails", typeof(Views.EventDetailPage));
 		Routing.RegisterRoute("filter", typeof(Views.FilterPage));
+		Routing.RegisterRoute("createevent", typeof(Views.CreateEventPage));
 	}
 }

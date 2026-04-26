@@ -92,12 +92,14 @@ public class SqliteEventAdapter : IEventAdapter
         return result.OrderBy(e => e.Date).ToList();
     }
 
-    /// <summary>
-    /// Récupère un événement par son Id via SQLite.
-    /// </summary>
     public async Task<Event?> GetByIdAsync(Guid id)
     {
         return await _db.Table<Event>().FirstOrDefaultAsync(e => e.Id == id);
+    }
+
+    public async Task AddAsync(Event newEvent)
+    {
+        await _db.InsertAsync(newEvent);
     }
 
     /// <summary>

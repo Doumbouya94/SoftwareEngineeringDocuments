@@ -204,6 +204,32 @@
         <!-- TabBar Separator -->
         <BoxView Grid.Row="3" HeightRequest="1" BackgroundColor="Black" VerticalOptions="End"/>
 
+        <!-- FAB Button -->
+        <Border Grid.Row="3"
+                HorizontalOptions="End"
+                VerticalOptions="End"
+                Margin="0,0,20,20"
+                BackgroundColor="Black"
+                WidthRequest="60"
+                HeightRequest="60"
+                StrokeShape="RoundRectangle 30"
+                StrokeThickness="0"
+                ZIndex="10">
+            <Border.Shadow>
+                <Shadow Brush="Black" Offset="0,4" Radius="10" Opacity="0.3"/>
+            </Border.Shadow>
+            <Border.GestureRecognizers>
+                <TapGestureRecognizer Tapped="OnCreateEventClicked"/>
+            </Border.GestureRecognizers>
+            <Path Data="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
+                  Fill="White"
+                  WidthRequest="30"
+                  HeightRequest="30"
+                  HorizontalOptions="Center"
+                  VerticalOptions="Center"
+                  Aspect="Uniform"/>
+        </Border>
+
     </Grid>
 
 </ContentPage>
