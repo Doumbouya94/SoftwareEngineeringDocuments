@@ -8,7 +8,7 @@ namespace EventGoApp.Services;
 /// <remarks>
 /// Auteur : Aboubacar Sidiki Doumbouya
 /// Patron de conception : Adaptateur — découple HomeViewModel de toute source de données concrète.
-/// UserStories : US2.1 (affichage de la liste), US2.2 (filtrage par catégorie), US2.3 (filtrage par date et prix).
+/// UserStories : US2.1 (affichage de la liste), US2.2 (filtrage par catégorie), US2.3 (filtrage par date et prix), US2.5 (recherche par mot-clé).
 /// Épic : Découverte et recherche d'événements.
 /// </remarks>
 public interface IEventAdapter
@@ -36,4 +36,10 @@ public interface IEventAdapter
 
     /// <summary>Supprime un événement par son identifiant.</summary>
     Task DeleteAsync(Guid id);
+
+    /// <summary>
+    /// Recherche des événements par mot-clé sur le titre, la description et le lieu.
+    /// La recherche est insensible à la casse et compatible avec les filtres de catégorie.
+    /// </summary>
+    Task<IReadOnlyList<Event>> SearchAsync(string query, EventCategory? category = null);
 }

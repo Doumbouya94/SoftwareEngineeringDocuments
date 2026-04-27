@@ -107,6 +107,15 @@ public partial class HomePage : ContentPage
         }
     }
 
+    /// <summary>
+    /// Déclenché à chaque caractère saisi dans la barre de recherche.
+    /// Filtre les événements en temps réel.
+    /// </summary>
+    private async void OnSearchTextChanged(object sender, TextChangedEventArgs e)
+    {
+        await _viewModel.SearchAsync(e.NewTextValue);
+    }
+
     private async void OnLogoutClicked(object sender, EventArgs e)
     {
         bool answer = await DisplayAlert("Déconnexion", "Êtes-vous sûr de vouloir vous déconnecter ?", "Oui", "Non");

@@ -21,6 +21,7 @@ public partial class HomeViewModel : INotifyPropertyChanged
     private readonly AuthStateService _authState;
     private readonly FilterStateService _filterState;
     private string _activeFilter = "Tous";
+    private string _searchText = string.Empty;
 
     /// <summary>Initialise le vue-modèle avec l'adaptateur d'événements.</summary>
     public HomeViewModel(IEventAdapter adapter, AuthStateService authState, FilterStateService filterState)
@@ -79,6 +80,17 @@ public partial class HomeViewModel : INotifyPropertyChanged
             OnPropertyChanged();
         }
     }
+    /// <summary>Texte de recherche saisi par l'utilisateur.</summary>
+    public string SearchText
+    {
+        get => _searchText;
+        set
+        {
+            if (_searchText == value) return;
+            _searchText = value;
+            OnPropertyChanged();
+        }
+    }
 
     /// <summary>
     /// Charge les événements depuis l'adaptateur selon le filtre actif
@@ -119,6 +131,35 @@ public partial class HomeViewModel : INotifyPropertyChanged
                 ? await _adapter.GetByCategoryAsync(category.Value)
                 : await _adapter.GetAllAsync();
         }
+
+        Events.Clear();
+        foreach (var e in events)
+            Events.Add(new EventViewModel(e));
+    }
+
+    /// <summary>
+    /// Recherche les événements par mot-clé en temps réel.
+    /// Compatible avec les filtres de catégorie actifs.
+    /// </summary>
+    public async Task SearchAsync(string query)
+    {
+        SearchText = query;
+
+        IReadOnlyList<Event> events;
+
+        if (string.IsNullOrWhiteSpace(query))
+        {
+            // Si recherche vide, recharger les événements normalement
+            await LoadEventsAsync();
+            return;
+        }
+
+        // Recherche avec la catégorie active si applicable
+        var category = _activeFilter == "Tous"
+            ? null
+            : FilterLabelToCategory(_activeFilter);
+
+        events = await _adapter.SearchAsync(query, category);
 
         Events.Clear();
         foreach (var e in events)

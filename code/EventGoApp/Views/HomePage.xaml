@@ -69,12 +69,15 @@
                     Stroke="Black"
                     StrokeThickness="1"
                     BackgroundColor="White">
-                <SearchBar Placeholder="Rechercher un événement..."
+                <!-- SearchBar branchée sur OnSearchTextChanged -->
+                <SearchBar x:Name="MainSearchBar"
+                           Placeholder="Rechercher un événement..."
                            PlaceholderColor="#9E9E9E"
                            TextColor="#2D1B4E"
                            CancelButtonColor="#6200EE"
                            BackgroundColor="Transparent"
-                           FontSize="14"/>
+                           FontSize="14"
+                           TextChanged="OnSearchTextChanged"/>
             </Border>
 
             <Border Grid.Column="1"
@@ -115,6 +118,28 @@
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout Orientation="Vertical" ItemSpacing="16"/>
             </CollectionView.ItemsLayout>
+
+            <!-- État vide -->
+            <CollectionView.EmptyView>
+                <VerticalStackLayout VerticalOptions="Center"
+                                     HorizontalOptions="Center"
+                                     Spacing="12"
+                                     Margin="0,60,0,0">
+                    <Label Text="🔍"
+                           FontSize="60"
+                           HorizontalOptions="Center"/>
+                    <Label Text="Aucun événement trouvé"
+                           FontSize="18"
+                           FontAttributes="Bold"
+                           HorizontalOptions="Center"
+                           TextColor="Black"/>
+                    <Label Text="Essayez un autre mot-clé ou modifiez vos filtres"
+                           FontSize="14"
+                           HorizontalOptions="Center"
+                           TextColor="Gray"/>
+                </VerticalStackLayout>
+            </CollectionView.EmptyView>
+
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="vm:EventViewModel">
                     <Grid Padding="16,0">
