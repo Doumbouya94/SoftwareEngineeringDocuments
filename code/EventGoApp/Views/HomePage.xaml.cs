@@ -8,15 +8,25 @@ public partial class HomePage : ContentPage
     private readonly HomeViewModel _viewModel;
     private readonly IAuthState _authState;
     private readonly FavoritesViewModel _favoritesViewModel;
+    private readonly CityStateService _cityState;
 
-    public HomePage(HomeViewModel viewModel, IAuthState authState, FavoritesViewModel favoritesViewModel)
+    public HomePage(HomeViewModel viewModel, IAuthState authState,
+                    FavoritesViewModel favoritesViewModel, CityStateService cityState)
     {
         InitializeComponent();
         _viewModel = viewModel;
         _authState = authState;
         _favoritesViewModel = favoritesViewModel;
+        _cityState = cityState;
         EventsCollection.ItemsSource = _viewModel.Events;
         BuildFilterPills();
+
+        // Écouter les changements de ville
+        _cityState.PropertyChanged += (s, e) =>
+        {
+            if (e.PropertyName == nameof(CityStateService.SelectedCity))
+                CityLabel.Text = _cityState.SelectedCity;
+        };
     }
 
     protected override async void OnAppearing()
@@ -25,6 +35,9 @@ public partial class HomePage : ContentPage
         SubtitleLabel.Text = _authState.CurrentMode == AuthMode.Guest
             ? "Bienvenue, explorateur 👋 !"
             : $"Bonjour, {_authState.CurrentUser?.Username ?? "vous"} 👋 !";
+
+        // Mettre à jour la ville affichée
+        CityLabel.Text = _cityState.SelectedCity;
 
         await _viewModel.LoadEventsAsync();
         await SyncFavoriteIconsAsync();
@@ -88,6 +101,14 @@ public partial class HomePage : ContentPage
     }
 
     /// <summary>
+    /// Ouvre la page sheet de sélection de ville.
+    /// </summary>
+    private async void OnCityClicked(object sender, TappedEventArgs e)
+    {
+        await Shell.Current.GoToAsync("citypicker");
+    }
+
+    /// <summary>
     /// Gère le clic sur le bouton ❤️ pour ajouter ou retirer un favori.
     /// </summary>
     private async void OnFavoriteClicked(object sender, EventArgs e)
@@ -109,7 +130,6 @@ public partial class HomePage : ContentPage
 
     /// <summary>
     /// Déclenché à chaque caractère saisi dans la barre de recherche.
-    /// Filtre les événements en temps réel.
     /// </summary>
     private async void OnSearchTextChanged(object sender, TextChangedEventArgs e)
     {

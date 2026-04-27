@@ -36,6 +36,8 @@ public static class MauiProgram
         builder.Services.AddSingleton<FilterStateService>();
         builder.Services.AddSingleton<IEventAdapter, SqliteEventAdapter>();
         builder.Services.AddSingleton<IEventSeeder, EventSeeder>();
+        builder.Services.AddSingleton<CityStateService>();
+
 
         // Favoris (Pattern Commande)
         builder.Services.AddSingleton<IFavoriteRepository, SqliteFavoriteRepository>();
@@ -50,6 +52,7 @@ public static class MauiProgram
         builder.Services.AddTransient<CreateEventViewModel>();
         builder.Services.AddTransient<MyEventsViewModel>();
         builder.Services.AddTransient<EditEventViewModel>();
+        builder.Services.AddTransient<CityPickerViewModel>();
 
         // Pages
         builder.Services.AddTransient<Views.WelcomePage>();
@@ -65,6 +68,7 @@ public static class MauiProgram
         builder.Services.AddTransient<Views.CreateEventPage>();
         builder.Services.AddTransient<Views.MyEventsPage>();
         builder.Services.AddTransient<Views.EditEventPage>();
+        builder.Services.AddTransient<Views.CityPickerPage>();
 
 #if DEBUG
         builder.Logging.AddDebug();

@@ -18,13 +18,17 @@
                        FontFamily="OswaldBold"
                        TextColor="Black"/>
                 <HorizontalStackLayout Spacing="4" Margin="0,-2,0,0">
+                    <HorizontalStackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnCityClicked"/>
+                    </HorizontalStackLayout.GestureRecognizers>
                     <Path Data="M12,2C8.13,2 5,5.13 5,9C5,14.25 12,22 12,22C12,22 19,14.25 19,9C19,5.13 15.87,2 12,2M12,11.5A2.5,2.5 0 0,1 9.5,9A2.5,2.5 0 0,1 12,6.5A2.5,2.5 0 0,1 14.5,9A2.5,2.5 0 0,1 12,11.5Z" 
                           Fill="Black" 
                           WidthRequest="16" 
                           HeightRequest="16" 
                           VerticalOptions="Center" 
                           Aspect="Uniform"/>
-                    <Label Text="Montréal"
+                    <Label x:Name="CityLabel"
+                           Text="Montréal"
                            FontSize="16"
                            FontFamily="OswaldRegular"
                            TextColor="Black"
@@ -69,7 +73,6 @@
                     Stroke="Black"
                     StrokeThickness="1"
                     BackgroundColor="White">
-                <!-- SearchBar branchée sur OnSearchTextChanged -->
                 <SearchBar x:Name="MainSearchBar"
                            Placeholder="Rechercher un événement..."
                            PlaceholderColor="#9E9E9E"
@@ -148,7 +151,6 @@
                                 Stroke="Black"
                                 StrokeThickness="1"
                                 HeightRequest="280">
-                            <!-- Content -->
                             <Grid RowDefinitions="180,*">
                                 <!-- Image or placeholder -->
                                 <BoxView Grid.Row="0" 
