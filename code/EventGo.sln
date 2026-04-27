@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventGoApp", "EventGoApp\EventGoApp.csproj", "{76465C70-84EC-485E-B69D-65A9B7BFEF65}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventGoApp.Tests", "EventGoApp.Tests\EventGoApp.Tests.csproj", "{55E7B4FB-7A57-4623-9DEE-24A1BDA8B894}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,8 +29,23 @@ Global
 		{76465C70-84EC-485E-B69D-65A9B7BFEF65}.Release|x64.Build.0 = Release|Any CPU
 		{76465C70-84EC-485E-B69D-65A9B7BFEF65}.Release|x86.ActiveCfg = Release|Any CPU
 		{76465C70-84EC-485E-B69D-65A9B7BFEF65}.Release|x86.Build.0 = Release|Any CPU
+		{55E7B4FB-7A57-4623-9DEE-24A1BDA8B894}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55E7B4FB-7A57-4623-9DEE-24A1BDA8B894}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55E7B4FB-7A57-4623-9DEE-24A1BDA8B894}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{55E7B4FB-7A57-4623-9DEE-24A1BDA8B894}.Debug|x64.Build.0 = Debug|Any CPU
+		{55E7B4FB-7A57-4623-9DEE-24A1BDA8B894}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{55E7B4FB-7A57-4623-9DEE-24A1BDA8B894}.Debug|x86.Build.0 = Debug|Any CPU
+		{55E7B4FB-7A57-4623-9DEE-24A1BDA8B894}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55E7B4FB-7A57-4623-9DEE-24A1BDA8B894}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55E7B4FB-7A57-4623-9DEE-24A1BDA8B894}.Release|x64.ActiveCfg = Release|Any CPU
+		{55E7B4FB-7A57-4623-9DEE-24A1BDA8B894}.Release|x64.Build.0 = Release|Any CPU
+		{55E7B4FB-7A57-4623-9DEE-24A1BDA8B894}.Release|x86.ActiveCfg = Release|Any CPU
+		{55E7B4FB-7A57-4623-9DEE-24A1BDA8B894}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6B8A76D3-2BA5-437D-B4D5-234E742FF665}
 	EndGlobalSection
 EndGlobal
