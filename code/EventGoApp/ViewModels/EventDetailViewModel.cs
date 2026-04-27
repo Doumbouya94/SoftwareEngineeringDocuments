@@ -53,6 +53,7 @@ public partial class EventDetailViewModel : INotifyPropertyChanged
             OnPropertyChanged(nameof(ImageSource));
             OnPropertyChanged(nameof(FormattedPrice));
             OnPropertyChanged(nameof(CategoryLabel));
+            OnPropertyChanged(nameof(OrganizerName));
         }
     }
 
@@ -90,6 +91,7 @@ public partial class EventDetailViewModel : INotifyPropertyChanged
     public string ImageSource => Event?.ImageSource ?? string.Empty;
     public string FormattedPrice => Event?.Price == 0 ? "Gratuit" : $"{Event?.Price:0.##} $";
     public string CategoryLabel => Event?.Category.ToString() ?? string.Empty;
+    public string OrganizerName => Event?.OrganizerName is { Length: > 0 } name ? name : "EventGo";
 
     /// <summary>Bascule l'état favori de l'événement.</summary>
     public async Task ToggleFavoriteAsync()

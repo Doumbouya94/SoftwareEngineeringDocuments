@@ -56,14 +56,14 @@ packages/
 # Entity Framework Core
 # ============================================================
 
-# Do NOT ignore Migrations — they should be committed
+# Do NOT ignore Migrations ï¿½ they should be committed
 # Migrations/
 
 # ============================================================
 # Docker
 # ============================================================
 
-# Keep docker-compose.yml — it is part of the project setup
+# Keep docker-compose.yml ï¿½ it is part of the project setup
 # docker-compose.override.yml can be local
 docker-compose.override.yml
 
@@ -88,6 +88,7 @@ docker-compose.override.yml
 Thumbs.db
 .DS_Store
 .claude/settings.local.json
+CLAUDE.md
 
 # ============================================================
 # .NET MAUI / Xamarin

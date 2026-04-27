@@ -6,10 +6,13 @@ using EventGoApp.Services;
 
 namespace EventGoApp.ViewModels;
 
-public class CreateEventViewModel : INotifyPropertyChanged
+[QueryProperty(nameof(EventId), "id")]
+public class EditEventViewModel : INotifyPropertyChanged
 {
     private readonly IEventAdapter _eventAdapter;
-    private readonly IAuthState _authState;
+    private Event? _originalEvent;
+
+    private string _eventId = string.Empty;
     private string _title = string.Empty;
     private string _description = string.Empty;
     private DateTime _date = DateTime.Now.Date;
@@ -20,14 +23,23 @@ public class CreateEventViewModel : INotifyPropertyChanged
     private string _imageSource = string.Empty;
     private EventCategory _category = EventCategory.Concerts;
 
-    public CreateEventViewModel(IEventAdapter eventAdapter, IAuthState authState)
+    public EditEventViewModel(IEventAdapter eventAdapter)
     {
         _eventAdapter = eventAdapter;
-        _authState = authState;
         SaveCommand = new Command(OnSave, CanSave);
         CancelCommand = new Command(OnCancel);
-
         Categories = Enum.GetValues(typeof(EventCategory)).Cast<EventCategory>().ToList();
+    }
+
+    public string EventId
+    {
+        get => _eventId;
+        set
+        {
+            _eventId = value;
+            if (Guid.TryParse(value, out var guid))
+                LoadEventAsync(guid);
+        }
     }
 
     public string Title
@@ -89,33 +101,40 @@ public class CreateEventViewModel : INotifyPropertyChanged
     public ICommand SaveCommand { get; }
     public ICommand CancelCommand { get; }
 
-    private bool CanSave()
+    private bool CanSave() => !string.IsNullOrWhiteSpace(Title) && !string.IsNullOrWhiteSpace(Venue);
+
+    private async void LoadEventAsync(Guid id)
     {
-        return !string.IsNullOrWhiteSpace(Title) && !string.IsNullOrWhiteSpace(Venue);
+        _originalEvent = await _eventAdapter.GetByIdAsync(id);
+        if (_originalEvent is null) return;
+
+        Title = _originalEvent.Title;
+        Description = _originalEvent.Description;
+        Date = _originalEvent.Date.Date;
+        Time = _originalEvent.Date.TimeOfDay;
+        Venue = _originalEvent.Venue;
+        Address = _originalEvent.Address;
+        Price = (decimal)_originalEvent.Price;
+        ImageSource = _originalEvent.ImageSource;
+        Category = _originalEvent.Category;
     }
 
     private async void OnSave()
     {
-        var newEvent = new Event
-        {
-            Id = Guid.NewGuid(),
-            Title = Title,
-            Description = Description,
-            Date = Date.Date + Time,
-            Venue = Venue,
-            Address = Address,
-            Price = (double)Price,
-            ImageSource = string.IsNullOrWhiteSpace(ImageSource) 
-                ? "https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?q=80&w=1000" 
-                : ImageSource,
-            Category = Category,
-            OrganizerId = _authState.CurrentUser?.Id ?? AuthStateService.GuestId,
-            OrganizerName = _authState.CurrentUser?.Username ?? "Invité",
-            CreatedAt = DateTime.UtcNow,
-            UpdatedAt = DateTime.UtcNow
-        };
+        if (_originalEvent is null) return;
 
-        await _eventAdapter.AddAsync(newEvent);
+        _originalEvent.Title = Title;
+        _originalEvent.Description = Description;
+        _originalEvent.Date = Date.Date + Time;
+        _originalEvent.Venue = Venue;
+        _originalEvent.Address = Address;
+        _originalEvent.Price = (double)Price;
+        _originalEvent.ImageSource = string.IsNullOrWhiteSpace(ImageSource)
+            ? "https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?q=80&w=1000"
+            : ImageSource;
+        _originalEvent.Category = Category;
+
+        await _eventAdapter.UpdateAsync(_originalEvent);
         await Shell.Current.GoToAsync("..");
     }
 

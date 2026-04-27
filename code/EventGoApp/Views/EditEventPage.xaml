@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:EventGoApp.ViewModels"
+             x:Class="EventGoApp.Views.EditEventPage"
+             x:DataType="vm:EditEventViewModel"
+             BackgroundColor="White"
+             Title="Modifier l'événement"
+             Shell.PresentationMode="ModalAnimated">
+
+    <Grid RowDefinitions="Auto, *, Auto" Padding="20">
+
+        <!-- Header -->
+        <Grid Grid.Row="0" ColumnDefinitions="*, Auto" Margin="0,0,0,20">
+            <Label Grid.Column="0" Text="Modifier l'événement" FontSize="24" FontAttributes="Bold" FontFamily="OswaldBold" TextColor="Black" VerticalOptions="Center"/>
+            <Label Grid.Column="1" Text="Annuler" TextColor="#E91E63" VerticalOptions="Center">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding CancelCommand}"/>
+                </Label.GestureRecognizers>
+            </Label>
+        </Grid>
+
+        <!-- Form Content -->
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Spacing="20">
+
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Titre de l'événement" FontAttributes="Bold" TextColor="Black"/>
+                    <Border Stroke="#D1C4E9" StrokeThickness="1" StrokeShape="RoundRectangle 8">
+                        <Entry Text="{Binding Title}" Placeholder="Ex: Concert de Jazz" TextColor="Black"/>
+                    </Border>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Description" FontAttributes="Bold" TextColor="Black"/>
+                    <Border Stroke="#D1C4E9" StrokeThickness="1" StrokeShape="RoundRectangle 8">
+                        <Editor Text="{Binding Description}" Placeholder="Détails de l'événement..." HeightRequest="100" TextColor="Black"/>
+                    </Border>
+                </VerticalStackLayout>
+
+                <Grid ColumnDefinitions="*, *" ColumnSpacing="12">
+                    <VerticalStackLayout Grid.Column="0" Spacing="8">
+                        <Label Text="Date" FontAttributes="Bold" TextColor="Black"/>
+                        <Border Stroke="#D1C4E9" StrokeThickness="1" StrokeShape="RoundRectangle 8">
+                            <DatePicker Date="{Binding Date}" TextColor="Black"/>
+                        </Border>
+                    </VerticalStackLayout>
+                    <VerticalStackLayout Grid.Column="1" Spacing="8">
+                        <Label Text="Heure" FontAttributes="Bold" TextColor="Black"/>
+                        <Border Stroke="#D1C4E9" StrokeThickness="1" StrokeShape="RoundRectangle 8">
+                            <TimePicker Time="{Binding Time}" TextColor="Black"/>
+                        </Border>
+                    </VerticalStackLayout>
+                </Grid>
+
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Lieu" FontAttributes="Bold" TextColor="Black"/>
+                    <Border Stroke="#D1C4E9" StrokeThickness="1" StrokeShape="RoundRectangle 8">
+                        <Entry Text="{Binding Venue}" Placeholder="Ex: Parc Central" TextColor="Black"/>
+                    </Border>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Adresse" FontAttributes="Bold" TextColor="Black"/>
+                    <Border Stroke="#D1C4E9" StrokeThickness="1" StrokeShape="RoundRectangle 8">
+                        <Entry Text="{Binding Address}" Placeholder="Ex: 123 Rue de la Paix" TextColor="Black"/>
+                    </Border>
+                </VerticalStackLayout>
+
+                <Grid ColumnDefinitions="*, *" ColumnSpacing="12">
+                    <VerticalStackLayout Grid.Column="0" Spacing="8">
+                        <Label Text="Prix ($)" FontAttributes="Bold" TextColor="Black"/>
+                        <Border Stroke="#D1C4E9" StrokeThickness="1" StrokeShape="RoundRectangle 8">
+                            <Entry Text="{Binding Price}" Keyboard="Numeric" Placeholder="0.00" TextColor="Black"/>
+                        </Border>
+                    </VerticalStackLayout>
+                    <VerticalStackLayout Grid.Column="1" Spacing="8">
+                        <Label Text="Catégorie" FontAttributes="Bold" TextColor="Black"/>
+                        <Border Stroke="#D1C4E9" StrokeThickness="1" StrokeShape="RoundRectangle 8">
+                            <Picker ItemsSource="{Binding Categories}" SelectedItem="{Binding Category}" TextColor="Black"/>
+                        </Border>
+                    </VerticalStackLayout>
+                </Grid>
+
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Image URL (Optionnel)" FontAttributes="Bold" TextColor="Black"/>
+                    <Border Stroke="#D1C4E9" StrokeThickness="1" StrokeShape="RoundRectangle 8">
+                        <Entry Text="{Binding ImageSource}" Placeholder="https://..." TextColor="Black"/>
+                    </Border>
+                </VerticalStackLayout>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Submit Button -->
+        <Button Grid.Row="2"
+                Text="Enregistrer les modifications"
+                Command="{Binding SaveCommand}"
+                BackgroundColor="Black"
+                TextColor="White"
+                FontAttributes="Bold"
+                CornerRadius="25"
+                HeightRequest="50"
+                Margin="0,20,0,0"/>
+
+    </Grid>
+</ContentPage>
