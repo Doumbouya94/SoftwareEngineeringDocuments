@@ -25,13 +25,36 @@
         <ScrollView Grid.Row="1">
             <VerticalStackLayout Spacing="24">
                 
-                <!-- City Filter -->
+                <!-- Date Filter -->
                 <VerticalStackLayout Spacing="8">
-                    <Label Text="Ville" FontSize="16" FontAttributes="Bold" TextColor="Black"/>
+                    <Label Text="Quand" FontSize="16" FontAttributes="Bold" TextColor="Black"/>
                     <Border Stroke="#D1C4E9" StrokeThickness="1" StrokeShape="RoundRectangle 8" Padding="12,4">
-                        <Picker ItemsSource="{Binding Cities}" SelectedItem="{Binding SelectedCity}" TextColor="Black"/>
+                        <Picker ItemsSource="{Binding DateFilters}" SelectedItem="{Binding SelectedDateFilter}" TextColor="Black"/>
                     </Border>
                 </VerticalStackLayout>
+
+                <!-- City Filter -->
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Où (Ville)" FontSize="16" FontAttributes="Bold" TextColor="Black"/>
+                    <Border Stroke="#D1C4E9" StrokeThickness="1" StrokeShape="RoundRectangle 8" Padding="12,4">
+                        <Picker ItemsSource="{Binding Cities}" SelectedItem="{Binding SelectedCity}" Title="Toutes les villes" TextColor="Black"/>
+                    </Border>
+                </VerticalStackLayout>
+
+                <!-- Free Only Filter -->
+                <Grid ColumnDefinitions="*, Auto" VerticalOptions="Center" Margin="0,4">
+                    <VerticalStackLayout Grid.Column="0" Spacing="2" VerticalOptions="Center">
+                        <Label Text="Gratuit uniquement" FontSize="16" FontAttributes="Bold" TextColor="Black"/>
+                        <Label Text="Afficher seulement les événements sans frais" FontSize="12" TextColor="#666666"/>
+                    </VerticalStackLayout>
+                    <Switch Grid.Column="1" 
+                            IsToggled="{Binding IsFreeOnly}" 
+                            OnColor="#6200EE"
+                            ThumbColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray200}}"
+                            VerticalOptions="Center"
+                            HorizontalOptions="End"
+                            Scale="1.1"/>
+                </Grid>
 
                 <!-- Price Filter -->
                 <VerticalStackLayout Spacing="8">
@@ -39,13 +62,7 @@
                         <Label Grid.Column="0" Text="Budget maximum" FontSize="16" FontAttributes="Bold" TextColor="Black"/>
                         <Label Grid.Column="1" Text="{Binding FormattedMaxPrice}" TextColor="#6200EE" FontAttributes="Bold"/>
                     </Grid>
-                    <Slider Minimum="0" Maximum="100" Value="{Binding MaxPrice}" MinimumTrackColor="#6200EE" MaximumTrackColor="#D1C4E9" ThumbColor="#6200EE"/>
-                </VerticalStackLayout>
-
-                <!-- Category Filter -->
-                <VerticalStackLayout Spacing="8">
-                    <Label Text="Catégorie" FontSize="16" FontAttributes="Bold" TextColor="Black"/>
-                    <Label Text="Plus de filtres bientôt disponible..." FontSize="14" TextColor="#666666" FontAttributes="Italic"/>
+                    <Slider Minimum="0" Maximum="100" Value="{Binding MaxPrice}" MinimumTrackColor="#6200EE" MaximumTrackColor="#D1C4E9" ThumbColor="#6200EE" IsEnabled="{Binding IsFreeOnly, Converter={StaticResource InverseBoolConverter}}"/>
                 </VerticalStackLayout>
 
             </VerticalStackLayout>

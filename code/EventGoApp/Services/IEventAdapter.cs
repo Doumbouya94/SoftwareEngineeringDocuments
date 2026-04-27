@@ -19,8 +19,8 @@ public interface IEventAdapter
     /// <summary>Retourne les événements d'une catégorie donnée.</summary>
     Task<IReadOnlyList<Event>> GetByCategoryAsync(EventCategory category);
 
-    /// <summary>Retourne les événements filtrés par catégorie, ville et prix maximum.</summary>
-    Task<IReadOnlyList<Event>> GetFilteredAsync(EventCategory? category, string? city, decimal? maxPrice);
+    /// <summary>Retourne les événements filtrés par catégorie, ville, prix et date.</summary>
+    Task<IReadOnlyList<Event>> GetFilteredAsync(EventCategory? category, string? city, decimal? maxPrice, string? dateFilter, bool isFreeOnly);
 
     /// <summary>Récupère un événement spécifique par son Id.</summary>
     Task<Event?> GetByIdAsync(Guid id);

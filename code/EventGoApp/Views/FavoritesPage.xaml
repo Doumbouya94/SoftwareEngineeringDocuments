@@ -40,6 +40,8 @@
         <CollectionView Grid.Row="1"
                         ItemsSource="{Binding Favorites}"
                         IsVisible="{Binding IsEmpty, Converter={StaticResource InverseBoolConverter}}"
+                        SelectionMode="Single"
+                        SelectionChanged="OnEventSelected"
                         Margin="0,0,0,0">
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout Orientation="Vertical" ItemSpacing="16"/>
@@ -52,44 +54,60 @@
                                 Stroke="Black"
                                 StrokeThickness="1"
                                 Padding="12">
-                            <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto,Auto" RowSpacing="4">
+                            <Grid ColumnDefinitions="70,*,Auto" ColumnSpacing="12">
 
-                                <!-- Titre -->
-                                <Label Grid.Row="0" Grid.Column="0"
-                                       Text="{Binding Title}"
-                                       FontSize="16"
-                                       FontAttributes="Bold"
-                                       TextColor="Black"
-                                       LineBreakMode="TailTruncation"/>
+                                <!-- Image Thumbnail -->
+                                <Border Grid.Column="0"
+                                        StrokeShape="RoundRectangle 8"
+                                        StrokeThickness="0"
+                                        BackgroundColor="{Binding ImagePlaceholderColor}"
+                                        WidthRequest="70"
+                                        HeightRequest="70"
+                                        VerticalOptions="Center">
+                                    <Image Source="{Binding ImageSource}" 
+                                           Aspect="AspectFill"/>
+                                </Border>
+
+                                <!-- Text Informations -->
+                                <Grid Grid.Column="1" RowDefinitions="Auto,Auto,Auto" RowSpacing="4" VerticalOptions="Center">
+                                    <Label Grid.Row="0"
+                                           Text="{Binding Title}"
+                                           FontSize="16"
+                                           FontAttributes="Bold"
+                                           TextColor="Black"
+                                           LineBreakMode="TailTruncation"/>
+
+                                    <Label Grid.Row="1"
+                                           Text="{Binding Date, StringFormat='{0:ddd d MMM yyyy · HH:mm}'}"
+                                           FontSize="13"
+                                           TextColor="Gray"/>
+
+                                    <Grid Grid.Row="2" ColumnDefinitions="*,Auto" Margin="0,2,0,0">
+                                        <Label Grid.Column="0"
+                                               Text="{Binding City}"
+                                               FontSize="13"
+                                               TextColor="Black"
+                                               LineBreakMode="TailTruncation"/>
+                                        <Label Grid.Column="1"
+                                               Text="{Binding Price, StringFormat='{0:0.##} $'}"
+                                               FontSize="14"
+                                               FontAttributes="Bold"
+                                               TextColor="Black"/>
+                                    </Grid>
+                                </Grid>
 
                                 <!-- Bouton retirer -->
-                                <Button Grid.Row="0" Grid.Column="1"
+                                <Button Grid.Column="2"
                                         Text="❤️"
                                         FontSize="20"
                                         BackgroundColor="Transparent"
                                         TextColor="Red"
+                                        VerticalOptions="Start"
+                                        Padding="0"
+                                        HeightRequest="36"
+                                        WidthRequest="36"
                                         Clicked="OnRemoveFavoriteClicked"
                                         CommandParameter="{Binding .}"/>
-
-                                <!-- Date -->
-                                <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
-                                       Text="{Binding Date, StringFormat='{0:ddd d MMM yyyy · HH:mm}'}"
-                                       FontSize="13"
-                                       TextColor="Gray"/>
-
-                                <!-- Ville et Prix -->
-                                <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
-                                      ColumnDefinitions="*,Auto">
-                                    <Label Grid.Column="0"
-                                           Text="{Binding City}"
-                                           FontSize="13"
-                                           TextColor="Black"/>
-                                    <Label Grid.Column="1"
-                                           Text="{Binding Price, StringFormat='{0:0.##} $'}"
-                                           FontSize="14"
-                                           FontAttributes="Bold"
-                                           TextColor="Black"/>
-                                </Grid>
                             </Grid>
                         </Border>
                     </Grid>
@@ -104,7 +122,7 @@
                 TextColor="White"
                 Margin="16,8,16,16"
                 CornerRadius="12"
-                IsVisible="{Binding CanUndo}"
+                IsEnabled="{Binding CanUndo}"
                 Clicked="OnUndoClicked"/>
 
         <!-- Séparateur -->

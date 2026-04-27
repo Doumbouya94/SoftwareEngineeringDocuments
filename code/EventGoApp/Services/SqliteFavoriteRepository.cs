@@ -6,7 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 using EventGoApp.Models;
 using EventGoApp.Services;
-using SQLite;
 
 namespace EventGoApp.Services;
 

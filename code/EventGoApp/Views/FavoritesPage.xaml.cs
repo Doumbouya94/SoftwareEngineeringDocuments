@@ -32,12 +32,25 @@ public partial class FavoritesPage : ContentPage
     private async void OnRemoveFavoriteClicked(object sender, EventArgs e)
     {
         if (sender is Button btn && btn.CommandParameter is Event @event)
+        {
             await _viewModel.RemoveFavoriteAsync(@event);
+        }
     }
 
     /// <summary>Annule le dernier geste.</summary>
     private async void OnUndoClicked(object sender, EventArgs e)
     {
         await _viewModel.UndoAsync();
+    }
+
+    /// <summary>Affiche les détails de l'événement sélectionné.</summary>
+    private async void OnEventSelected(object sender, SelectionChangedEventArgs e)
+    {
+        if (e.CurrentSelection.FirstOrDefault() is Event selectedEvent)
+        {
+            ((CollectionView)sender).SelectedItem = null; // Désélectionner l'item
+
+            await Shell.Current.GoToAsync($"eventdetails?id={selectedEvent.Id}");
+        }
     }
 }

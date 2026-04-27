@@ -108,28 +108,23 @@ public partial class HomeViewModel : INotifyPropertyChanged
 
         IReadOnlyList<Event> events;
 
-        // Si des filtres ville/prix sont actifs, on utilise GetFilteredAsync
-        if (_filterState.HasActiveFilters)
+        // Si des filtres actifs existent dans FilterStateService ou qu'une catégorie est sélectionnée
+        if (_filterState.HasActiveFilters || _activeFilter != "Tous")
         {
             var category = _activeFilter == "Tous"
-                ? _filterState.SelectedCategory
+                ? null
                 : FilterLabelToCategory(_activeFilter);
 
             events = await _adapter.GetFilteredAsync(
                 category,
                 _filterState.SelectedCity,
-                _filterState.MaxPrice);
-        }
-        else if (_activeFilter == "Tous")
-        {
-            events = await _adapter.GetAllAsync();
+                _filterState.MaxPrice,
+                _filterState.SelectedDateFilter,
+                _filterState.IsFreeOnly);
         }
         else
         {
-            var category = FilterLabelToCategory(_activeFilter);
-            events = category.HasValue
-                ? await _adapter.GetByCategoryAsync(category.Value)
-                : await _adapter.GetAllAsync();
+            events = await _adapter.GetAllAsync();
         }
 
         Events.Clear();

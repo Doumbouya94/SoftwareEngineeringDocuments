@@ -51,15 +51,10 @@ public class SqliteEventAdapter : IEventAdapter
     }
 
     /// <summary>
-    /// Récupère les événements filtrés par catégorie, ville et/ou prix maximum.
-    /// Les filtres sont optionnels (nullable) et combinables.
-    /// Note : le filtre category est appliqué côté SQLite,
-    /// les filtres city et maxPrice sont appliqués en mémoire
-    /// car SQLite-net ne supporte pas StringComparison ni le cast decimal directement.
-    /// Adapte : GetFilteredAsync(...) → SQLite + filtres LINQ en mémoire
+    /// Récupère les événements filtrés par catégorie, ville, prix maximum, date et gratuité.
     /// </summary>
     public async Task<IReadOnlyList<Event>> GetFilteredAsync(
-        EventCategory? category, string? city, decimal? maxPrice)
+        EventCategory? category, string? city, decimal? maxPrice, string? dateFilter, bool isFreeOnly)
     {
         // Requête de base sur la table Event
         var query = _db.Table<Event>();
@@ -68,18 +63,46 @@ public class SqliteEventAdapter : IEventAdapter
         if (category.HasValue)
             query = query.Where(e => e.Category == category.Value);
 
-        // Chargement en mémoire pour les filtres suivants
+        // Chargement en mémoire pour les filtres complexes
         var events = await query.ToListAsync();
         IEnumerable<Event> result = events;
 
-        // Filtre par ville appliqué en mémoire
+        // Filtre par ville
         if (!string.IsNullOrEmpty(city))
             result = result.Where(e =>
                 e.City.Equals(city, StringComparison.OrdinalIgnoreCase));
 
-        // Filtre par prix maximum appliqué en mémoire
+        // Filtre par prix maximum
         if (maxPrice.HasValue)
             result = result.Where(e => (decimal)e.Price <= maxPrice.Value);
+
+        // Filtre Gratuit uniquement
+        if (isFreeOnly)
+            result = result.Where(e => e.Price == 0);
+
+        // Filtre par date
+        if (!string.IsNullOrEmpty(dateFilter) && dateFilter != "Toutes les dates")
+        {
+            var today = DateTime.Today;
+            result = dateFilter switch
+            {
+                "Aujourd'hui" => result.Where(e => e.Date.Date == today),
+                "Demain" => result.Where(e => e.Date.Date == today.AddDays(1)),
+                "Ce week-end" => result.Where(e => {
+                    int daysToSaturday = ((int)DayOfWeek.Saturday - (int)today.DayOfWeek + 7) % 7;
+                    var saturday = today.AddDays(daysToSaturday);
+                    var sunday = saturday.AddDays(1);
+                    return e.Date.Date == saturday || e.Date.Date == sunday;
+                }),
+                "Cette semaine" => result.Where(e => {
+                    int daysToSunday = ((int)DayOfWeek.Sunday - (int)today.DayOfWeek + 7) % 7;
+                    var nextSunday = today.AddDays(daysToSunday);
+                    return e.Date.Date >= today && e.Date.Date <= nextSunday;
+                }),
+                "Ce mois-ci" => result.Where(e => e.Date.Month == today.Month && e.Date.Year == today.Year),
+                _ => result
+            };
+        }
 
         return result.OrderBy(e => e.Date).ToList();
     }

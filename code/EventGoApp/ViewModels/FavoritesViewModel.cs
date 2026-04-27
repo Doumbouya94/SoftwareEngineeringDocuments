@@ -58,6 +58,7 @@ public class FavoritesViewModel : INotifyPropertyChanged
             Favorites.Add(@event);
 
         OnPropertyChanged(nameof(IsEmpty));
+        OnPropertyChanged(nameof(CanUndo));
     }
 
     /// <summary>
@@ -71,6 +72,7 @@ public class FavoritesViewModel : INotifyPropertyChanged
 
         Favorites.Remove(@event);
         OnPropertyChanged(nameof(IsEmpty));
+        OnPropertyChanged(nameof(CanUndo));
     }
 
     /// <summary>
@@ -80,6 +82,7 @@ public class FavoritesViewModel : INotifyPropertyChanged
     {
         await _invoker.UndoLastAsync();
         await LoadFavoritesAsync();
+        OnPropertyChanged(nameof(CanUndo));
     }
 
     /// <summary>Indique si une annulation est possible.</summary>

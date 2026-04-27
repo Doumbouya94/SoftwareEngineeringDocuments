@@ -18,7 +18,8 @@ public class FilterViewModel : INotifyPropertyChanged
     private readonly FilterStateService _filterState;
     private string? _selectedCity;
     private double _maxPrice = 100;
-    private EventCategory? _selectedCategory;
+    private string? _selectedDateFilter = "Toutes les dates";
+    private bool _isFreeOnly;
 
     public FilterViewModel(FilterStateService filterState)
     {
@@ -27,14 +28,16 @@ public class FilterViewModel : INotifyPropertyChanged
         // Charger les filtres actifs existants
         _selectedCity = _filterState.SelectedCity;
         _maxPrice = (double?)_filterState.MaxPrice ?? 100;
-        _selectedCategory = _filterState.SelectedCategory;
+        _selectedDateFilter = _filterState.SelectedDateFilter ?? "Toutes les dates";
+        _isFreeOnly = _filterState.IsFreeOnly;
 
         ApplyCommand = new Command(async () =>
         {
             // Sauvegarder les filtres dans le service partagé
             _filterState.SelectedCity = _selectedCity;
             _filterState.MaxPrice = _maxPrice >= 100 ? null : (decimal?)_maxPrice;
-            _filterState.SelectedCategory = _selectedCategory;
+            _filterState.SelectedDateFilter = _selectedDateFilter;
+            _filterState.IsFreeOnly = _isFreeOnly;
 
             await Shell.Current.GoToAsync("..");
         });
@@ -46,7 +49,8 @@ public class FilterViewModel : INotifyPropertyChanged
         {
             SelectedCity = null;
             MaxPrice = 100;
-            SelectedCategory = null;
+            SelectedDateFilter = "Toutes les dates";
+            IsFreeOnly = false;
             _filterState.Reset();
         });
     }
@@ -54,6 +58,11 @@ public class FilterViewModel : INotifyPropertyChanged
     public List<string> Cities { get; } = new()
     {
         "Montréal", "Québec", "Laval", "Gatineau", "Sherbrooke", "Chambly", "Trois-Rivières"
+    };
+
+    public List<string> DateFilters { get; } = new()
+    {
+        "Toutes les dates", "Aujourd'hui", "Demain", "Ce week-end", "Cette semaine", "Ce mois-ci"
     };
 
     public string? SelectedCity
@@ -75,10 +84,16 @@ public class FilterViewModel : INotifyPropertyChanged
 
     public string FormattedMaxPrice => _maxPrice >= 100 ? "Tous les prix" : $"{_maxPrice:0} $ et moins";
 
-    public EventCategory? SelectedCategory
+    public string? SelectedDateFilter
     {
-        get => _selectedCategory;
-        set { _selectedCategory = value; OnPropertyChanged(); }
+        get => _selectedDateFilter;
+        set { _selectedDateFilter = value; OnPropertyChanged(); }
+    }
+
+    public bool IsFreeOnly
+    {
+        get => _isFreeOnly;
+        set { _isFreeOnly = value; OnPropertyChanged(); }
     }
 
     public ICommand ApplyCommand { get; }

@@ -69,7 +69,11 @@ public partial class EventDetailViewModel : INotifyPropertyChanged
         get => _isFavorite;
         set
         {
-            if (_isFavorite == value) return;
+            if (_isFavorite == value)
+            {
+                return;
+            }
+
             _isFavorite = value;
             OnPropertyChanged();
             OnPropertyChanged(nameof(FavoriteLabel));

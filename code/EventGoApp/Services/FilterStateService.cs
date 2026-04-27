@@ -22,18 +22,22 @@ public class FilterStateService
     /// <summary>Prix maximum sélectionné. Null = tous les prix.</summary>
     public decimal? MaxPrice { get; set; }
 
-    /// <summary>Catégorie sélectionnée. Null = toutes les catégories.</summary>
-    public EventCategory? SelectedCategory { get; set; }
+    /// <summary>Filtre de date sélectionné (ex: Aujourd'hui, Ce week-end).</summary>
+    public string? SelectedDateFilter { get; set; }
+
+    /// <summary>Indique si on n'affiche que les événements gratuits.</summary>
+    public bool IsFreeOnly { get; set; }
 
     /// <summary>Indique si des filtres sont actifs.</summary>
     public bool HasActiveFilters =>
-        SelectedCity != null || MaxPrice != null || SelectedCategory != null;
+        SelectedCity != null || MaxPrice != null || SelectedDateFilter != null || IsFreeOnly;
 
     /// <summary>Réinitialise tous les filtres.</summary>
     public void Reset()
     {
         SelectedCity = null;
         MaxPrice = null;
-        SelectedCategory = null;
+        SelectedDateFilter = null;
+        IsFreeOnly = false;
     }
 }
