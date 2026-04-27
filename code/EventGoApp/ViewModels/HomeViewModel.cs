@@ -19,13 +19,15 @@ public partial class HomeViewModel : INotifyPropertyChanged
 {
     private readonly IEventAdapter _adapter;
     private readonly AuthStateService _authState;
+    private readonly FilterStateService _filterState;
     private string _activeFilter = "Tous";
 
     /// <summary>Initialise le vue-modèle avec l'adaptateur d'événements.</summary>
-    public HomeViewModel(IEventAdapter adapter, AuthStateService authState)
+    public HomeViewModel(IEventAdapter adapter, AuthStateService authState, FilterStateService filterState)
     {
         _adapter = adapter;
         _authState = authState;
+        _filterState = filterState;
         LoadFilterPills();
     }
 
@@ -44,17 +46,12 @@ public partial class HomeViewModel : INotifyPropertyChanged
         if (user != null && user.PreferredCategories.Any())
         {
             foreach (var cat in user.PreferredCategories)
-            {
                 FilterPills.Add(CategoryToFilterLabel(cat));
-            }
         }
         else
         {
-            // Fallback to all if no preferences
             foreach (EventCategory cat in Enum.GetValues(typeof(EventCategory)))
-            {
                 FilterPills.Add(CategoryToFilterLabel(cat));
-            }
         }
     }
 
@@ -71,34 +68,26 @@ public partial class HomeViewModel : INotifyPropertyChanged
         _ => cat.ToString()
     };
 
-    /// <summary>
-    /// Filtre actif. Déclenche PropertyChanged lors d'un changement.
-    /// </summary>
+    /// <summary>Filtre actif. Déclenche PropertyChanged lors d'un changement.</summary>
     public string ActiveFilter
     {
         get => _activeFilter;
         set
         {
-            if (_activeFilter == value)
-            {
-                return;
-            }
-
+            if (_activeFilter == value) return;
             _activeFilter = value;
             OnPropertyChanged();
         }
     }
 
     /// <summary>
-    /// Charge les événements depuis l'adaptateur selon le filtre actif,
-    /// puis met à jour la collection Events.
+    /// Charge les événements depuis l'adaptateur selon le filtre actif
+    /// et les filtres de ville/prix du FilterStateService.
     /// </summary>
     public async Task LoadEventsAsync()
     {
-        // Refresh pills in case preferences changed
         LoadFilterPills();
-        
-        // Reset active filter if it's no longer in pills
+
         if (!FilterPills.Contains(_activeFilter))
         {
             _activeFilter = "Tous";
@@ -107,7 +96,19 @@ public partial class HomeViewModel : INotifyPropertyChanged
 
         IReadOnlyList<Event> events;
 
-        if (_activeFilter == "Tous")
+        // Si des filtres ville/prix sont actifs, on utilise GetFilteredAsync
+        if (_filterState.HasActiveFilters)
+        {
+            var category = _activeFilter == "Tous"
+                ? _filterState.SelectedCategory
+                : FilterLabelToCategory(_activeFilter);
+
+            events = await _adapter.GetFilteredAsync(
+                category,
+                _filterState.SelectedCity,
+                _filterState.MaxPrice);
+        }
+        else if (_activeFilter == "Tous")
         {
             events = await _adapter.GetAllAsync();
         }
@@ -121,35 +122,26 @@ public partial class HomeViewModel : INotifyPropertyChanged
 
         Events.Clear();
         foreach (var e in events)
-        {
             Events.Add(new EventViewModel(e));
-        }
     }
 
-    /// <summary>
-    /// Applique un filtre de catégorie et recharge les événements.
-    /// </summary>
-    /// <param name="filterLabel">Étiquette du filtre sélectionné par l'utilisateur.</param>
+    /// <summary>Applique un filtre de catégorie et recharge les événements.</summary>
     public async Task ApplyFilterAsync(string filterLabel)
     {
         ActiveFilter = filterLabel;
         await LoadEventsAsync();
     }
 
-    /// <summary>
-    /// Convertit une étiquette de filtre en valeur EventCategory correspondante.
-    /// Retourne null si l'étiquette ne correspond à aucune catégorie.
-    /// </summary>
     private static EventCategory? FilterLabelToCategory(string label) => label switch
     {
-        "Concerts"       => EventCategory.Concerts,
-        "Festivals"      => EventCategory.Festivals,
-        "Sports"         => EventCategory.Sports,
-        "Soirées"        => EventCategory.Parties,
-        "Gastronomie"    => EventCategory.Food,
+        "Concerts" => EventCategory.Concerts,
+        "Festivals" => EventCategory.Festivals,
+        "Sports" => EventCategory.Sports,
+        "Soirées" => EventCategory.Parties,
+        "Gastronomie" => EventCategory.Food,
         "Arts & Culture" => EventCategory.Arts,
-        "Plein air"      => EventCategory.Outdoor,
-        "Réseautage"     => EventCategory.Networking,
+        "Plein air" => EventCategory.Outdoor,
+        "Réseautage" => EventCategory.Networking,
         _ => null
     };
 

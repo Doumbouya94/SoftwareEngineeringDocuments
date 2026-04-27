@@ -8,7 +8,7 @@ namespace EventGoApp.Services;
 /// </summary>
 /// <remarks>
 /// Auteur : Aboubacar Sidiki Doumbouya
-/// Patron de conception : Façade —­ cache la complexité de l'initialisation SQLite derrière deux méthodes simples.
+/// Patron de conception : Façade — cache la complexité de l'initialisation SQLite derrière deux méthodes simples.
 /// UserStories : US1.1 (inscription), US1.2 (connexion), US2.1 (affichage des événements).
 /// Épic : Authentification et gestion des utilisateurs / Découverte et recherche d'événements.
 /// </remarks>
@@ -23,15 +23,14 @@ public class SqliteService
     public async Task InitializeAsync()
     {
         if (_db is not null)
-        {
             return;
-        }
 
         string dbPath = Path.Combine(FileSystem.AppDataDirectory, "eventgo.db");
         _db = new SQLiteAsyncConnection(dbPath);
 
         await _db.CreateTableAsync<User>();
         await _db.CreateTableAsync<Event>();
+        await _db.CreateTableAsync<Favorite>();
     }
 
     /// <summary>
@@ -45,7 +44,6 @@ public class SqliteService
             throw new InvalidOperationException(
                 "Base de données non initialisée. Appelez InitializeAsync() avant d'utiliser les services.");
         }
-
         return _db;
     }
 
@@ -55,13 +53,14 @@ public class SqliteService
     public async Task DropAndRecreateAsync()
     {
         if (_db is null)
-        {
             return;
-        }
 
         await _db.DropTableAsync<User>();
         await _db.DropTableAsync<Event>();
+        await _db.DropTableAsync<Favorite>();
+
         await _db.CreateTableAsync<User>();
         await _db.CreateTableAsync<Event>();
+        await _db.CreateTableAsync<Favorite>();
     }
 }

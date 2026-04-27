@@ -17,6 +17,7 @@ public partial class EventViewModel : INotifyPropertyChanged
 {
     private readonly Event _event;
     private bool _isSelected;
+    private bool _isFavorite;
 
     /// <summary>Initialise le vue-modèle avec l'événement source.</summary>
     public EventViewModel(Event @event)
@@ -64,13 +65,13 @@ public partial class EventViewModel : INotifyPropertyChanged
     /// <summary>Nom de la catégorie en français.</summary>
     public string CategoryLabel => _event.Category switch
     {
-        EventCategory.Concerts   => "Concerts",
-        EventCategory.Festivals  => "Festivals",
-        EventCategory.Sports     => "Sports",
-        EventCategory.Parties    => "Soirées",
-        EventCategory.Food       => "Gastronomie",
-        EventCategory.Arts       => "Arts & Culture",
-        EventCategory.Outdoor    => "Plein air",
+        EventCategory.Concerts => "Concerts",
+        EventCategory.Festivals => "Festivals",
+        EventCategory.Sports => "Sports",
+        EventCategory.Parties => "Soirées",
+        EventCategory.Food => "Gastronomie",
+        EventCategory.Arts => "Arts & Culture",
+        EventCategory.Outdoor => "Plein air",
         EventCategory.Networking => "Réseautage",
         _ => _event.Category.ToString()
     };
@@ -78,13 +79,13 @@ public partial class EventViewModel : INotifyPropertyChanged
     /// <summary>Couleur associée à la catégorie de l'événement.</summary>
     public Color CategoryColor => _event.Category switch
     {
-        EventCategory.Concerts   => Color.FromArgb("#1A237E"),
-        EventCategory.Festivals  => Color.FromArgb("#4A148C"),
-        EventCategory.Sports     => Color.FromArgb("#B71C1C"),
-        EventCategory.Parties    => Color.FromArgb("#880E4F"),
-        EventCategory.Food       => Color.FromArgb("#F57F17"),
-        EventCategory.Arts       => Color.FromArgb("#006064"),
-        EventCategory.Outdoor    => Color.FromArgb("#1B5E20"),
+        EventCategory.Concerts => Color.FromArgb("#1A237E"),
+        EventCategory.Festivals => Color.FromArgb("#4A148C"),
+        EventCategory.Sports => Color.FromArgb("#B71C1C"),
+        EventCategory.Parties => Color.FromArgb("#880E4F"),
+        EventCategory.Food => Color.FromArgb("#F57F17"),
+        EventCategory.Arts => Color.FromArgb("#006064"),
+        EventCategory.Outdoor => Color.FromArgb("#1B5E20"),
         EventCategory.Networking => Color.FromArgb("#37474F"),
         _ => Color.FromArgb("#444444")
     };
@@ -99,14 +100,31 @@ public partial class EventViewModel : INotifyPropertyChanged
         set
         {
             if (_isSelected == value)
-            {
                 return;
-            }
-
             _isSelected = value;
             OnPropertyChanged();
         }
     }
+
+    /// <summary>Indique si l'événement est dans les favoris.</summary>
+    public bool IsFavorite
+    {
+        get => _isFavorite;
+        set
+        {
+            if (_isFavorite == value)
+                return;
+            _isFavorite = value;
+            OnPropertyChanged();
+            OnPropertyChanged(nameof(FavoriteIcon));
+        }
+    }
+
+    /// <summary>Icône du bouton favori selon l'état.</summary>
+    public string FavoriteIcon => _isFavorite ? "❤️" : "🤍";
+
+    /// <summary>Retourne l'objet Event source.</summary>
+    public Event Source => _event;
 
     /// <inheritdoc/>
     public event PropertyChangedEventHandler? PropertyChanged;

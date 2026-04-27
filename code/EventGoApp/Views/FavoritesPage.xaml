@@ -1,15 +1,115 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:EventGoApp.ViewModels"
+             xmlns:models="clr-namespace:EventGoApp.Models"
              x:Class="EventGoApp.Views.FavoritesPage"
              Title="Favoris"
              BackgroundColor="White">
-    <Grid>
-        <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="20">
+
+    <Grid RowDefinitions="Auto,*,Auto">
+
+        <!-- Header -->
+        <Grid Grid.Row="0" Padding="20,20,20,12" BackgroundColor="White">
+            <Label Text="Mes Favoris"
+                   FontSize="24"
+                   FontAttributes="Bold"
+                   FontFamily="OswaldBold"
+                   TextColor="Black"/>
+        </Grid>
+
+        <!-- Liste vide -->
+        <VerticalStackLayout Grid.Row="1"
+                             VerticalOptions="Center"
+                             HorizontalOptions="Center"
+                             Spacing="12"
+                             IsVisible="{Binding IsEmpty}">
             <Label Text="❤️" FontSize="60" HorizontalOptions="Center"/>
-            <Label Text="Vos Favoris" FontSize="24" FontAttributes="Bold" HorizontalOptions="Center" TextColor="Black"/>
-            <Label Text="Pas de favoris en ce moment !" HorizontalOptions="Center" TextColor="Gray"/>
+            <Label Text="Aucun favori pour l'instant"
+                   FontSize="18"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   TextColor="Black"/>
+            <Label Text="Appuyez sur ❤️ sur un événement pour l'ajouter"
+                   FontSize="14"
+                   HorizontalOptions="Center"
+                   TextColor="Gray"/>
         </VerticalStackLayout>
-        <BoxView HeightRequest="1" BackgroundColor="Black" VerticalOptions="End"/>
+
+        <!-- Liste des favoris -->
+        <CollectionView Grid.Row="1"
+                        ItemsSource="{Binding Favorites}"
+                        IsVisible="{Binding IsEmpty, Converter={StaticResource InverseBoolConverter}}"
+                        Margin="0,0,0,0">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="16"/>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Event">
+                    <Grid Padding="16,0">
+                        <Border BackgroundColor="White"
+                                StrokeShape="RoundRectangle 12"
+                                Stroke="Black"
+                                StrokeThickness="1"
+                                Padding="12">
+                            <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto,Auto" RowSpacing="4">
+
+                                <!-- Titre -->
+                                <Label Grid.Row="0" Grid.Column="0"
+                                       Text="{Binding Title}"
+                                       FontSize="16"
+                                       FontAttributes="Bold"
+                                       TextColor="Black"
+                                       LineBreakMode="TailTruncation"/>
+
+                                <!-- Bouton retirer -->
+                                <Button Grid.Row="0" Grid.Column="1"
+                                        Text="❤️"
+                                        FontSize="20"
+                                        BackgroundColor="Transparent"
+                                        TextColor="Red"
+                                        Clicked="OnRemoveFavoriteClicked"
+                                        CommandParameter="{Binding .}"/>
+
+                                <!-- Date -->
+                                <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                                       Text="{Binding Date, StringFormat='{0:ddd d MMM yyyy · HH:mm}'}"
+                                       FontSize="13"
+                                       TextColor="Gray"/>
+
+                                <!-- Ville et Prix -->
+                                <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+                                      ColumnDefinitions="*,Auto">
+                                    <Label Grid.Column="0"
+                                           Text="{Binding City}"
+                                           FontSize="13"
+                                           TextColor="Black"/>
+                                    <Label Grid.Column="1"
+                                           Text="{Binding Price, StringFormat='{0:0.##} $'}"
+                                           FontSize="14"
+                                           FontAttributes="Bold"
+                                           TextColor="Black"/>
+                                </Grid>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <!-- Bouton Undo -->
+        <Button Grid.Row="2"
+                Text="↩ Annuler le dernier geste"
+                BackgroundColor="Black"
+                TextColor="White"
+                Margin="16,8,16,16"
+                CornerRadius="12"
+                IsVisible="{Binding CanUndo}"
+                Clicked="OnUndoClicked"/>
+
+        <!-- Séparateur -->
+        <BoxView Grid.Row="2" HeightRequest="1" BackgroundColor="Black" VerticalOptions="Start"/>
+
     </Grid>
+
 </ContentPage>

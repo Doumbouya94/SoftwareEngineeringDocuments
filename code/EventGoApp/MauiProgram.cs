@@ -21,9 +21,10 @@ public static class MauiProgram
                 fonts.AddFont("Inter_18pt-Medium.ttf", "InterMedium");
                 fonts.AddFont("Inter_18pt-SemiBold.ttf", "InterSemiBold");
             });
+
         builder.Services.AddSingleton<App>();
 
-        // SQLite 
+        // SQLite
         builder.Services.AddSingleton<SqliteService>();
         builder.Services.AddSingleton<PasswordService>();
 
@@ -32,8 +33,14 @@ public static class MauiProgram
         builder.Services.AddSingleton<IAuthState>(sp => sp.GetRequiredService<AuthStateService>());
         builder.Services.AddSingleton<LocalAuthService>();
         builder.Services.AddSingleton<OnboardingStateService>();
+        builder.Services.AddSingleton<FilterStateService>();
         builder.Services.AddSingleton<IEventAdapter, SqliteEventAdapter>();
         builder.Services.AddSingleton<IEventSeeder, EventSeeder>();
+
+        // Favoris (Pattern Commande)
+        builder.Services.AddSingleton<IFavoriteRepository, SqliteFavoriteRepository>();
+        builder.Services.AddSingleton<FavoriteCommandInvoker>();
+        builder.Services.AddSingleton<FavoritesViewModel>();
 
         // ViewModels
         builder.Services.AddTransient<HomeViewModel>();

@@ -13,13 +13,16 @@ namespace EventGoApp.ViewModels;
 public partial class EventDetailViewModel : INotifyPropertyChanged
 {
     private readonly IEventAdapter _adapter;
+    private readonly FavoritesViewModel _favoritesViewModel;
     private Event? _event;
     private string _eventId = string.Empty;
     private bool _isBusy;
+    private bool _isFavorite;
 
-    public EventDetailViewModel(IEventAdapter adapter)
+    public EventDetailViewModel(IEventAdapter adapter, FavoritesViewModel favoritesViewModel)
     {
         _adapter = adapter;
+        _favoritesViewModel = favoritesViewModel;
     }
 
     /// <summary>Identifiant de l'événement passé en paramètre de navigation.</summary>
@@ -30,9 +33,7 @@ public partial class EventDetailViewModel : INotifyPropertyChanged
         {
             _eventId = value;
             if (Guid.TryParse(value, out var guid))
-            {
                 LoadEventAsync(guid);
-            }
         }
     }
 
@@ -58,28 +59,60 @@ public partial class EventDetailViewModel : INotifyPropertyChanged
     public bool IsBusy
     {
         get => _isBusy;
+        set { _isBusy = value; OnPropertyChanged(); }
+    }
+
+    /// <summary>Indique si l'événement est dans les favoris.</summary>
+    public bool IsFavorite
+    {
+        get => _isFavorite;
         set
         {
-            _isBusy = value;
+            if (_isFavorite == value) return;
+            _isFavorite = value;
             OnPropertyChanged();
+            OnPropertyChanged(nameof(FavoriteLabel));
         }
     }
+
+    /// <summary>Texte du bouton favori selon l'état.</summary>
+    public string FavoriteLabel => _isFavorite ? "Retirer des favoris" : "Ajouter aux favoris";
 
     // Properties for UI binding
     public string Title => Event?.Title ?? "Chargement...";
     public string Description => Event?.Description ?? string.Empty;
-    public string FormattedDate => Event?.Date.ToString("dddd, d MMMM yyyy", new System.Globalization.CultureInfo("fr-CA")) ?? string.Empty;
-    public string FormattedTime => Event?.Date.ToString("HH:mm", new System.Globalization.CultureInfo("fr-CA")) ?? string.Empty;
+    public string FormattedDate => Event?.Date.ToString("dddd, d MMMM yyyy",
+        new System.Globalization.CultureInfo("fr-CA")) ?? string.Empty;
+    public string FormattedTime => Event?.Date.ToString("HH:mm",
+        new System.Globalization.CultureInfo("fr-CA")) ?? string.Empty;
     public string Venue => Event?.Venue ?? string.Empty;
     public string Address => Event?.Address ?? string.Empty;
     public string ImageSource => Event?.ImageSource ?? string.Empty;
     public string FormattedPrice => Event?.Price == 0 ? "Gratuit" : $"{Event?.Price:0.##} $";
     public string CategoryLabel => Event?.Category.ToString() ?? string.Empty;
 
+    /// <summary>Bascule l'état favori de l'événement.</summary>
+    public async Task ToggleFavoriteAsync()
+    {
+        if (_event is null) return;
+
+        if (_isFavorite)
+            await _favoritesViewModel.RemoveFavoriteAsync(_event);
+        else
+            await _favoritesViewModel.AddFavoriteAsync(_event);
+
+        IsFavorite = !_isFavorite;
+    }
+
     private async void LoadEventAsync(Guid id)
     {
         IsBusy = true;
         Event = await _adapter.GetByIdAsync(id);
+
+        // Vérifier si l'événement est déjà dans les favoris
+        if (_event is not null)
+            IsFavorite = _favoritesViewModel.Favorites.Any(f => f.Id == _event.Id);
+
         IsBusy = false;
     }
 

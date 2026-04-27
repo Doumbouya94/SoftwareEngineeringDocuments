@@ -7,12 +7,14 @@ public partial class HomePage : ContentPage
 {
     private readonly HomeViewModel _viewModel;
     private readonly IAuthState _authState;
+    private readonly FavoritesViewModel _favoritesViewModel;
 
-    public HomePage(HomeViewModel viewModel, IAuthState authState)
+    public HomePage(HomeViewModel viewModel, IAuthState authState, FavoritesViewModel favoritesViewModel)
     {
         InitializeComponent();
         _viewModel = viewModel;
         _authState = authState;
+        _favoritesViewModel = favoritesViewModel;
         EventsCollection.ItemsSource = _viewModel.Events;
         BuildFilterPills();
     }
@@ -20,13 +22,27 @@ public partial class HomePage : ContentPage
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-
         SubtitleLabel.Text = _authState.CurrentMode == AuthMode.Guest
             ? "Bienvenue, explorateur 👋 !"
             : $"Bonjour, {_authState.CurrentUser?.Username ?? "vous"} 👋 !";
 
         await _viewModel.LoadEventsAsync();
-        BuildFilterPills(); // Rebuild the manual UI pills
+        await SyncFavoriteIconsAsync();
+        BuildFilterPills();
+    }
+
+    /// <summary>
+    /// Synchronise les icônes ❤️ / 🤍 selon les favoris existants.
+    /// </summary>
+    private async Task SyncFavoriteIconsAsync()
+    {
+        await _favoritesViewModel.LoadFavoritesAsync();
+        var favoriteIds = _favoritesViewModel.Favorites
+            .Select(f => f.Id)
+            .ToHashSet();
+
+        foreach (var ev in _viewModel.Events)
+            ev.IsFavorite = favoriteIds.Contains(ev.Id);
     }
 
     private void BuildFilterPills()
@@ -71,6 +87,26 @@ public partial class HomePage : ContentPage
         }
     }
 
+    /// <summary>
+    /// Gère le clic sur le bouton ❤️ pour ajouter ou retirer un favori.
+    /// </summary>
+    private async void OnFavoriteClicked(object sender, EventArgs e)
+    {
+        if (sender is Button btn && btn.CommandParameter is EventViewModel eventVm)
+        {
+            if (eventVm.IsFavorite)
+            {
+                await _favoritesViewModel.RemoveFavoriteAsync(eventVm.Source);
+                eventVm.IsFavorite = false;
+            }
+            else
+            {
+                await _favoritesViewModel.AddFavoriteAsync(eventVm.Source);
+                eventVm.IsFavorite = true;
+            }
+        }
+    }
+
     private async void OnLogoutClicked(object sender, EventArgs e)
     {
         bool answer = await DisplayAlert("Déconnexion", "Êtes-vous sûr de vouloir vous déconnecter ?", "Oui", "Non");
@@ -95,10 +131,7 @@ public partial class HomePage : ContentPage
     {
         if (e.CurrentSelection.FirstOrDefault() is EventViewModel selectedEvent)
         {
-            // Désélectionner l'item pour permettre de cliquer à nouveau
             ((CollectionView)sender).SelectedItem = null;
-
-            // Naviguer vers la page de détails avec l'Id
             await Shell.Current.GoToAsync($"eventdetails?id={selectedEvent.Id}");
         }
     }
