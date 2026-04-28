@@ -18,12 +18,10 @@ public partial class App : Application
         var window = new Window(new AppShell());
 
 #if WINDOWS || MACCATALYST
+        window.Height = 900;
+        window.Width = 500;
         window.MaximumHeight = 900;
         window.MaximumWidth = 500;
-        window.Height = 800;
-        window.Width = 400;
-        window.MinimumHeight = 600;
-        window.MinimumWidth = 300;
 #endif
 
         return window;

@@ -18,9 +18,15 @@ public partial class EventDetailPage : ContentPage
         await Shell.Current.GoToAsync("..");
     }
 
-    /// <summary>Bascule l'état favori depuis la page de détail.</summary>
+    /// <summary>Bascule l'ï¿½tat favori depuis la page de dï¿½tail.</summary>
     private async void OnFavoriteClicked(object sender, EventArgs e)
     {
         await _viewModel.ToggleFavoriteAsync();
+    }
+
+    private async void OnParticiperClicked(object sender, EventArgs e)
+    {
+        if (_viewModel.Event is null) return;
+        await Shell.Current.GoToAsync($"ticketcheckout?id={_viewModel.Event.Id}");
     }
 }

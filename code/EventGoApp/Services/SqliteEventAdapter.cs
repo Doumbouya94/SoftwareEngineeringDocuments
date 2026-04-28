@@ -61,7 +61,9 @@ public class SqliteEventAdapter : IEventAdapter
 
         // Filtre par catégorie appliqué directement dans SQLite
         if (category.HasValue)
+        {
             query = query.Where(e => e.Category == category.Value);
+        }
 
         // Chargement en mémoire pour les filtres complexes
         var events = await query.ToListAsync();
@@ -69,16 +71,22 @@ public class SqliteEventAdapter : IEventAdapter
 
         // Filtre par ville
         if (!string.IsNullOrEmpty(city))
+        {
             result = result.Where(e =>
                 e.City.Equals(city, StringComparison.OrdinalIgnoreCase));
+        }
 
         // Filtre par prix maximum
         if (maxPrice.HasValue)
+        {
             result = result.Where(e => (decimal)e.Price <= maxPrice.Value);
+        }
 
         // Filtre Gratuit uniquement
         if (isFreeOnly)
+        {
             result = result.Where(e => e.Price == 0);
+        }
 
         // Filtre par date
         if (!string.IsNullOrEmpty(dateFilter) && dateFilter != "Toutes les dates")
@@ -121,7 +129,9 @@ public class SqliteEventAdapter : IEventAdapter
 
         // Si la recherche est vide, retourner tous les événements
         if (string.IsNullOrWhiteSpace(query))
+        {
             return events.OrderBy(e => e.Date).ToList();
+        }
 
         // Recherche insensible à la casse sur titre, description et lieu
         var lower = query.ToLowerInvariant();

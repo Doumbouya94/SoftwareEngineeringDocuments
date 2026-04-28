@@ -31,6 +31,7 @@ public class SqliteService
         await _db.CreateTableAsync<User>();
         await _db.CreateTableAsync<Event>();
         await _db.CreateTableAsync<Favorite>();
+        await _db.CreateTableAsync<Ticket>();
     }
 
     /// <summary>
@@ -58,9 +59,11 @@ public class SqliteService
         await _db.DropTableAsync<User>();
         await _db.DropTableAsync<Event>();
         await _db.DropTableAsync<Favorite>();
+        await _db.DropTableAsync<Ticket>();
 
         await _db.CreateTableAsync<User>();
         await _db.CreateTableAsync<Event>();
         await _db.CreateTableAsync<Favorite>();
+        await _db.CreateTableAsync<Ticket>();
     }
 }

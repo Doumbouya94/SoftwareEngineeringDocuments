@@ -39,6 +39,9 @@ public static class MauiProgram
         builder.Services.AddSingleton<CityStateService>();
 
 
+        // Tickets
+        builder.Services.AddSingleton<ITicketRepository, SqliteTicketRepository>();
+
         // Favoris (Pattern Commande)
         builder.Services.AddSingleton<IFavoriteRepository, SqliteFavoriteRepository>();
         builder.Services.AddSingleton<FavoriteCommandInvoker>();
@@ -53,6 +56,8 @@ public static class MauiProgram
         builder.Services.AddTransient<MyEventsViewModel>();
         builder.Services.AddTransient<EditEventViewModel>();
         builder.Services.AddTransient<CityPickerViewModel>();
+        builder.Services.AddTransient<TicketCheckoutViewModel>();
+        builder.Services.AddSingleton<TicketsViewModel>();
 
         // Pages
         builder.Services.AddTransient<Views.WelcomePage>();
@@ -63,7 +68,8 @@ public static class MauiProgram
         builder.Services.AddTransient<Views.EventDetailPage>();
         builder.Services.AddTransient<Views.FilterPage>();
         builder.Services.AddTransient<Views.FavoritesPage>();
-        builder.Services.AddTransient<Views.TicketsPage>();
+        builder.Services.AddSingleton<Views.TicketsPage>();
+        builder.Services.AddTransient<Views.TicketCheckoutPage>();
         builder.Services.AddTransient<Views.ProfilePage>();
         builder.Services.AddTransient<Views.CreateEventPage>();
         builder.Services.AddTransient<Views.MyEventsPage>();

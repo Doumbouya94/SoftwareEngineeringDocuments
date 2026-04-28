@@ -117,7 +117,7 @@
 
         <!-- Bouton Undo -->
         <Button Grid.Row="2"
-                Text="↩ Annuler le dernier geste"
+                Text="↩ Annuler la dernière action"
                 BackgroundColor="Black"
                 TextColor="White"
                 Margin="16,8,16,16"

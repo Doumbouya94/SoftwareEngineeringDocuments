@@ -218,7 +218,8 @@
                         FontAttributes="Bold"
                         CornerRadius="25"
                         Padding="40,0"
-                        HeightRequest="50"/>
+                        HeightRequest="50"
+                        Clicked="OnParticiperClicked"/>
             </Grid>
         </Border>
 

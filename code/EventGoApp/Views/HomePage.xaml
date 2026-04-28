@@ -157,7 +157,7 @@
                                 StrokeShape="RoundRectangle 12"
                                 Stroke="Black"
                                 StrokeThickness="1"
-                                HeightRequest="280">
+                                HeightRequest="300"> <!--- Hauteur du card -->
                             <!-- Content -->
                             <Grid RowDefinitions="180,*">
                                 <!-- Image or placeholder -->
@@ -237,7 +237,7 @@
                                         <Label Grid.Column="0"
                                                Text="{Binding City}"
                                                FontSize="13"
-                                               TextColor="#666666"/>
+                                               TextColor="Black"/>
                                         <Label Grid.Column="1"
                                                Text="{Binding FormattedPrice}"
                                                FontSize="16"

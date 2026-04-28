@@ -15,5 +15,6 @@ public partial class AppShell : Shell
 		Routing.RegisterRoute("myevents", typeof(Views.MyEventsPage));
 		Routing.RegisterRoute("editevent", typeof(Views.EditEventPage));
         Routing.RegisterRoute("citypicker", typeof(Views.CityPickerPage));
+        Routing.RegisterRoute("ticketcheckout", typeof(Views.TicketCheckoutPage));
     }
 }

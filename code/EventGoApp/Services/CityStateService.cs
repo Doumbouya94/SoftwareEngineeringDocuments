@@ -25,7 +25,11 @@ public class CityStateService : INotifyPropertyChanged
         get => _selectedCity;
         set
         {
-            if (_selectedCity == value) return;
+            if (_selectedCity == value)
+            {
+                return;
+            }
+
             _selectedCity = value;
             OnPropertyChanged();
         }

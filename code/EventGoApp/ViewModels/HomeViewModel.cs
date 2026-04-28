@@ -47,12 +47,16 @@ public partial class HomeViewModel : INotifyPropertyChanged
         if (user != null && user.PreferredCategories.Any())
         {
             foreach (var cat in user.PreferredCategories)
+            {
                 FilterPills.Add(CategoryToFilterLabel(cat));
+            }
         }
         else
         {
             foreach (EventCategory cat in Enum.GetValues(typeof(EventCategory)))
+            {
                 FilterPills.Add(CategoryToFilterLabel(cat));
+            }
         }
     }
 
@@ -75,7 +79,11 @@ public partial class HomeViewModel : INotifyPropertyChanged
         get => _activeFilter;
         set
         {
-            if (_activeFilter == value) return;
+            if (_activeFilter == value)
+            {
+                return;
+            }
+
             _activeFilter = value;
             OnPropertyChanged();
         }
@@ -86,7 +94,11 @@ public partial class HomeViewModel : INotifyPropertyChanged
         get => _searchText;
         set
         {
-            if (_searchText == value) return;
+            if (_searchText == value)
+            {
+                return;
+            }
+
             _searchText = value;
             OnPropertyChanged();
         }
@@ -129,7 +141,9 @@ public partial class HomeViewModel : INotifyPropertyChanged
 
         Events.Clear();
         foreach (var e in events)
+        {
             Events.Add(new EventViewModel(e));
+        }
     }
 
     /// <summary>
@@ -158,7 +172,9 @@ public partial class HomeViewModel : INotifyPropertyChanged
 
         Events.Clear();
         foreach (var e in events)
+        {
             Events.Add(new EventViewModel(e));
+        }
     }
 
     /// <summary>Applique un filtre de catégorie et recharge les événements.</summary>

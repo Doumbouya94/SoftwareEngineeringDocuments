@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:EventGoApp.ViewModels"
+             x:Class="EventGoApp.Views.TicketCheckoutPage"
+             x:DataType="vm:TicketCheckoutViewModel"
+             BackgroundColor="White"
+             Title="Confirmer la commande"
+             Shell.PresentationMode="ModalAnimated">
+
+    <Grid RowDefinitions="*, Auto" Padding="0">
+
+        <ScrollView Grid.Row="0">
+            <VerticalStackLayout Spacing="0">
+
+                <!-- Event image -->
+                <Image Source="{Binding ImageSource}"
+                       HeightRequest="220"
+                       Aspect="AspectFill"
+                       BackgroundColor="#F0E6FF"/>
+
+                <VerticalStackLayout Padding="20" Spacing="20">
+
+                    <!-- Event info -->
+                    <VerticalStackLayout Spacing="4">
+                        <Label Text="{Binding Title}"
+                               FontSize="22"
+                               FontAttributes="Bold"
+                               FontFamily="OswaldBold"
+                               TextColor="Black"/>
+                        <Label Text="{Binding FormattedDate}"
+                               FontSize="14"
+                               TextColor="#666666"/>
+                        <Label Text="{Binding Venue}"
+                               FontSize="14"
+                               TextColor="#666666"/>
+                    </VerticalStackLayout>
+
+                    <BoxView HeightRequest="1" BackgroundColor="#EEEEEE"/>
+
+                    <!-- Quantity selector -->
+                    <VerticalStackLayout Spacing="12">
+                        <Label Text="Nombre de billets"
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               TextColor="Black"/>
+                        <HorizontalStackLayout Spacing="24" VerticalOptions="Center">
+                            <Border BackgroundColor="Black"
+                                    WidthRequest="44" HeightRequest="44"
+                                    StrokeShape="RoundRectangle 22"
+                                    StrokeThickness="0">
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding DecrementCommand}"/>
+                                </Border.GestureRecognizers>
+                                <Label Text="−" TextColor="White" FontSize="24"
+                                       HorizontalOptions="Center" VerticalOptions="Center"/>
+                            </Border>
+
+                            <Label Text="{Binding Quantity}"
+                                   FontSize="26" FontAttributes="Bold"
+                                   TextColor="Black" VerticalOptions="Center"
+                                   MinimumWidthRequest="36"
+                                   HorizontalTextAlignment="Center"
+                                   HorizontalOptions="Center"/>
+
+                            <Border BackgroundColor="Black"
+                                    WidthRequest="44" HeightRequest="44"
+                                    StrokeShape="RoundRectangle 22"
+                                    StrokeThickness="0">
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding IncrementCommand}"/>
+                                </Border.GestureRecognizers>
+                                <Label Text="+" TextColor="White" FontSize="24"
+                                       HorizontalOptions="Center" VerticalOptions="Center"/>
+                            </Border>
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+
+                    <BoxView HeightRequest="1" BackgroundColor="#EEEEEE"/>
+
+                    <!-- Pricing breakdown -->
+                    <VerticalStackLayout Spacing="12">
+                        <Label Text="Détail de la commande"
+                               FontSize="16" FontAttributes="Bold" TextColor="Black"/>
+
+                        <Grid ColumnDefinitions="*, Auto">
+                            <Label Grid.Column="0" Text="Prix unitaire" TextColor="#666666" FontSize="14"/>
+                            <Label Grid.Column="1" Text="{Binding FormattedUnitPrice}" TextColor="Black" FontSize="14"/>
+                        </Grid>
+                        <Grid ColumnDefinitions="*, Auto">
+                            <Label Grid.Column="0" Text="Sous-total" TextColor="#666666" FontSize="14"/>
+                            <Label Grid.Column="1" Text="{Binding FormattedSubtotal}" TextColor="Black" FontSize="14"/>
+                        </Grid>
+                        <Grid ColumnDefinitions="*, Auto">
+                            <Label Grid.Column="0" Text="TPS (5 %)" TextColor="#666666" FontSize="14"/>
+                            <Label Grid.Column="1" Text="{Binding FormattedTPS}" TextColor="Black" FontSize="14"/>
+                        </Grid>
+                        <Grid ColumnDefinitions="*, Auto">
+                            <Label Grid.Column="0" Text="TVQ (9,975 %)" TextColor="#666666" FontSize="14"/>
+                            <Label Grid.Column="1" Text="{Binding FormattedTVQ}" TextColor="Black" FontSize="14"/>
+                        </Grid>
+
+                        <BoxView HeightRequest="1" BackgroundColor="#EEEEEE"/>
+
+                        <Grid ColumnDefinitions="*, Auto">
+                            <Label Grid.Column="0" Text="Total"
+                                   FontAttributes="Bold" FontSize="17" TextColor="Black"/>
+                            <Label Grid.Column="1" Text="{Binding FormattedTotal}"
+                                   FontAttributes="Bold" FontSize="17" TextColor="Black"/>
+                        </Grid>
+                    </VerticalStackLayout>
+
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Confirm button -->
+        <Border Grid.Row="1"
+                BackgroundColor="White"
+                StrokeThickness="1"
+                Stroke="#EEEEEE"
+                Padding="20,12">
+            <Button Text="Confirmer la commande"
+                    Command="{Binding ConfirmCommand}"
+                    BackgroundColor="Black"
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    CornerRadius="25"
+                    HeightRequest="50"/>
+        </Border>
+
+    </Grid>
+</ContentPage>
