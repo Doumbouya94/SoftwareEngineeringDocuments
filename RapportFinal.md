@@ -1,4 +1,4 @@
-# Rapport Technique Final — EventGo
+# Rapport Technique Final : EventGo
 
 **Cours :** Développement d'applications mobiles  
 **Équipe :** Pierre-Sylvestre Cypré, Aboubacar Sidiki Doumbouya  
