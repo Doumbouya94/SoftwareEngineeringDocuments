@@ -34,7 +34,9 @@ public static class MauiProgram
         builder.Services.AddSingleton<LocalAuthService>();
         builder.Services.AddSingleton<OnboardingStateService>();
         builder.Services.AddSingleton<FilterStateService>();
-        builder.Services.AddSingleton<IEventAdapter, SqliteEventAdapter>();
+        builder.Services.AddSingleton<SqliteEventAdapter>();
+        builder.Services.AddSingleton<IEventAdapter>(sp =>
+            new CachingEventAdapter(sp.GetRequiredService<SqliteEventAdapter>()));
         builder.Services.AddSingleton<IEventSeeder, EventSeeder>();
         builder.Services.AddSingleton<CityStateService>();
 
