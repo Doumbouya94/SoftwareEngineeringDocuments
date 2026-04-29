@@ -182,7 +182,7 @@ builder.Services.AddSingleton<IEventAdapter>(sp =>
 
 ## 4. Patrons de conception
 
-### 4.1 Décorateur — CachingEventAdapter
+### 4.1 Décorateur : CachingEventAdapter
 
 **Problème résolu :** Chaque navigation vers la page d'accueil déclenche un rechargement des événements. Sans optimisation, chaque appel effectue une requête SQLite complète, ce qui est inutile lorsque les données n'ont pas changé.
 
@@ -212,7 +212,7 @@ public async Task AddAsync(Event newEvent)
 
 **Principes SOLID respectés :** OCP (SqliteEventAdapter n'est pas modifié), SRP (la logique de cache est isolée), LSP (le décorateur remplace IEventAdapter sans changer le comportement observable).
 
-### 4.2 Fabrique — EventFactoryRegistry
+### 4.2 Fabrique : EventFactoryRegistry
 
 **Problème résolu :** L'application doit insérer 21 événements de démonstration au démarrage, organisés par catégorie, sans coupler `EventSeeder` aux détails de chaque type d'événement.
 
@@ -281,13 +281,13 @@ public bool CanUndo => _history.Count > 0;
 
 `FavoritesViewModel` délègue toutes les opérations à l'invocateur, sans connaître les détails des commandes concrètes.
 
-### 4.4 Adaptateur — SqliteEventAdapter
+### 4.4 Adaptateur : SqliteEventAdapter
 
 **Problème résolu :** Les ViewModels ne doivent pas dépendre directement de `SQLiteAsyncConnection`. L'interface `IEventAdapter` définit un contrat indépendant de la source de données.
 
 **Implémentation :** `SqliteEventAdapter` traduit chaque appel de `IEventAdapter` en requête `SQLiteAsyncConnection`. Les filtres complexes (ville, date, gratuité) sont appliqués en mémoire via LINQ après un premier filtre SQLite par catégorie, car le moteur SQLite-net-pcl ne supporte pas toutes les expressions lambda.
 
-### 4.5 Facade — SqliteService
+### 4.5 Facade : SqliteService
 
 **Problème résolu :** L'initialisation de la connexion SQLite et la création des quatre tables (`Event`, `User`, `Favorite`, `Ticket`) doivent être centralisées et cachées derrière une interface simple.
 
@@ -299,7 +299,7 @@ public bool CanUndo => _history.Count > 0;
 
 **Implémentation :** `AuthStateService` maintient l'état de connexion via l'énumération `AuthMode` (Guest, LoggedIn, LoggedOut) et expose l'utilisateur courant. `OnboardingStateService` gère un processus en 4 étapes avec les méthodes `NextStep()`, `PreviousStep()` et `Reset()`.
 
-### 4.7 Observateur — INotifyPropertyChanged
+### 4.7 Observateur : INotifyPropertyChanged
 
 **Problème résolu :** Les vues XAML doivent se mettre à jour automatiquement lorsque les propriétés des ViewModels changent, sans couplage direct entre les couches.
 
@@ -315,7 +315,7 @@ set
 }
 ```
 
-### 4.8 Référentiel — SqliteFavoriteRepository et SqliteTicketRepository
+### 4.8 Référentiel : SqliteFavoriteRepository et SqliteTicketRepository
 
 **Problème résolu :** Les opérations de persistance sur les favoris et les billets doivent être isolées derrière des interfaces pour faciliter les tests et le remplacement de la source de données.
 
