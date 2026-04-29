@@ -1,57 +1,83 @@
-# Aperçu de la documentation du projet
+# EventGo
 
-Ce dépôt contient la documentation principale utilisée pour structurer et guider le projet **EventGo**, une application mobile de découverte d'événements publics par géolocalisation tout au long de son cycle de développement.
+Application mobile de découverte d'événements construite avec **.NET MAUI 9 / C#**, ciblant Android, iOS, macOS et Windows.
 
-## Documents inclus
+## Aperçu
 
-### 1. `SRS.md` — Spécification des exigences logicielles
+EventGo permet aux utilisateurs de découvrir et gérer des événements locaux dans plusieurs villes du Québec. De l'inscription jusqu'à l'achat de billets, l'application offre une expérience complète de découverte d'événements culturels, sportifs et sociaux.
 
-Ce document décrit **ce que le système doit faire**.
+## Fonctionnalités
 
-Il définit :
+- 🔐 **Authentification** : Inscription, connexion et mode invité
+- 🎯 **Onboarding** : Personnalisation par ville, catégories et budget
+- 🔍 **Découverte** : Parcourir, rechercher et filtrer des événements
+- ❤️ **Favoris** : Sauvegarder des événements avec possibilité d'annulation
+- 🎟️ **Billets** : Achat de billets avec calcul des taxes (TPS + TVQ)
+- 🛠️ **Gestion** : Créer, modifier et supprimer ses propres événements
+- 👤 **Profil** : Modifier ses préférences et catégories favorites
 
-- la portée du projet (fonctionnalités incluses et exclues),
-- les exigences fonctionnelles,
-- les exigences non fonctionnelles (performance, sécurité, utilisabilité, etc.),
-- les contraintes (plateforme, outils, échéances),
-- les hypothèses et les dépendances.
+## Technologies
 
-Le SRS constitue la **référence pour comprendre les exigences du système** et sert de base aux décisions de conception et de développement d'EventGo.
+| Technologie | Rôle |
+|---|---|
+| .NET MAUI 9 | Framework cross-platform |
+| SQLite | Base de données locale |
+| BCrypt | Hachage des mots de passe |
+| xUnit + NSubstitute | Tests unitaires |
 
----
+## Démarrage
 
-### 2. `ADR.md` — Registres de décisions architecturales
+### Prérequis
 
-Ce document consigne **pourquoi les décisions architecturales et techniques clés ont été prises**.
+- [Visual Studio 2022](https://visualstudio.microsoft.com/) avec la charge de travail **.NET MAUI** installée
+- [.NET 9 SDK](https://dotnet.microsoft.com/download/dotnet/9.0)
+- Un émulateur Android / iOS ou un appareil physique connecté
 
-Chaque ADR capture :
+### Installation
 
-- le contexte de la décision,
-- la solution retenue,
-- les alternatives envisagées,
-- les justifications,
-- les conséquences et les compromis.
+```bash
+# Cloner le dépôt
+git clone https://github.com/votre-utilisateur/eventgo.git
+cd eventgo
+```
 
-Les entrées ADR assurent la **traçabilité, la cohérence et la clarté** tout au long de l'évolution de l'architecture d'EventGo.
+### Lancer l'application
 
----
+**Via Visual Studio :**
 
-## Utilisation conjointe de ces documents
+1. Ouvrir `code/EventGo.sln`
+2. Sélectionner la plateforme cible (Android, iOS, Windows) dans la barre d'outils
+3. Choisir un émulateur ou un appareil connecté
+4. Appuyer sur `F5` pour démarrer
 
-- Le **SRS** définit *ce que* le système EventGo doit être.
-- Les **ADR** expliquent *comment et pourquoi* les décisions architecturales sont prises pour répondre à ces exigences.
+**Via ligne de commande :**
 
-Ensemble, ils forment un cadre de documentation clair, professionnel et maintenable, aligné avec les pratiques modernes du génie logiciel.
+```bash
+cd code/EventGoApp
 
-## Arborescence de la documentation
+# Android
+dotnet build -f net9.0-android
+dotnet run -f net9.0-android
 
-- [SRS.md](https://github.com/Doumbouya94/SoftwareEngineeringDocuments/blob/main/documentation/SRS.md)
-- [ADR.md](https://github.com/Doumbouya94/SoftwareEngineeringDocuments/blob/main/documentation/ADR-001.md)
-- [ADR02.md](https://github.com/Doumbouya94/SoftwareEngineeringDocuments/blob/main/documentation/ADR-002.md)
-- [Rapport.md](https://github.com/Doumbouya94/SoftwareEngineeringDocuments/blob/main/documentation/rapport.md)
-- [Guide de demarrage](https://github.com/Doumbouya94/SoftwareEngineeringDocuments/blob/main/documentation/guide-demarrage.md)
+# Windows
+dotnet build -f net9.0-windows10.0.19041.0
+dotnet run -f net9.0-windows10.0.19041.0
+```
 
-## En savoir plus
+## Compte de démonstration
 
-- [Gabarit Architecture Decision Records (ADR) par Joel Parker Henderson](https://github.com/joelparkerhenderson/architecture-decision-record?tab=readme-ov-file)
-- [Site web ADR](https://adr.github.io/)
+Une fois l'application lancée, utiliser les identifiants suivants pour se connecter directement :
+
+```
+Email    : demo@eventgo.ca
+Mot de passe : Demo1234
+```
+
+## Données de démonstration
+
+- **21 événements** répartis sur 8 catégories et 7 villes québécoises
+- **Compte démo** : `demo@eventgo.ca` / `Demo1234`
+
+## Plateformes cibles
+
+Android · iOS · macOS · Windows
